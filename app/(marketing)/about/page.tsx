@@ -11,23 +11,28 @@ export const metadata: Metadata = {
 const TIMELINE = [
   {
     year: "1990",
-    heading: "The Beginning",
-    body: "Marty D. Orr enters real estate development in North Georgia, buying raw land and rezoning it for single-family residential use — selling lots to regional builders and managing closings in-house.",
+    heading: "Learning the Land",
+    body: "Marty D. Orr enters development under the mentorship of W.T. \"Terry\" Dunahoo — a Barrow County surveyor, developer, and banker — laying miles of roads and utilities across Barrow and Gwinnett Counties and learning the business from the ground up.",
+  },
+  {
+    year: "1990s",
+    heading: "Homes Etc.",
+    body: "Through the company's homebuilding arm, Marty builds homes on developed lots and sells every one in-house — no agents, no brokers. He partners with Dunahoo in Subdivision Developer's, Inc., capturing the full value chain from raw land to finished home.",
   },
   {
     year: "1998",
     heading: "Prime Interest Founded",
-    body: "Marty formalizes the business as Prime Interest Land Development, headquartered at 4235 South Lee Street in Buford, Georgia. The company expands to sell homes directly without brokers, capturing the full value chain.",
+    body: "Marty founds Prime Interest, Inc. and builds its headquarters in Buford, beside a commercial strip center the company developed itself. The firm moves into larger subdivisions, commercial tracts, and ground-up commercial construction.",
   },
   {
-    year: "2001–2007",
-    heading: "Subdivision Growth",
-    body: "Prime Interest develops dozens of single-family and townhome subdivisions across Gwinnett, Forsyth, Hall, Barrow, and surrounding counties — partnering with D.R. Horton, Beazer Homes, Meritage Homes, Century Communities, and other national builders.",
+    year: "2000s",
+    heading: "Prime Interest Properties",
+    body: "Marty forms Prime Interest Properties with friend and former teacher Larry Cheek — a board member of Peoples Bank & Trust, the Buford bank that has long backed the firm's developments. Together they deliver single-family and commercial projects across North Georgia.",
   },
   {
     year: "2008+",
     heading: "The Pivot",
-    body: "Following the housing crisis, Prime Interest adapts. Marty identifies an emerging opportunity in market-rate apartments and university-adjacent student housing — forming relationships with American Campus Communities, Walden Communities, and Wood Partners to pursue larger, mixed-use projects.",
+    body: "When housing collapses, Marty retools the business rather than wait it out — reading the moment correctly and moving into market-rate apartments and university student housing. He partners with national REITs including American Campus Communities, one of the largest student housing operators in the world.",
   },
   {
     year: "2012",
@@ -41,8 +46,8 @@ const TIMELINE = [
   },
   {
     year: "Today",
-    heading: "Building Forward",
-    body: "Active developments include Alta Dalton (234 luxury apartments with Wood Partners), The Holbrook ($65M mixed-use in Sugar Hill), Bellwood Park (154 townhome lots in Atlanta), The Stables Motor Condos (Buford), and Northside Medical Office Buildings. Prime Interest continues to shape Georgia communities.",
+    heading: "Back to the Land",
+    body: "With lots in short supply across the metro's best markets, Prime Interest has returned to acquiring raw land for single-family communities in upscale, walkable areas like Roswell, Alpharetta, Milton, and Smyrna — while continuing to develop apartments and student housing. Active projects include Alta Dalton, the $65M Holbrook in Sugar Hill, Bellwood Park, and the Northside Medical Office Buildings.",
   },
 ];
 
@@ -130,7 +135,7 @@ export default async function AboutPage() {
                   className="text-2xl md:text-3xl font-display font-bold leading-snug mb-12 pl-8"
                   style={{ borderLeft: "3px solid var(--color-gold)", color: "var(--color-gold-light)" }}
                 >
-                  "We don't just develop land — we shape the communities where Georgia families live, work, and grow."
+                  "The value isn't in the land you buy — it's in what you're able to turn it into."
                 </blockquote>
               </AnimatedSection>
               <AnimatedSection delay={0.2}>

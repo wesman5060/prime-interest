@@ -152,7 +152,7 @@ export default async function HomePage() {
             {/* Pull quote */}
             <blockquote className="mb-8 pl-6" style={{ borderLeft: "2px solid var(--color-gold)" }}>
               <p className="text-lg italic leading-relaxed" style={{ color: "rgba(255,255,255,0.5)" }}>
-                "The plan was a beautiful plan. We develop something that actually works and actually gets built."
+                "The value isn't in the land you buy — it's in what you're able to turn it into."
               </p>
               <footer className="mt-3 text-[10px] tracking-[0.2em] uppercase" style={{ color: "var(--color-gold)" }}>
                 — Marty D. Orr, Founder
@@ -160,10 +160,10 @@ export default async function HomePage() {
             </blockquote>
 
             <p className="text-base leading-relaxed mb-10" style={{ color: "var(--color-text-muted)", lineHeight: 1.9 }}>
-              From small single-family subdivisions to $65M mixed-use developments
-              and student housing for thousands — Prime Interest has spent three
-              decades shaping the landscape of Georgia alongside the country's
-              most respected builders and REITs.
+              From his first subdivisions in the 1990s to $65M mixed-use
+              developments and student housing for thousands, Marty Orr has
+              spent three decades turning raw Georgia land into communities —
+              alongside the country's most respected builders and REITs.
             </p>
 
             <a

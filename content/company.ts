@@ -13,16 +13,16 @@ export const company: CompanyInfo = {
   fax: "770-945-0472",
   email: "martyorr@bellsouth.net",
   story: [
-    "Prime Interest Land Development was founded in 1998 by Marty D. Orr, who has been involved in real estate development since 1990. The company started out developing small single-family subdivisions, then progressed into construction of homes on developed lots — selling individual product in-house, without the use of real estate agents and brokers.",
-    "Following the housing crisis of 2007–2008, Prime Interest adapted and expanded its scope, branching into the development of market-rate apartments and student housing at major universities across Georgia.",
-    "Prime Interest formed Prime Interest Properties, Inc. with former teacher and friend Larry Cheek, of Dover and Cheek Supplies, a local utility supplier. The company has partnered with various entities and REITs — including American Campus Communities, arguably the world's largest student housing group — as well as national builders such as D.R. Horton, Beazer Homes, Meritage Homes, Century Communities, McKinley Homes, and Wood Partners.",
-    "Today, Prime Interest continues to develop apartment and student housing sites as well as single-family subdivisions in upscale Atlanta-area communities including Roswell, Alpharetta, Milton, Chamblee, Doraville, Smyrna, and beyond.",
+    "Prime Interest began with a single conviction: that raw Georgia land, in the right hands, becomes something far greater than its asking price. Marty D. Orr entered development in 1990 under the mentorship of W.T. \"Terry\" Dunahoo — a respected Barrow County surveyor, developer, and banker — and learned the business from the ground up, laying miles of roads and utilities across Barrow and Gwinnett Counties.",
+    "Through the 1990s, Marty built and sold homes through Homes Etc., the company's homebuilding arm, handling every closing in-house without agents or brokers. In 1998 he founded Prime Interest, building its headquarters in Buford beside a commercial center the company had developed itself. From there the work grew — larger subdivisions, commercial tracts, and the relationships that would come to define the firm.",
+    "When the housing market collapsed in 2007–2008, Marty reinvented the business rather than wait it out. Reading the moment — families locked out of mortgages, students returning to universities in a thin job market — he pivoted into market-rate apartments and student housing, partnering with national REITs including American Campus Communities, one of the largest student housing operators in the world.",
+    "Today Prime Interest develops across every major asset class — and has returned to its roots, acquiring raw land for single-family communities in upscale, walkable markets like Roswell, Alpharetta, Milton, and Smyrna. The throughline has never changed: acquire well, entitle patiently, and deliver land that builders and communities are proud to build on.",
   ],
   principals: [
     {
       name: "Marty D. Orr",
-      title: "Founder & Principal, Real Estate Developer",
-      bio: "Marty D. Orr has been involved in real estate development since 1990. Under his leadership, Prime Interest has grown from a single-family subdivision developer into a full-spectrum land development company with projects ranging from luxury apartments and student housing to mixed-use retail, medical office, and motor condominiums. Prime Interest has been recognized as one of the largest commercial real estate developers in the region.",
+      title: "Founder & Principal",
+      bio: "Marty D. Orr has spent more than three decades turning Georgia land into communities. He learned the trade hands-on in the 1990s — installing infrastructure, building homes, and managing his own closings — before founding Prime Interest in 1998. He has personally handled the rezoning and entitlement of his properties throughout his career, the work where most of a parcel's value is won or lost. Under his direction the firm has grown from a single-family subdivision developer into a full-spectrum operation spanning luxury apartments, student housing, mixed-use retail, medical office, and motor condominiums — and one of the most recognized commercial developers in the region.",
     },
   ],
   partners: [

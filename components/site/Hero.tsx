@@ -1,11 +1,17 @@
 "use client";
 
-import { useRef } from "react";
-import Image from "next/image";
+import { useState, useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
-import { motion, useScroll, useTransform, type Variants } from "framer-motion";
+import { motion, AnimatePresence, useScroll, useTransform, type Variants } from "framer-motion";
 
-const HERO_IMAGE = "/images/hero.jpg";
+const CLIPS = [
+  { src: "https://videos.pexels.com/video-files/33945045/14403569_2560_1440_25fps.mp4", brightness: 1.0 },
+  { src: "https://videos.pexels.com/video-files/36525706/15488174_3840_2160_24fps.mp4", brightness: 1.0 },
+  { src: "https://videos.pexels.com/video-files/11491400/11491400-uhd_3840_2160_30fps.mp4", brightness: 1.0 },
+  { src: "https://videos.pexels.com/video-files/33327315/14191637_3840_2160_30fps.mp4", brightness: 1.0 },
+];
+
+const CLIP_DURATION = 9000;
 const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1];
 
 const fadeUp: Variants = {
@@ -20,26 +26,47 @@ const fadeUp: Variants = {
 export default function Hero() {
   const ref = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
-  const imageY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
+  const videoY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
   const contentY = useTransform(scrollYProgress, [0, 1], ["0%", "15%"]);
   const opacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
 
+  const [clipIndex, setClipIndex] = useState(0);
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const advance = useCallback(() => {
+    setClipIndex((i) => (i + 1) % CLIPS.length);
+  }, []);
+
+  useEffect(() => {
+    timerRef.current = setTimeout(advance, CLIP_DURATION);
+    return () => { if (timerRef.current) clearTimeout(timerRef.current); };
+  }, [clipIndex, advance]);
+
   return (
     <section ref={ref} className="relative h-screen min-h-[700px] flex items-center justify-center overflow-hidden">
-      {/* Parallax background */}
-      <motion.div className="absolute inset-0 z-0 scale-110" style={{ y: imageY }}>
-        <Image
-          src={HERO_IMAGE}
-          alt="Prime Interest — Georgia Land Development"
-          fill
-          priority
-          className="object-cover"
-          sizes="100vw"
-        />
+      {/* Cycling video background */}
+      <motion.div className="absolute inset-0 z-0 scale-110" style={{ y: videoY }}>
+        <AnimatePresence mode="sync">
+          <motion.video
+            key={clipIndex}
+            src={CLIPS[clipIndex].src}
+            autoPlay
+            muted
+            playsInline
+            onEnded={advance}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1.5, ease: "easeInOut" }}
+            className="absolute inset-0 h-full w-full object-cover"
+            style={{ filter: `brightness(${CLIPS[clipIndex].brightness})` }}
+            style={{ filter: `brightness(${CLIPS[clipIndex].brightness})` }}
+          />
+        </AnimatePresence>
       </motion.div>
 
-      {/* Layered overlays for depth */}
-      <div className="absolute inset-0 z-10" style={{ background: "rgba(0,0,0,0.55)" }} />
+      {/* Layered overlays */}
+      <div className="absolute inset-0 z-10" style={{ background: "rgba(0,0,0,0.52)" }} />
       <div className="absolute inset-0 z-10" style={{ background: "linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.1) 40%, rgba(0,0,0,0.7) 80%, #000 100%)" }} />
       <div className="absolute inset-0 z-10" style={{ background: "linear-gradient(to right, rgba(0,0,0,0.4) 0%, transparent 50%, rgba(0,0,0,0.4) 100%)" }} />
 
@@ -48,7 +75,6 @@ export default function Hero() {
         className="relative z-20 text-center px-6 max-w-6xl mx-auto w-full"
         style={{ opacity, y: contentY }}
       >
-        {/* Eyebrow with decorative lines */}
         <motion.div
           custom={0}
           initial="hidden"
@@ -63,7 +89,6 @@ export default function Hero() {
           <div className="h-px w-12" style={{ background: "var(--color-gold)" }} />
         </motion.div>
 
-        {/* Main headline */}
         <motion.h1
           custom={1}
           initial="hidden"
@@ -77,7 +102,6 @@ export default function Hero() {
           Future
         </motion.h1>
 
-        {/* Subheadline */}
         <motion.p
           custom={2}
           initial="hidden"
@@ -90,7 +114,6 @@ export default function Hero() {
           student housing, and mixed-use projects that shape communities.
         </motion.p>
 
-        {/* CTAs */}
         <motion.div
           custom={3}
           initial="hidden"

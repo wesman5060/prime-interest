@@ -25,12 +25,14 @@ export default function Header() {
   }, []);
 
   return (
+    <>
     <header
       className="fixed top-0 left-0 right-0 z-50 transition-all duration-500"
       style={{
-        background: scrolled ? "rgba(0,0,0,0.88)" : "transparent",
-        backdropFilter: scrolled ? "blur(20px)" : "none",
-        borderBottom: scrolled ? "1px solid rgba(201,169,110,0.12)" : "1px solid transparent",
+        // When the mobile menu is open, force a solid background so the menu reads as a sealed panel.
+        background: open ? "rgba(0,0,0,0.98)" : scrolled ? "rgba(0,0,0,0.88)" : "transparent",
+        backdropFilter: scrolled || open ? "blur(20px)" : "none",
+        borderBottom: scrolled || open ? "1px solid rgba(201,169,110,0.12)" : "1px solid transparent",
       }}
     >
       <div className="max-w-7xl mx-auto px-8 py-5 flex items-center justify-between">
@@ -88,39 +90,46 @@ export default function Header() {
         </button>
       </div>
 
-      {/* Mobile menu */}
-      <div
-        className="md:hidden overflow-hidden transition-all duration-500"
-        style={{ maxHeight: open ? "400px" : "0" }}
-      >
-        <div
-          className="px-8 py-8 flex flex-col gap-6"
-          style={{ background: "rgba(0,0,0,0.95)", borderTop: "1px solid rgba(201,169,110,0.15)" }}
-        >
-          {nav.map((item) => {
-            const active = pathname === item.href || (item.href !== "/" && pathname.startsWith(item.href));
-            return (
-              <Link
-                key={item.href}
-                href={item.href}
-                onClick={() => setOpen(false)}
-                className="text-sm tracking-[0.25em] uppercase transition-colors"
-                style={{ color: active ? "var(--color-gold)" : "rgba(255,255,255,0.6)" }}
-              >
-                {item.label}
-              </Link>
-            );
-          })}
-          <Link
-            href="/contact"
-            onClick={() => setOpen(false)}
-            className="inline-flex items-center gap-2 px-6 py-3 text-[11px] tracking-[0.2em] uppercase font-medium mt-2 w-fit"
-            style={{ background: "var(--color-gold)", color: "#000" }}
-          >
-            Get in Touch →
-          </Link>
-        </div>
-      </div>
     </header>
+
+    {/* Mobile menu — rendered as a sibling so it can fix to the viewport
+        (the header has backdrop-filter, which would otherwise contain it). */}
+    <div
+      className="md:hidden fixed left-0 right-0 z-40 overflow-hidden transition-opacity duration-300"
+      style={{
+        top: "73px",
+        bottom: 0,
+        opacity: open ? 1 : 0,
+        pointerEvents: open ? "auto" : "none",
+        background: "var(--color-bg)",
+        borderTop: "1px solid rgba(201,169,110,0.15)",
+      }}
+    >
+      <div className="px-8 pt-10 pb-12 flex flex-col gap-7">
+        {nav.map((item) => {
+          const active = pathname === item.href || (item.href !== "/" && pathname.startsWith(item.href));
+          return (
+            <Link
+              key={item.href}
+              href={item.href}
+              onClick={() => setOpen(false)}
+              className="text-base tracking-[0.25em] uppercase transition-colors"
+              style={{ color: active ? "var(--color-gold)" : "rgba(255,255,255,0.75)" }}
+            >
+              {item.label}
+            </Link>
+          );
+        })}
+        <Link
+          href="/contact"
+          onClick={() => setOpen(false)}
+          className="inline-flex items-center gap-2 px-7 py-4 text-[11px] tracking-[0.25em] uppercase font-medium mt-4 w-fit"
+          style={{ background: "var(--color-gold)", color: "#000" }}
+        >
+          Get in Touch →
+        </Link>
+      </div>
+    </div>
+    </>
   );
 }

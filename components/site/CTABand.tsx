@@ -2,6 +2,9 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { getPortfolioStats } from "@/lib/content/stats";
+
+const stats = getPortfolioStats();
 
 export default function CTABand() {
   return (
@@ -46,7 +49,7 @@ export default function CTABand() {
           style={{ color: "var(--color-text-muted)" }}
         >
           Prime Interest has been turning raw land into thriving communities
-          for over 35 years. Let's talk about your next project.
+          for over {stats.yearsActive} years. Let's talk about your next project.
         </motion.p>
 
         <motion.div

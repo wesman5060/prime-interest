@@ -39,10 +39,4 @@ export const company: CompanyInfo = {
     "Trinity Senior Living",
     "Brookfield Properties",
   ],
-  stats: [
-    { value: "46+", label: "Developments" },
-    { value: "1990", label: "Developing Since" },
-    { value: "15+", label: "Georgia Counties" },
-    { value: "35+", label: "Builder & REIT Partners" },
-  ],
 };

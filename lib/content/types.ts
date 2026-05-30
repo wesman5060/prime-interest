@@ -61,16 +61,10 @@ export interface CompanyInfo {
   story: string[];
   principals: Principal[];
   partners: string[];
-  stats: Stat[];
 }
 
 export interface Principal {
   name: string;
   title: string;
   bio: string;
-}
-
-export interface Stat {
-  value: string;
-  label: string;
 }

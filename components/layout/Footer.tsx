@@ -1,5 +1,6 @@
 import Link from "next/link";
 import GlobeMark from "@/components/site/GlobeMark";
+import Year from "@/components/site/Year";
 
 export default function Footer() {
   return (
@@ -63,7 +64,7 @@ export default function Footer() {
       <div className="border-t" style={{ borderColor: "var(--color-border)" }}>
         <div className="max-w-7xl mx-auto px-8 py-6 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-xs" style={{ color: "var(--color-text-subtle)" }}>
-            © {new Date().getFullYear()} Prime Interest Land Development. All Rights Reserved.
+            © <Year /> Prime Interest Land Development. All Rights Reserved.
           </p>
           <p className="text-xs" style={{ color: "var(--color-text-subtle)" }}>
             Buford, Georgia

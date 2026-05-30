@@ -18,13 +18,17 @@ const playfair = Playfair_Display({
   weight: ["400", "600", "700", "800"],
 });
 
+// Update this once the production domain is finalized; sitemap.ts will follow.
+const SITE_URL = "https://prime-interest.com";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: {
     default: "Prime Interest Land Development",
     template: "%s | Prime Interest",
   },
   description:
-    "Prime Interest Land Development — 46 developments across Georgia since 1990. Residential, commercial, student housing, and mixed-use projects throughout metro Atlanta and beyond.",
+    "Prime Interest Land Development — building Georgia's communities since 1990. 46 developments across metro Atlanta and beyond: residential, commercial, student housing, and mixed-use.",
   keywords: [
     "real estate development",
     "land development",
@@ -43,15 +47,15 @@ export const metadata: Metadata = {
     locale: "en_US",
     siteName: "Prime Interest Land Development",
     images: [{
-      url: "https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=1200&q=80",
+      url: "/og.jpg",
       width: 1200,
       height: 630,
-      alt: "Prime Interest Land Development — Georgia",
+      alt: "Prime Interest Land Development — Building Georgia's Communities Since 1990",
     }],
   },
   twitter: {
     card: "summary_large_image",
-    images: ["https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=1200&q=80"],
+    images: ["/og.jpg"],
   },
 };
 

@@ -402,8 +402,8 @@ export const projects: Project[] = [
     partner: "Metal Building Associates",
     description:
       "5.9823-acre commercial development for truck driving school with Metal Building Associates.",
-    images: [],
-    coordinates: [-84.005, 34.116],
+    images: ["/images/projects/dalys-truck-driving-school.jpg"],
+    coordinates: [-84.0081, 34.1316],
   },
   {
     slug: "madison-subdivision",

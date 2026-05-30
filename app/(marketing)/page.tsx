@@ -131,7 +131,7 @@ export default async function HomePage() {
                   border: "1px solid rgba(201,169,110,0.2)",
                 }}
               >
-                <p className="font-display text-4xl font-bold mb-1" style={{ color: "var(--color-gold)" }}>35+</p>
+                <p className="font-display text-4xl font-bold mb-1" style={{ color: "var(--color-gold)" }}>{stats.yearsActive}+</p>
                 <p className="text-[10px] tracking-[0.2em] uppercase" style={{ color: "var(--color-text-muted)" }}>Years of Experience</p>
               </div>
             </div>

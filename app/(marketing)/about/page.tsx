@@ -253,11 +253,11 @@ export default async function AboutPage() {
               Prime Interest actively acquires land across metro Atlanta and North Georgia. If you have a site, we want to hear from you.
             </p>
             <Link
-              href="/contact"
+              href="/acquisitions"
               className="inline-flex items-center gap-3 px-10 py-4 text-[11px] tracking-[0.3em] uppercase font-medium transition-all duration-300 hover:gap-5"
               style={{ background: "var(--color-gold)", color: "#000" }}
             >
-              Get in Touch →
+              Our Acquisitions Program →
             </Link>
           </div>
         </AnimatedSection>

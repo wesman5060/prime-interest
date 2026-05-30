@@ -6,8 +6,10 @@ import { usePathname } from "next/navigation";
 import GlobeMark from "@/components/site/GlobeMark";
 
 const nav = [
-  { label: "About", href: "/about" },
+  { label: "Approach", href: "/approach" },
   { label: "Projects", href: "/projects" },
+  { label: "Acquisitions", href: "/acquisitions" },
+  { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
 ];
 

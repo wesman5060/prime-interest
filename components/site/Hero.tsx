@@ -3,6 +3,15 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence, useScroll, useTransform, type Variants } from "framer-motion";
+import { getPortfolioStats } from "@/lib/content/stats";
+
+const stats = getPortfolioStats();
+const STAT_BAR = [
+  { value: `${stats.projectCount}+`, label: "Developments" },
+  { value: String(stats.developingSince), label: "Developing Since" },
+  { value: `${stats.residentialDelivered.toLocaleString()}+`, label: "Homes Delivered" },
+  { value: `${stats.countyCount}`, label: "Georgia Counties" },
+];
 
 const CLIPS = [
   { src: "https://videos.pexels.com/video-files/33945045/14403569_2560_1440_25fps.mp4", brightness: 1.0 },
@@ -59,7 +68,6 @@ export default function Hero() {
             exit={{ opacity: 0 }}
             transition={{ duration: 1.5, ease: "easeInOut" }}
             className="absolute inset-0 h-full w-full object-cover"
-            style={{ filter: `brightness(${CLIPS[clipIndex].brightness})` }}
             style={{ filter: `brightness(${CLIPS[clipIndex].brightness})` }}
           />
         </AnimatePresence>
@@ -129,14 +137,14 @@ export default function Hero() {
             View All Projects <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
           </Link>
           <Link
-            href="/contact"
+            href="/acquisitions"
             className="inline-flex items-center gap-3 px-10 py-4 text-[11px] tracking-[0.3em] uppercase transition-all duration-300 hover:bg-white/8"
             style={{
               border: "1px solid rgba(201,169,110,0.4)",
               color: "rgba(255,255,255,0.7)",
             }}
           >
-            Get in Touch
+            Acquisitions
           </Link>
         </motion.div>
       </motion.div>
@@ -166,12 +174,7 @@ export default function Hero() {
         className="absolute bottom-0 left-0 right-0 z-20 hidden md:flex"
         style={{ borderTop: "1px solid rgba(255,255,255,0.08)" }}
       >
-        {[
-          { value: "46+", label: "Developments" },
-          { value: "1990", label: "Developing Since" },
-          { value: "15+", label: "Counties" },
-          { value: "35+", label: "Partners" },
-        ].map((s, i) => (
+        {STAT_BAR.map((s, i) => (
           <div
             key={s.label}
             className="flex-1 flex flex-col items-center py-4 text-center"

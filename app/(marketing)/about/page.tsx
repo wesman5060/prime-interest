@@ -106,7 +106,16 @@ export default async function AboutPage() {
             <div className="md:col-span-4">
               <AnimatedSection>
                 <p className="text-xs tracking-[0.3em] uppercase mb-6" style={{ color: "var(--color-gold)" }}>Leadership</p>
-                <div className="w-24 h-px mb-8" style={{ background: "var(--color-gold)" }} />
+                {/* PLACEHOLDER: low-res photo pulled from the original prime-interest.com — swap when Marty provides a current headshot */}
+                <div className="relative mb-8 overflow-hidden" style={{ maxWidth: "256px", border: "1px solid var(--color-border-gold)" }}>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src="/images/original/marty.jpg"
+                    alt="Marty D. Orr, Founder & Principal of Prime Interest Land Development"
+                    className="w-full h-auto object-cover"
+                  />
+                  <div className="absolute inset-0 pointer-events-none" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.35) 0%, transparent 45%)" }} />
+                </div>
                 <p className="font-display text-4xl font-bold text-white leading-tight mb-3">
                   Marty D. Orr
                 </p>

@@ -125,6 +125,15 @@ export default function ContactPage() {
                 <span className="transition-transform duration-200 group-hover:translate-x-1">→</span>
               </a>
             </div>
+            {/* PLACEHOLDER: office photo pulled from the original prime-interest.com — swap when a higher-res shot is available */}
+            <div className="mb-6 w-full overflow-hidden border" style={{ borderColor: "var(--color-border-custom)" }}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/images/original/office1.jpg"
+                alt="Prime Interest Land Development office — 4235 South Lee St, Buford, GA"
+                className="w-full h-auto object-cover"
+              />
+            </div>
             <div
               className="h-[420px] w-full overflow-hidden border"
               style={{ borderColor: "var(--color-border-custom)" }}

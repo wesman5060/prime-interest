@@ -415,8 +415,8 @@ export const projects: Project[] = [
     lots: 90,
     partner: "Landstar Corporation",
     description: "90-lot residential subdivision with Landstar Corporation.",
-    images: [],
-    coordinates: [-84.138, 34.22],
+    images: ["/images/projects/madison-subdivision.jpg"],
+    coordinates: [-84.2273, 34.2255],
   },
   {
     slug: "kelly-crossing",
@@ -468,8 +468,8 @@ export const projects: Project[] = [
     partner: "Capital Communities",
     description:
       "Rezoned from Agricultural to R2, 199 lots adjacent to the Laurel Canyon project, developed with Capital Communities.",
-    images: [],
-    coordinates: [-84.4916, 34.237],
+    images: ["/images/projects/puckett-creek.jpg"],
+    coordinates: [-84.5038, 34.2584],
   },
   {
     slug: "rose-creek-phase-3",

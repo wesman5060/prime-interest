@@ -117,8 +117,8 @@ export const projects: Project[] = [
     acreage: 57.36,
     description:
       "57.36-acre single-family detached subdivision with 149 lots near Chateau Elan.",
-    images: [],
-    coordinates: [-83.773, 34.11],
+    images: ["/images/projects/union-grove-subdivision.jpg"],
+    coordinates: [-83.8415, 34.1301],
   },
   {
     slug: "gardendale",
@@ -151,8 +151,8 @@ export const projects: Project[] = [
     partner: "Wade Jurney Homes / Century Communities",
     description:
       "32 single-family detached lots near Fort Stewart Army Base. 24 lots sold to Wade Jurney Homes, 8 lots to Century Communities.",
-    images: [],
-    coordinates: [-81.5957, 31.8468],
+    images: ["/images/projects/governors-quarters.jpg"],
+    coordinates: [-81.6533, 31.8257],
   },
   {
     slug: "highland-overlook",
@@ -206,8 +206,8 @@ export const projects: Project[] = [
     partner: "Century Communities",
     description:
       "18.12-acre single-family detached subdivision with 32 lots developed with Century Communities.",
-    images: [],
-    coordinates: [-84.0012, 34.105],
+    images: ["/images/projects/ashley-falls.jpg"],
+    coordinates: [-83.9411, 34.1664],
   },
   {
     slug: "the-holbrook",
@@ -281,8 +281,8 @@ export const projects: Project[] = [
     lots: 19,
     partner: "KM Homes",
     description: "19 single-family detached lots developed with KM Homes.",
-    images: [],
-    coordinates: [-84.1327, 34.198],
+    images: ["/images/projects/carramore-subdivision.jpg"],
+    coordinates: [-84.2112, 34.2125],
   },
   {
     slug: "roswell-village",
@@ -311,8 +311,8 @@ export const projects: Project[] = [
     partner: "Reliance Development Company",
     description:
       "16-lot residential subdivision developed with Reliance Development Company.",
-    images: [],
-    coordinates: [-84.2219, 33.9659],
+    images: ["/images/projects/peachtree-preserve.jpg"],
+    coordinates: [-84.2058, 33.9842],
   },
   {
     slug: "u-club-on-frey-phase-2",

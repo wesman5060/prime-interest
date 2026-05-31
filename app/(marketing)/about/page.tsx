@@ -2,6 +2,7 @@ import { getCompany } from "@/lib/content/source";
 import AnimatedSection from "@/components/site/AnimatedSection";
 import Link from "next/link";
 import type { Metadata } from "next";
+import { RANKINGS, FEATURED_AWARD } from "@/content/recognition";
 
 export const metadata: Metadata = {
   title: "About",
@@ -49,13 +50,6 @@ const TIMELINE = [
     heading: "Back to the Land",
     body: "With lots in short supply across the metro's best markets, Prime Interest has returned to acquiring raw land for single-family communities in upscale, walkable areas like Roswell, Alpharetta, Milton, and Smyrna — while continuing to develop apartments and student housing. Active projects include Alta Dalton, the $65M Holbrook in Sugar Hill, Bellwood Park, and the Northside Medical Office Buildings.",
   },
-];
-
-const RANKINGS = [
-  { year: "2019", rank: "#5", note: "Commercial RE Developer" },
-  { year: "2020", rank: "#7", note: "Commercial RE Developer" },
-  { year: "2021", rank: "#12", note: "Commercial RE Developer" },
-  { year: "2022", rank: "#13", note: "Commercial RE Developer" },
 ];
 
 export default async function AboutPage() {
@@ -221,10 +215,10 @@ export default async function AboutPage() {
                 <span className="text-2xl" style={{ color: "var(--color-gold)" }}>★</span>
               </div>
               <div>
-                <p className="text-xs tracking-[0.25em] uppercase mb-2" style={{ color: "var(--color-gold)" }}>2022 Award</p>
-                <p className="font-display text-xl font-bold text-white mb-1">Washington Contractor Award</p>
+                <p className="text-xs tracking-[0.25em] uppercase mb-2" style={{ color: "var(--color-gold)" }}>{FEATURED_AWARD.year} Award</p>
+                <p className="font-display text-xl font-bold text-white mb-1">{FEATURED_AWARD.title}</p>
                 <p className="text-sm" style={{ color: "var(--color-text-muted)" }}>
-                  Multi-Family / Mixed-Use / Hospitality Category
+                  {FEATURED_AWARD.category}
                 </p>
               </div>
             </div>

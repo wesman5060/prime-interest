@@ -64,35 +64,68 @@ export default function ProjectsExplorer({ projects }: Props) {
   const [typeFilter, setTypeFilter] = useState<ProjectType | "all">("all");
   const [statusFilter, setStatusFilter] = useState<ProjectStatus | "all">("all");
   const [county, setCounty] = useState<string>("all");
+  const [query, setQuery] = useState("");
   const [selectedSlug, setSelectedSlug] = useState<string | null>(null);
 
   const types = useMemo(() => Array.from(new Set(projects.map((p) => p.type))) as ProjectType[], [projects]);
   const counties = useMemo(() => Array.from(new Set(projects.map((p) => p.county))).sort(), [projects]);
 
-  const filtered = useMemo(
-    () =>
-      projects.filter(
-        (p) =>
-          (typeFilter === "all" || p.type === typeFilter) &&
-          (statusFilter === "all" || p.status === statusFilter) &&
-          (county === "all" || p.county === county)
-      ),
-    [projects, typeFilter, statusFilter, county]
-  );
+  const filtered = useMemo(() => {
+    const q = query.trim().toLowerCase();
+    return projects.filter(
+      (p) =>
+        (typeFilter === "all" || p.type === typeFilter) &&
+        (statusFilter === "all" || p.status === statusFilter) &&
+        (county === "all" || p.county === county) &&
+        (q === "" ||
+          [p.name, p.city, p.county, p.location, p.partner, p.description]
+            .filter(Boolean)
+            .join(" ")
+            .toLowerCase()
+            .includes(q))
+    );
+  }, [projects, typeFilter, statusFilter, county, query]);
 
   const selected = filtered.find((p) => p.slug === selectedSlug) ?? null;
+  const anyFilter = typeFilter !== "all" || statusFilter !== "all" || county !== "all" || query !== "";
 
   return (
     <div>
-      {/* ── Full-viewport map ── */}
-      <div
-        className="relative w-full overflow-hidden"
-        style={{ height: "calc(100vh - 72px)" }}
-      >
+      {/* ── Map: list-first on phones (shorter map), full-viewport on desktop ── */}
+      <div className="relative w-full overflow-hidden h-[52vh] min-h-[380px] md:h-[calc(100vh-72px)]">
         <ProjectsMap projects={filtered} selectedSlug={selected?.slug ?? null} onSelect={setSelectedSlug} />
 
         {/* Floating filter bar */}
         <div className="absolute top-4 left-4 right-4 z-10 flex items-center gap-2 flex-wrap md:flex-nowrap">
+          {/* Text search */}
+          <div className="relative w-full md:w-auto md:flex-1 md:max-w-[260px]">
+            <input
+              type="search"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="Search name, city, partner…"
+              aria-label="Search developments"
+              className="w-full px-3 py-2 pr-8 text-[11px] tracking-[0.12em] uppercase outline-none placeholder:normal-case placeholder:tracking-normal"
+              style={{
+                background: "rgba(0,0,0,0.75)",
+                backdropFilter: "blur(10px)",
+                border: "1px solid rgba(201,169,110,0.25)",
+                color: "var(--color-gold)",
+                caretColor: "var(--color-gold)",
+              }}
+            />
+            {query && (
+              <button
+                onClick={() => setQuery("")}
+                aria-label="Clear search"
+                className="absolute right-2 top-1/2 -translate-y-1/2 text-xs"
+                style={{ color: "rgba(201,169,110,0.6)" }}
+              >
+                ✕
+              </button>
+            )}
+          </div>
+
           {/* Count badge */}
           <div
             className="shrink-0 px-3 py-2 text-[10px] tracking-[0.18em] uppercase whitespace-nowrap"
@@ -144,9 +177,9 @@ export default function ProjectsExplorer({ projects }: Props) {
           </div>
 
           {/* Reset — only shown when any filter is active */}
-          {(typeFilter !== "all" || statusFilter !== "all" || county !== "all") && (
+          {anyFilter && (
             <button
-              onClick={() => { setTypeFilter("all"); setStatusFilter("all"); setCounty("all"); setSelectedSlug(null); }}
+              onClick={() => { setTypeFilter("all"); setStatusFilter("all"); setCounty("all"); setQuery(""); setSelectedSlug(null); }}
               className="text-[10px] tracking-[0.15em] uppercase transition-colors"
               style={{ color: "rgba(201,169,110,0.6)" }}
             >
@@ -271,7 +304,7 @@ export default function ProjectsExplorer({ projects }: Props) {
               No developments match these filters
             </p>
             <button
-              onClick={() => { setTypeFilter("all"); setStatusFilter("all"); setCounty("all"); }}
+              onClick={() => { setTypeFilter("all"); setStatusFilter("all"); setCounty("all"); setQuery(""); }}
               className="text-xs tracking-[0.15em] uppercase underline"
               style={{ color: "var(--color-gold)" }}
             >

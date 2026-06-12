@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import { usePathname } from "next/navigation";
+import { MotionConfig } from "framer-motion";
 import Lenis from "lenis";
 
 export default function LenisProvider({ children }: { children: React.ReactNode }) {
@@ -10,6 +11,8 @@ export default function LenisProvider({ children }: { children: React.ReactNode 
   useEffect(() => {
     // Standalone preview routes (e.g. /logo) don't use the site's smooth scroll.
     if (pathname?.startsWith("/logo")) return;
+    // Respect OS-level reduced-motion: native scrolling, no smoothing layer.
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     const lenis = new Lenis({
       duration: 1.4,
@@ -28,5 +31,7 @@ export default function LenisProvider({ children }: { children: React.ReactNode 
     return () => lenis.destroy();
   }, [pathname]);
 
-  return <>{children}</>;
+  // reducedMotion="user" makes every framer-motion animation site-wide
+  // collapse to a simple opacity change when the OS asks for less motion.
+  return <MotionConfig reducedMotion="user">{children}</MotionConfig>;
 }

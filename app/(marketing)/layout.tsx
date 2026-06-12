@@ -9,8 +9,9 @@ export default function MarketingLayout({
 }) {
   return (
     <>
+      <a href="#main" className="skip-link">Skip to content</a>
       <Header />
-      <main className="flex-1">{children}</main>
+      <main id="main" className="flex-1">{children}</main>
       <Footer />
       <ScrollToTop />
     </>

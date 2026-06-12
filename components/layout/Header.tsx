@@ -45,8 +45,8 @@ export default function Header() {
           </div>
         </Link>
 
-        {/* Desktop nav */}
-        <nav className="hidden md:flex items-center gap-10">
+        {/* Desktop nav — lg+: between 768-1024px the five items + CTA get crushed, so tablets use the menu */}
+        <nav className="hidden lg:flex items-center gap-10">
           {nav.map((item) => {
             const active = pathname === item.href || (item.href !== "/" && pathname.startsWith(item.href));
             return (
@@ -72,15 +72,15 @@ export default function Header() {
         {/* CTA */}
         <Link
           href="/contact"
-          className="hidden md:inline-flex items-center gap-2 px-6 py-2.5 text-[11px] tracking-[0.2em] uppercase font-medium transition-all duration-300 hover:gap-4"
+          className="hidden lg:inline-flex items-center gap-2 px-6 py-2.5 text-[11px] tracking-[0.2em] uppercase font-medium transition-all duration-300 hover:gap-4"
           style={{ background: "var(--color-gold)", color: "#000" }}
         >
           Get in Touch <span>→</span>
         </Link>
 
-        {/* Mobile hamburger */}
+        {/* Mobile + tablet hamburger */}
         <button
-          className="md:hidden flex flex-col gap-1.5 p-2"
+          className="lg:hidden flex flex-col gap-1.5 p-2"
           onClick={() => setOpen(!open)}
           aria-label="Toggle menu"
         >
@@ -95,7 +95,7 @@ export default function Header() {
     {/* Mobile menu — rendered as a sibling so it can fix to the viewport
         (the header has backdrop-filter, which would otherwise contain it). */}
     <div
-      className="md:hidden fixed left-0 right-0 z-40 overflow-hidden transition-opacity duration-300"
+      className="lg:hidden fixed left-0 right-0 z-40 overflow-hidden transition-opacity duration-300"
       style={{
         top: "73px",
         bottom: 0,

@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
-import { motion, AnimatePresence, useScroll, useTransform, type Variants } from "framer-motion";
+import { motion, AnimatePresence, useScroll, useTransform, useReducedMotion, type Variants } from "framer-motion";
 import { getPortfolioStats } from "@/lib/content/stats";
 
 const stats = getPortfolioStats();
@@ -13,12 +13,31 @@ const STAT_BAR = [
   { value: `${stats.countyCount}`, label: "Georgia Counties" },
 ];
 
+/**
+ * Two renditions per clip: 1080p for desktop (visually identical to 4K under
+ * the dark overlays at a fraction of the bandwidth), 540p for phones.
+ */
 const CLIPS = [
-  { src: "https://videos.pexels.com/video-files/33945045/14403569_2560_1440_25fps.mp4", brightness: 1.0 },
-  { src: "https://videos.pexels.com/video-files/36525706/15488174_3840_2160_24fps.mp4", brightness: 1.0 },
-  { src: "https://videos.pexels.com/video-files/11491400/11491400-uhd_3840_2160_30fps.mp4", brightness: 1.0 },
-  { src: "https://videos.pexels.com/video-files/33327315/14191637_3840_2160_30fps.mp4", brightness: 1.0 },
+  {
+    desktop: "https://videos.pexels.com/video-files/33945045/14403568_1920_1080_25fps.mp4",
+    mobile: "https://videos.pexels.com/video-files/33945045/14403566_960_540_25fps.mp4",
+  },
+  {
+    desktop: "https://videos.pexels.com/video-files/36525706/15488170_1920_1080_24fps.mp4",
+    mobile: "https://videos.pexels.com/video-files/36525706/15488166_960_540_24fps.mp4",
+  },
+  {
+    desktop: "https://videos.pexels.com/video-files/11491400/11491400-hd_1920_1080_30fps.mp4",
+    mobile: "https://videos.pexels.com/video-files/11491400/11491400-sd_960_540_30fps.mp4",
+  },
+  {
+    desktop: "https://videos.pexels.com/video-files/33327315/14191635_1920_1080_30fps.mp4",
+    mobile: "https://videos.pexels.com/video-files/33327315/14191633_960_540_30fps.mp4",
+  },
 ];
+
+/** First frame of clip 1 — paints instantly and backstops every crossfade. */
+const POSTER = "/images/hero-poster.jpg";
 
 const CLIP_DURATION = 9000;
 const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1];
@@ -41,36 +60,62 @@ export default function Hero() {
 
   const [clipIndex, setClipIndex] = useState(0);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const reduceMotion = useReducedMotion();
+
+  // Render video only after mount so phones never start fetching the desktop
+  // rendition, and pick the rendition from the actual viewport.
+  const [mounted, setMounted] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 767px)");
+    setIsMobile(mq.matches);
+    setMounted(true);
+    const onChange = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+    mq.addEventListener("change", onChange);
+    return () => mq.removeEventListener("change", onChange);
+  }, []);
 
   const advance = useCallback(() => {
     setClipIndex((i) => (i + 1) % CLIPS.length);
   }, []);
 
   useEffect(() => {
+    if (reduceMotion) return;
     timerRef.current = setTimeout(advance, CLIP_DURATION);
     return () => { if (timerRef.current) clearTimeout(timerRef.current); };
-  }, [clipIndex, advance]);
+  }, [clipIndex, advance, reduceMotion]);
+
+  const showVideo = mounted && !reduceMotion;
 
   return (
-    <section ref={ref} className="relative h-screen min-h-[700px] flex items-center justify-center overflow-hidden">
-      {/* Cycling video background */}
+    <section ref={ref} className="relative h-screen min-h-[700px] flex items-center justify-center overflow-hidden pb-28 md:pb-0">
+      {/* Background: poster paints instantly and backstops every crossfade; videos layer on top. */}
       <motion.div className="absolute inset-0 z-0 scale-110" style={{ y: videoY }}>
-        <AnimatePresence mode="sync">
-          <motion.video
-            key={clipIndex}
-            src={CLIPS[clipIndex].src}
-            autoPlay
-            muted
-            playsInline
-            onEnded={advance}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 1.5, ease: "easeInOut" }}
-            className="absolute inset-0 h-full w-full object-cover"
-            style={{ filter: `brightness(${CLIPS[clipIndex].brightness})` }}
-          />
-        </AnimatePresence>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={POSTER}
+          alt=""
+          aria-hidden
+          className="absolute inset-0 h-full w-full object-cover"
+        />
+        {showVideo && (
+          <AnimatePresence mode="sync">
+            <motion.video
+              key={clipIndex}
+              src={isMobile ? CLIPS[clipIndex].mobile : CLIPS[clipIndex].desktop}
+              autoPlay
+              muted
+              playsInline
+              preload="auto"
+              onEnded={advance}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 1.5, ease: "easeInOut" }}
+              className="absolute inset-0 h-full w-full object-cover"
+            />
+          </AnimatePresence>
+        )}
       </motion.div>
 
       {/* Layered overlays */}
@@ -149,42 +194,24 @@ export default function Hero() {
         </motion.div>
       </motion.div>
 
-      {/* Scroll indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 2, duration: 1 }}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-3"
-      >
-        <motion.div
-          animate={{ y: [0, 6, 0] }}
-          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-          className="flex flex-col items-center gap-2"
-        >
-          <span className="text-[9px] tracking-[0.4em] uppercase" style={{ color: "rgba(255,255,255,0.3)" }}>Scroll</span>
-          <div className="w-px h-14" style={{ background: "linear-gradient(to bottom, var(--color-gold), transparent)" }} />
-        </motion.div>
-      </motion.div>
-
-      {/* Bottom stat bar */}
+      {/* Bottom stat bar — 2x2 grid on phones, single row on desktop */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 1.6, duration: 0.8, ease: EASE }}
-        className="absolute bottom-0 left-0 right-0 z-20 hidden md:flex"
-        style={{ borderTop: "1px solid rgba(255,255,255,0.08)" }}
+        className="absolute bottom-0 left-0 right-0 z-20 grid grid-cols-2 md:grid-cols-4 gap-px"
+        style={{ borderTop: "1px solid rgba(255,255,255,0.08)", background: "rgba(255,255,255,0.08)" }}
       >
-        {STAT_BAR.map((s, i) => (
+        {STAT_BAR.map((s) => (
           <div
             key={s.label}
-            className="flex-1 flex flex-col items-center py-4 text-center"
+            className="flex flex-col items-center py-3 md:py-4 text-center px-2"
             style={{
-              borderRight: i < 3 ? "1px solid rgba(255,255,255,0.08)" : "none",
-              background: "rgba(0,0,0,0.6)",
+              background: "rgba(0,0,0,0.65)",
               backdropFilter: "blur(10px)",
             }}
           >
-            <span className="font-display font-bold text-lg" style={{ color: "var(--color-gold)" }}>{s.value}</span>
+            <span className="font-display font-bold text-base md:text-lg" style={{ color: "var(--color-gold)" }}>{s.value}</span>
             <span className="text-[9px] tracking-[0.2em] uppercase mt-0.5" style={{ color: "rgba(255,255,255,0.35)" }}>{s.label}</span>
           </div>
         ))}

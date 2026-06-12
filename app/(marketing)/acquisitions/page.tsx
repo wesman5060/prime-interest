@@ -22,7 +22,15 @@ export default function AcquisitionsPage() {
   return (
     <div className="min-h-screen">
       {/* ── Header ── */}
-      <div className="pt-40 pb-20 px-8 max-w-7xl mx-auto">
+      <div className="relative overflow-hidden">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/images/topo.svg"
+          alt=""
+          aria-hidden
+          className="pointer-events-none absolute -right-48 -top-40 w-[760px] max-w-none opacity-[0.06]"
+        />
+      <div className="relative pt-40 pb-20 px-8 max-w-7xl mx-auto">
         <AnimatedSection>
           <p className="text-xs tracking-[0.4em] uppercase mb-6" style={{ color: "var(--color-gold)" }}>
             {ACQUISITIONS_INTRO.eyebrow}
@@ -43,6 +51,7 @@ export default function AcquisitionsPage() {
             {ACQUISITIONS_INTRO.lead}
           </p>
         </AnimatedSection>
+      </div>
       </div>
 
       {/* ── Proof band ── */}

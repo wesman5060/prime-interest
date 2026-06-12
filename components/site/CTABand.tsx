@@ -16,6 +16,14 @@ export default function CTABand() {
           background: "radial-gradient(ellipse 60% 50% at 50% 50%, rgba(201,169,110,0.04) 0%, transparent 70%)",
         }}
       />
+      {/* Survey contour motif */}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src="/images/topo.svg"
+        alt=""
+        aria-hidden
+        className="pointer-events-none absolute -left-56 -bottom-72 w-[760px] max-w-none opacity-[0.05]"
+      />
 
       <div className="relative max-w-4xl mx-auto px-8 text-center">
         <motion.p

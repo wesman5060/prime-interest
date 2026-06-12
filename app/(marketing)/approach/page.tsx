@@ -42,7 +42,15 @@ export default async function ApproachPage() {
   return (
     <div className="min-h-screen">
       {/* ── Page Header ── */}
-      <div className="pt-40 pb-20 px-8 max-w-7xl mx-auto">
+      <div className="relative overflow-hidden">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/images/topo.svg"
+          alt=""
+          aria-hidden
+          className="pointer-events-none absolute -right-48 -top-40 w-[760px] max-w-none opacity-[0.06]"
+        />
+      <div className="relative pt-40 pb-20 px-8 max-w-7xl mx-auto">
         <AnimatedSection>
           <p className="text-xs tracking-[0.4em] uppercase mb-6" style={{ color: "var(--color-gold)" }}>
             {APPROACH_INTRO.eyebrow}
@@ -63,6 +71,7 @@ export default async function ApproachPage() {
             {APPROACH_INTRO.lead}
           </p>
         </AnimatedSection>
+      </div>
       </div>
 
       {/* ── The Process ── */}

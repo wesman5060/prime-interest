@@ -71,8 +71,16 @@ export default async function HomePage() {
       </section>
 
       {/* Acquisitions band — quiet, professional surfacing of the buy-side */}
-      <section className="border-t" style={{ borderColor: "rgba(255,255,255,0.06)", background: "var(--color-surface)" }}>
-        <div className="max-w-7xl mx-auto px-8 py-28">
+      <section className="relative overflow-hidden border-t" style={{ borderColor: "rgba(255,255,255,0.06)", background: "var(--color-surface)" }}>
+        {/* Survey contour motif */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/images/topo.svg"
+          alt=""
+          aria-hidden
+          className="pointer-events-none absolute -right-40 -top-56 w-[700px] max-w-none opacity-[0.06]"
+        />
+        <div className="relative max-w-7xl mx-auto px-8 py-28">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-10 items-center">
             <div className="md:col-span-8">
               <AnimatedSection>

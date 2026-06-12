@@ -253,3 +253,44 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .gold-sheen::after { display: none; }
 }
+
+/* ── Designed-not-generated craft layer ── */
+
+/* Brand text selection */
+::selection {
+  background: var(--color-gold);
+  color: #000;
+}
+
+/* Film grain — ~3% so black surfaces have texture instead of flat vector */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.032;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Unified photo grade — pro shots, Street View captures, and stock all sit
+   in one warm, slightly muted register so the portfolio reads curated. */
+.img-grade {
+  filter: saturate(0.92) contrast(1.04) brightness(0.98) sepia(0.1);
+}
+
+/* Survey corner ticks for plat-style cards */
+.plat-corner {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border-color: rgba(201, 169, 110, 0.55);
+  border-style: solid;
+  border-width: 0;
+  pointer-events: none;
+  z-index: 10;
+}
+.plat-corner.tl { top: 10px; left: 10px; border-top-width: 1px; border-left-width: 1px; }
+.plat-corner.tr { top: 10px; right: 10px; border-top-width: 1px; border-right-width: 1px; }
+.plat-corner.bl { bottom: 10px; left: 10px; border-bottom-width: 1px; border-left-width: 1px; }
+.plat-corner.br { bottom: 10px; right: 10px; border-bottom-width: 1px; border-right-width: 1px; }

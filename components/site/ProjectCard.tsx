@@ -57,24 +57,31 @@ export default function ProjectCard({ project, index = 0 }: Props) {
           />
         )}
 
-        {/* Image */}
+        {/* Image — plat-style frame with survey corner ticks */}
         <div className="relative overflow-hidden" style={{ height: "220px" }}>
           <motion.img
             src={getProjectImage(project)}
             alt={project.name}
-            className="w-full h-full object-cover"
+            className="img-grade w-full h-full object-cover"
             animate={{ scale: hovered ? 1.08 : 1 }}
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           />
           <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(10,10,10,0.9) 0%, rgba(0,0,0,0.2) 60%, transparent 100%)" }} />
 
-          {/* Number */}
-          <div className="absolute top-4 left-4 z-10">
-            <span className="font-display text-2xl font-bold" style={{ color: "rgba(201,169,110,0.35)" }}>{num}</span>
+          {/* Survey corner ticks */}
+          <span className="plat-corner tl" />
+          <span className="plat-corner tr" />
+          <span className="plat-corner bl" />
+          <span className="plat-corner br" />
+
+          {/* Parcel number */}
+          <div className="absolute top-5 left-6 z-10 flex items-baseline gap-1.5">
+            <span className="text-[8px] tracking-[0.25em] uppercase" style={{ color: "rgba(201,169,110,0.55)" }}>Parcel</span>
+            <span className="font-display text-xl font-bold leading-none" style={{ color: "rgba(201,169,110,0.6)" }}>{num}</span>
           </div>
 
           {/* Type badge */}
-          <div className="absolute top-4 right-4 z-10">
+          <div className="absolute top-4 right-6 z-10">
             <span
               className="text-[9px] tracking-[0.18em] uppercase px-2.5 py-1"
               style={{
@@ -87,6 +94,15 @@ export default function ProjectCard({ project, index = 0 }: Props) {
               {project.type.replace(/-/g, " ")}
             </span>
           </div>
+
+          {/* Acreage — survey annotation in the plat frame */}
+          {project.acreage && (
+            <div className="absolute bottom-4 right-6 z-10">
+              <span className="text-[10px] tracking-[0.18em] tabular-nums" style={{ color: "rgba(201,169,110,0.75)" }}>
+                ± {project.acreage} AC
+              </span>
+            </div>
+          )}
         </div>
 
         {/* Content */}

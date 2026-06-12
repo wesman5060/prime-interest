@@ -37,7 +37,7 @@ export default function ProjectGallery({ images, name, isRepresentative }: Props
           key={active}
           src={images[active]}
           alt={`${name} — photo ${active + 1}`}
-          className="h-full w-full object-cover transition-opacity duration-300"
+          className="img-grade h-full w-full object-cover transition-opacity duration-300"
         />
 
         {/* Gradient overlay */}
@@ -101,7 +101,7 @@ export default function ProjectGallery({ images, name, isRepresentative }: Props
               }}
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={src} alt="" className="w-full h-full object-cover" />
+              <img src={src} alt="" className="img-grade w-full h-full object-cover" />
             </button>
           ))}
         </div>

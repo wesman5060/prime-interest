@@ -4,8 +4,43 @@ import Year from "@/components/site/Year";
 
 export default function Footer() {
   return (
-    <footer className="border-t mt-auto" style={{ borderColor: "var(--color-border)", background: "var(--color-surface)" }}>
-      <div className="max-w-7xl mx-auto px-8 py-16 grid grid-cols-1 md:grid-cols-3 gap-12">
+    <footer className="relative overflow-hidden border-t mt-auto" style={{ borderColor: "var(--color-border)", background: "var(--color-surface)" }}>
+      {/* Survey contour motif */}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src="/images/topo.svg"
+        alt=""
+        aria-hidden
+        className="pointer-events-none absolute -right-64 -bottom-80 w-[820px] max-w-none opacity-[0.05]"
+      />
+
+      {/* Statement */}
+      <div className="relative max-w-7xl mx-auto px-8 pt-20 pb-16">
+        <Link href="/acquisitions" className="group block">
+          <p className="text-[10px] tracking-[0.4em] uppercase mb-6" style={{ color: "var(--color-gold)" }}>
+            Have land in Georgia?
+          </p>
+          <span
+            className="font-display font-bold leading-[1.02] text-white block max-w-4xl transition-colors duration-300 group-hover:text-[color:var(--color-gold)]"
+            style={{ fontSize: "clamp(2.25rem, 5.5vw, 4.5rem)" }}
+          >
+            Let&rsquo;s put your land{" "}
+            <span className="whitespace-nowrap">
+              <em>to work</em>
+              <span
+                className="inline-block align-baseline ml-4 transition-transform duration-300 group-hover:translate-x-3"
+                style={{ color: "var(--color-gold)" }}
+              >
+                →
+              </span>
+            </span>
+          </span>
+        </Link>
+      </div>
+
+      <div className="relative border-t" style={{ borderColor: "var(--color-border)" }} />
+
+      <div className="relative max-w-7xl mx-auto px-8 py-16 grid grid-cols-1 md:grid-cols-3 gap-12">
 
         {/* Brand */}
         <div>
@@ -66,8 +101,8 @@ export default function Footer() {
           <p className="text-xs" style={{ color: "var(--color-text-subtle)" }}>
             © <Year /> Prime Interest Land Development. All Rights Reserved.
           </p>
-          <p className="text-xs" style={{ color: "var(--color-text-subtle)" }}>
-            Buford, Georgia
+          <p className="text-xs tracking-[0.15em] tabular-nums" style={{ color: "var(--color-text-subtle)" }}>
+            34.0963° N&nbsp;&nbsp;84.0001° W &nbsp;·&nbsp; Buford, Georgia
           </p>
         </div>
       </div>

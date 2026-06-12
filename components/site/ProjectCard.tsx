@@ -10,9 +10,15 @@ function statusColor(status: Project["status"]) {
   return status === "completed" || status === "fully-leased" ? "#6DC87A" : "var(--color-gold)";
 }
 
-interface Props { project: Project; index?: number }
+interface Props {
+  project: Project;
+  index?: number;
+  /** "feature" = the large editorial card in an asymmetric grid. */
+  variant?: "default" | "feature";
+  className?: string;
+}
 
-export default function ProjectCard({ project, index = 0 }: Props) {
+export default function ProjectCard({ project, index = 0, variant = "default", className }: Props) {
   const [hovered, setHovered] = useState(false);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
 
@@ -22,9 +28,11 @@ export default function ProjectCard({ project, index = 0 }: Props) {
   }
 
   const num = String(index + 1).padStart(2, "0");
+  const feature = variant === "feature";
 
   return (
     <motion.div
+      className={className}
       initial={{ opacity: 0, y: 32 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.08 }}
@@ -58,7 +66,7 @@ export default function ProjectCard({ project, index = 0 }: Props) {
         )}
 
         {/* Image — plat-style frame with survey corner ticks */}
-        <div className="relative overflow-hidden" style={{ height: "220px" }}>
+        <div className={`relative overflow-hidden ${feature ? "h-[260px] md:h-[424px]" : "h-[220px]"}`}>
           <motion.img
             src={getProjectImage(project)}
             alt={project.name}
@@ -109,7 +117,7 @@ export default function ProjectCard({ project, index = 0 }: Props) {
         <div className="p-6">
           <div className="flex items-start justify-between gap-2 mb-2">
             <h3
-              className="font-display text-xl font-bold leading-tight transition-colors duration-300"
+              className={`font-display font-bold leading-tight transition-colors duration-300 ${feature ? "text-2xl md:text-3xl" : "text-xl"}`}
               style={{ color: hovered ? "var(--color-gold)" : "#fff" }}
             >
               {project.name}

@@ -51,10 +51,16 @@ export default async function HomePage() {
             </AnimatedSection>
           </div>
 
-          {/* Cards */}
+          {/* Cards — asymmetric editorial grid: one feature-sized card leads */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             {featured.map((project, i) => (
-              <ProjectCard key={project.slug} project={project} index={i} />
+              <ProjectCard
+                key={project.slug}
+                project={project}
+                index={i}
+                variant={i === 0 ? "feature" : "default"}
+                className={i === 0 ? "md:col-span-2" : undefined}
+              />
             ))}
           </div>
 

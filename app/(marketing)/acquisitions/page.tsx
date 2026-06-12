@@ -1,6 +1,7 @@
 import { getPortfolioStats } from "@/lib/content/stats";
 import AnimatedSection from "@/components/site/AnimatedSection";
 import AcquisitionForm from "@/components/site/AcquisitionForm";
+import CountUp from "@/components/site/CountUp";
 import type { Metadata } from "next";
 import {
   ACQUISITIONS_INTRO,
@@ -55,7 +56,7 @@ export default function AcquisitionsPage() {
           ].map((s, i) => (
             <AnimatedSection key={s.label} delay={i * 0.08}>
               <div className="flex flex-col items-center py-12 text-center px-4" style={{ borderRight: i < 3 ? "1px solid var(--color-border-custom)" : "none" }}>
-                <span className="font-display text-4xl md:text-5xl font-bold leading-none mb-3" style={{ color: "var(--color-gold)" }}>{s.value}</span>
+                <CountUp value={s.value} className="font-display text-4xl md:text-5xl font-bold leading-none mb-3" style={{ color: "var(--color-gold)" }} />
                 <span className="text-[10px] tracking-[0.2em] uppercase" style={{ color: "var(--color-text-muted)" }}>{s.label}</span>
               </div>
             </AnimatedSection>

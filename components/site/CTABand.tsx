@@ -60,7 +60,7 @@ export default function CTABand() {
         >
           <Link
             href="/contact"
-            className="inline-flex items-center gap-3 px-12 py-5 text-xs tracking-[0.25em] uppercase font-medium transition-all duration-300 hover:brightness-110 hover:scale-[1.02] hover:shadow-[0_0_40px_rgba(201,169,110,0.3)]"
+            className="gold-sheen inline-flex items-center gap-3 px-12 py-5 text-xs tracking-[0.25em] uppercase font-medium transition-all duration-300 hover:brightness-110 hover:scale-[1.02] hover:shadow-[0_0_40px_rgba(201,169,110,0.3)]"
             style={{ background: "var(--color-gold)", color: "#000" }}
           >
             Start a Conversation

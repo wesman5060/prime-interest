@@ -1,6 +1,7 @@
 import { getProjects, getCompany } from "@/lib/content/source";
 import { getPortfolioStats } from "@/lib/content/stats";
 import AnimatedSection from "@/components/site/AnimatedSection";
+import CountUp from "@/components/site/CountUp";
 import Link from "next/link";
 import type { Metadata } from "next";
 import type { ProjectType } from "@/lib/content/types";
@@ -122,9 +123,7 @@ export default async function ApproachPage() {
           {types.map(([type, count], i) => (
             <AnimatedSection key={type} delay={i * 0.04}>
               <div className="flex flex-col justify-between p-8 h-40" style={{ background: "var(--color-bg)" }}>
-                <span className="font-display text-5xl font-bold leading-none" style={{ color: "var(--color-gold)" }}>
-                  {count}
-                </span>
+                <CountUp value={String(count)} className="font-display text-5xl font-bold leading-none" style={{ color: "var(--color-gold)" }} />
                 <span className="text-sm font-medium tracking-wide" style={{ color: "var(--color-text-muted)" }}>
                   {TYPE_LABELS[type]}
                 </span>
@@ -172,7 +171,7 @@ export default async function ApproachPage() {
             </p>
             <Link
               href="/acquisitions"
-              className="inline-flex items-center gap-3 px-10 py-4 text-[11px] tracking-[0.3em] uppercase font-medium transition-all duration-300 hover:gap-5"
+              className="gold-sheen inline-flex items-center gap-3 px-10 py-4 text-[11px] tracking-[0.3em] uppercase font-medium transition-all duration-300 hover:gap-5"
               style={{ background: "var(--color-gold)", color: "#000" }}
             >
               Our Acquisitions Program →

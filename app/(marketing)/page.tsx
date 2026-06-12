@@ -1,6 +1,8 @@
 import { getFeaturedProjects, getCompany, getProjects } from "@/lib/content/source";
 import { getPortfolioStats } from "@/lib/content/stats";
 import Hero from "@/components/site/Hero";
+import CountUp from "@/components/site/CountUp";
+import RevealImage from "@/components/site/RevealImage";
 import ProjectCard from "@/components/site/ProjectCard";
 import PartnersSection from "@/components/site/PartnersSection";
 import RecognitionStrip from "@/components/site/RecognitionStrip";
@@ -110,20 +112,17 @@ export default async function HomePage() {
           {/* Image side */}
           <AnimatedSection direction="left">
             <div className="relative">
-              <div
-                className="relative aspect-[4/5] overflow-hidden"
-                style={{ border: "1px solid rgba(201,169,110,0.12)" }}
+              <RevealImage
+                src="/images/about.jpg"
+                alt="Prime Interest Land Development"
+                className="aspect-[4/5] border border-[rgba(201,169,110,0.12)]"
+                imgClassName="w-full h-full object-cover"
               >
-                <img
-                  src="/images/about.jpg"
-                  alt="Prime Interest Land Development"
-                  className="w-full h-full object-cover"
-                />
                 <div
                   className="absolute inset-0"
                   style={{ background: "linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 60%)" }}
                 />
-              </div>
+              </RevealImage>
               {/* Floating stat card */}
               <div
                 className="absolute -bottom-6 -right-6 px-8 py-6"
@@ -132,7 +131,7 @@ export default async function HomePage() {
                   border: "1px solid rgba(201,169,110,0.2)",
                 }}
               >
-                <p className="font-display text-4xl font-bold mb-1" style={{ color: "var(--color-gold)" }}>{stats.yearsActive}+</p>
+                <CountUp value={`${stats.yearsActive}+`} className="font-display text-4xl font-bold mb-1 block" style={{ color: "var(--color-gold)" }} />
                 <p className="text-[10px] tracking-[0.2em] uppercase" style={{ color: "var(--color-text-muted)" }}>Years of Experience</p>
               </div>
             </div>

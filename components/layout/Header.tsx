@@ -72,7 +72,7 @@ export default function Header() {
         {/* CTA */}
         <Link
           href="/contact"
-          className="hidden lg:inline-flex items-center gap-2 px-6 py-2.5 text-[11px] tracking-[0.2em] uppercase font-medium transition-all duration-300 hover:gap-4"
+          className="gold-sheen hidden lg:inline-flex items-center gap-2 px-6 py-2.5 text-[11px] tracking-[0.2em] uppercase font-medium transition-all duration-300 hover:gap-4"
           style={{ background: "var(--color-gold)", color: "#000" }}
         >
           Get in Touch <span>→</span>

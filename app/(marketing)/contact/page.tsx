@@ -1,5 +1,6 @@
 import ContactForm from "@/components/site/ContactForm";
 import AnimatedSection from "@/components/site/AnimatedSection";
+import RevealImage from "@/components/site/RevealImage";
 import OfficeMapClient from "@/components/site/OfficeMapClient";
 import type { Metadata } from "next";
 
@@ -126,14 +127,12 @@ export default function ContactPage() {
               </a>
             </div>
             {/* Office photo from the original prime-interest.com, AI-upscaled 4x + enhanced. Swap if a new shot becomes available. */}
-            <div className="mb-6 w-full overflow-hidden border" style={{ borderColor: "var(--color-border-custom)" }}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/images/office.jpg"
-                alt="Prime Interest Land Development office — 4235 South Lee St, Buford, GA"
-                className="w-full h-auto object-cover"
-              />
-            </div>
+            <RevealImage
+              src="/images/office.jpg"
+              alt="Prime Interest Land Development office — 4235 South Lee St, Buford, GA"
+              className="mb-6 w-full border border-[var(--color-border-custom)]"
+              imgClassName="w-full h-auto object-cover"
+            />
             <div
               className="h-[420px] w-full overflow-hidden border"
               style={{ borderColor: "var(--color-border-custom)" }}

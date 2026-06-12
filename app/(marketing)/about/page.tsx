@@ -1,5 +1,6 @@
 import { getCompany } from "@/lib/content/source";
 import AnimatedSection from "@/components/site/AnimatedSection";
+import Timeline from "@/components/site/Timeline";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { RANKINGS, FEATURED_AWARD } from "@/content/recognition";
@@ -151,39 +152,7 @@ export default async function AboutPage() {
           </h2>
         </AnimatedSection>
 
-        <div className="relative">
-          {/* vertical rule */}
-          <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-px -translate-x-1/2" style={{ background: "var(--color-border-custom)" }} />
-
-          <div className="space-y-0">
-            {TIMELINE.map((item, i) => (
-              <AnimatedSection key={item.year} delay={i * 0.07} direction={i % 2 === 0 ? "left" : "right"}>
-                <div className={`grid grid-cols-1 md:grid-cols-2 gap-0 md:gap-24 py-12 ${i % 2 === 0 ? "" : "md:flex-row-reverse"}`}>
-                  {/* Year side */}
-                  <div className={`flex items-start gap-6 ${i % 2 === 0 ? "md:text-right md:justify-end" : "md:order-2"}`}>
-                    <div className={`flex flex-col ${i % 2 === 0 ? "md:items-end" : ""}`}>
-                      <span className="font-display text-5xl font-bold leading-none mb-3" style={{ color: "rgba(201,169,110,0.18)" }}>
-                        {item.year}
-                      </span>
-                      <span className="text-sm font-medium tracking-wider text-white">{item.heading}</span>
-                    </div>
-                  </div>
-
-                  {/* dot */}
-                  <div className="hidden md:block absolute left-1/2 -translate-x-1/2 w-3 h-3 rounded-full border-2 mt-4" style={{ borderColor: "var(--color-gold)", background: "var(--color-bg)" }} />
-
-                  {/* Content side */}
-                  <div className={`mt-3 md:mt-0 ${i % 2 === 0 ? "md:order-2" : ""}`}>
-                    <p className="text-base leading-relaxed" style={{ color: "var(--color-text-muted)" }}>{item.body}</p>
-                  </div>
-                </div>
-                {i < TIMELINE.length - 1 && (
-                  <div className="md:hidden h-px mx-0 my-2" style={{ background: "var(--color-border-custom)" }} />
-                )}
-              </AnimatedSection>
-            ))}
-          </div>
-        </div>
+        <Timeline items={TIMELINE} />
       </div>
 
       {/* ── Rankings ── */}
@@ -262,7 +231,7 @@ export default async function AboutPage() {
             </p>
             <Link
               href="/acquisitions"
-              className="inline-flex items-center gap-3 px-10 py-4 text-[11px] tracking-[0.3em] uppercase font-medium transition-all duration-300 hover:gap-5"
+              className="gold-sheen inline-flex items-center gap-3 px-10 py-4 text-[11px] tracking-[0.3em] uppercase font-medium transition-all duration-300 hover:gap-5"
               style={{ background: "var(--color-gold)", color: "#000" }}
             >
               Our Acquisitions Program →

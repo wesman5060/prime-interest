@@ -1,24 +1,28 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import { getPortfolioStats } from "@/lib/content/stats";
 
 export const metadata: Metadata = {
   title: "Page Not Found",
 };
 
+const stats = getPortfolioStats();
+
 export default function NotFound() {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center px-8 text-center">
       <p className="text-xs tracking-[0.4em] uppercase mb-6" style={{ color: "var(--color-gold)" }}>
-        404
+        404 · Unentitled Territory
       </p>
       <h1
         className="font-display font-bold text-white leading-none mb-6"
         style={{ fontSize: "clamp(4rem, 12vw, 10rem)" }}
       >
-        Page Not Found
+        Undeveloped<br />Land
       </h1>
-      <p className="text-lg mb-12 max-w-sm" style={{ color: "var(--color-text-muted)" }}>
-        This page doesn't exist. Head back to the homepage or explore our developments.
+      <p className="text-lg mb-12 max-w-md" style={{ color: "var(--color-text-muted)" }}>
+        There's nothing built at this address yet. Head back home, or explore
+        the {stats.projectCount} developments we did build.
       </p>
       <div className="flex flex-col sm:flex-row gap-4">
         <Link

@@ -36,7 +36,7 @@ export default function Footer() {
               <Link
                 key={item.href}
                 href={item.href}
-                className="text-sm transition-colors duration-200 hover:text-[--color-gold]"
+                className="text-sm transition-colors duration-200 hover:text-[color:var(--color-gold)]"
                 style={{ color: "var(--color-text-muted)" }}
               >
                 {item.label}
@@ -51,10 +51,10 @@ export default function Footer() {
           <address className="not-italic flex flex-col gap-2 text-sm" style={{ color: "var(--color-text-muted)" }}>
             <span>4235 South Lee St</span>
             <span>Buford, GA 30518</span>
-            <a href="tel:7709453241" className="hover:text-[--color-gold] transition-colors mt-2">
+            <a href="tel:7709453241" className="hover:text-[color:var(--color-gold)] transition-colors mt-2">
               770-945-3241
             </a>
-            <a href="mailto:martyorr@bellsouth.net" className="hover:text-[--color-gold] transition-colors">
+            <a href="mailto:martyorr@bellsouth.net" className="hover:text-[color:var(--color-gold)] transition-colors">
               martyorr@bellsouth.net
             </a>
           </address>

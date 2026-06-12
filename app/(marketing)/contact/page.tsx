@@ -61,21 +61,21 @@ export default function ContactPage() {
                   <div className="space-y-3">
                     <a
                       href="tel:7709453241"
-                      className="block text-sm transition-colors duration-200 hover:text-[--color-gold]"
+                      className="block text-sm transition-colors duration-200 hover:text-[color:var(--color-gold)]"
                       style={{ color: "var(--color-text-muted)" }}
                     >
                       770-945-3241
                     </a>
                     <a
                       href="tel:7709450472"
-                      className="block text-sm transition-colors duration-200 hover:text-[--color-gold]"
+                      className="block text-sm transition-colors duration-200 hover:text-[color:var(--color-gold)]"
                       style={{ color: "var(--color-text-muted)" }}
                     >
                       Fax: 770-945-0472
                     </a>
                     <a
                       href="mailto:martyorr@bellsouth.net"
-                      className="block text-sm transition-colors duration-200 hover:text-[--color-gold]"
+                      className="block text-sm transition-colors duration-200 hover:text-[color:var(--color-gold)]"
                       style={{ color: "var(--color-text-muted)" }}
                     >
                       martyorr@bellsouth.net
@@ -130,7 +130,7 @@ export default function ContactPage() {
             <RevealImage
               src="/images/office.jpg"
               alt="Prime Interest Land Development office — 4235 South Lee St, Buford, GA"
-              className="mb-6 w-full border border-[var(--color-border-custom)]"
+              className="mb-6 w-full border border-[color:var(--color-border-custom)]"
               imgClassName="w-full h-auto object-cover"
             />
             <div

@@ -81,7 +81,7 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
       <div className="max-w-5xl mx-auto px-8">
         <a
           href="/projects"
-          className="inline-flex items-center gap-2 text-xs tracking-[0.2em] uppercase mb-12 transition-colors hover:text-[--color-gold]"
+          className="inline-flex items-center gap-2 text-xs tracking-[0.2em] uppercase mb-12 transition-colors hover:text-[color:var(--color-gold)]"
           style={{ color: "var(--color-text-muted)" }}
         >
           ← Back to Map
@@ -144,7 +144,7 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
                 <img
                   src={mapUrl}
                   alt={`Map showing the location of ${project.name} in ${project.county} County, Georgia`}
-                  className="w-full h-auto object-cover"
+                  className="w-full h-52 md:h-auto object-cover"
                   loading="lazy"
                 />
                 <div
@@ -203,7 +203,7 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
             <span className="text-[10px] tracking-[0.25em] uppercase" style={{ color: "var(--color-text-subtle)" }}>
               ← Previous
             </span>
-            <span className="font-display text-xl font-bold text-white transition-colors duration-300 group-hover:text-[--color-gold]">
+            <span className="font-display text-xl font-bold text-white transition-colors duration-300 group-hover:text-[color:var(--color-gold)]">
               {prev.name}
             </span>
           </Link>
@@ -215,7 +215,7 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
             <span className="text-[10px] tracking-[0.25em] uppercase" style={{ color: "var(--color-text-subtle)" }}>
               Next →
             </span>
-            <span className="font-display text-xl font-bold text-white transition-colors duration-300 group-hover:text-[--color-gold]">
+            <span className="font-display text-xl font-bold text-white transition-colors duration-300 group-hover:text-[color:var(--color-gold)]">
               {next.name}
             </span>
           </Link>

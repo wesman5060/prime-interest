@@ -90,7 +90,7 @@ export default function GalleryGrid({ photos }: Props) {
                 </div>
                 <button
                   onClick={() => setLightbox(null)}
-                  className="text-xs tracking-[0.2em] uppercase transition-colors hover:text-[--color-gold]"
+                  className="text-xs tracking-[0.2em] uppercase transition-colors hover:text-[color:var(--color-gold)]"
                   style={{ color: "var(--color-text-muted)" }}
                 >
                   Close ×

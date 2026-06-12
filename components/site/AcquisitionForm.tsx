@@ -23,7 +23,7 @@ type FormValues = z.infer<typeof schema>;
 type State = "idle" | "loading" | "success" | "error";
 
 const inputClass =
-  "w-full bg-transparent border-b py-3 text-sm text-white placeholder:text-[--color-text-subtle] outline-none transition-colors duration-200 focus:border-[--color-gold]";
+  "w-full bg-transparent border-b py-3 text-sm text-white placeholder:text-[color:var(--color-text-subtle)] outline-none transition-colors duration-200 focus:border-[color:var(--color-gold)]";
 const inputStyle = { borderColor: "var(--color-border-custom)", caretColor: "var(--color-gold)" };
 const labelClass = "block text-[10px] tracking-[0.2em] uppercase mb-3";
 

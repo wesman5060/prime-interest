@@ -270,7 +270,7 @@ export default function ProjectsExplorer({ projects }: Props) {
                 <div className="mt-auto">
                   <Link
                     href={`/projects/${selected.slug}`}
-                    className="flex items-center justify-between border px-5 py-3 text-[10px] tracking-[0.2em] uppercase transition-all duration-200 hover:border-[--color-gold]"
+                    className="flex items-center justify-between border px-5 py-3 text-[10px] tracking-[0.2em] uppercase transition-all duration-200 hover:border-[color:var(--color-gold)]"
                     style={{ borderColor: "rgba(201,169,110,0.3)", color: "var(--color-gold)" }}
                   >
                     Full Project Details

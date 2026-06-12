@@ -77,7 +77,7 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${playfair.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-[--color-bg] text-[--color-text]">
+      <body className="min-h-full flex flex-col bg-[color:var(--color-bg)] text-[color:var(--color-text)]">
         <LenisProvider>{children}</LenisProvider>
         <Analytics />
       </body>

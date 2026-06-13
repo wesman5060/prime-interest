@@ -124,9 +124,9 @@ export default function Hero() {
       <div className="absolute inset-0 z-10" style={{ background: "linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.1) 40%, rgba(0,0,0,0.7) 80%, #000 100%)" }} />
       <div className="absolute inset-0 z-10" style={{ background: "linear-gradient(to right, rgba(0,0,0,0.4) 0%, transparent 50%, rgba(0,0,0,0.4) 100%)" }} />
 
-      {/* Content — left-aligned editorial composition, survey coordinates as the eyebrow */}
+      {/* Content — centered composition, survey coordinates as the eyebrow */}
       <motion.div
-        className="relative z-20 w-full max-w-7xl mx-auto px-6 md:px-8 text-left"
+        className="relative z-20 text-center px-6 max-w-6xl mx-auto w-full"
         style={{ opacity, y: contentY }}
       >
         <motion.div
@@ -134,17 +134,18 @@ export default function Hero() {
           initial="hidden"
           animate="visible"
           variants={fadeUp}
-          className="flex items-center gap-4 mb-10"
+          className="flex items-center justify-center gap-4 mb-10"
         >
           <div className="h-px w-12" style={{ background: "var(--color-gold)" }} />
           <span className="text-[10px] tracking-[0.4em] uppercase tabular-nums" style={{ color: "var(--color-gold)" }}>
-            34.0963° N&nbsp;&nbsp;84.0001° W &nbsp;·&nbsp; Buford, Georgia &nbsp;·&nbsp; Est. 1990
+            34.0963° N&nbsp;&nbsp;84.0001° W &nbsp;·&nbsp; Buford, Georgia
           </span>
+          <div className="h-px w-12" style={{ background: "var(--color-gold)" }} />
         </motion.div>
 
         <h1
           className="font-display font-bold text-white leading-[0.88] tracking-tight mb-8"
-          style={{ fontSize: "clamp(4rem, 11vw, 9.5rem)" }}
+          style={{ fontSize: "clamp(4rem, 12vw, 10rem)" }}
         >
           {["Building", "Georgia's", "Future"].map((line, i) => (
             <span key={line} className="block overflow-hidden pb-[0.12em] -mb-[0.12em]">
@@ -153,7 +154,7 @@ export default function Hero() {
                 initial={{ y: "120%" }}
                 animate={{ y: 0 }}
                 transition={{ duration: 1.1, delay: 0.2 + i * 0.14, ease: EASE }}
-                style={i === 1 ? { color: "var(--color-gold)", paddingLeft: "0.06em" } : undefined}
+                style={i === 1 ? { color: "var(--color-gold)" } : undefined}
               >
                 {i === 1 ? <em>{line}</em> : line}
               </motion.span>
@@ -166,7 +167,7 @@ export default function Hero() {
           initial="hidden"
           animate="visible"
           variants={fadeUp}
-          className="text-base md:text-xl max-w-lg mb-14 leading-relaxed font-light"
+          className="text-base md:text-xl max-w-lg mx-auto mb-14 leading-relaxed font-light"
           style={{ color: "rgba(255,255,255,0.55)" }}
         >
           {stats.projectCount} developments across Georgia — residential, commercial,
@@ -178,7 +179,7 @@ export default function Hero() {
           initial="hidden"
           animate="visible"
           variants={fadeUp}
-          className="flex flex-col sm:flex-row gap-4 items-start sm:items-center"
+          className="flex flex-col sm:flex-row gap-4 justify-center items-center"
         >
           <Link
             href="/projects"

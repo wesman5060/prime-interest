@@ -148,10 +148,16 @@ export default function Hero() {
           style={{ fontSize: "clamp(4rem, 12vw, 10rem)" }}
         >
           {["Building", "Georgia's", "Future"].map((line, i) => (
-            <span key={line} className="block overflow-hidden pb-[0.12em] -mb-[0.12em]">
+            // Generous mask padding so Playfair's descenders/ascenders never
+            // clip at the tight 0.88 leading; negative margins re-tighten the
+            // visual rhythm. y starts at 140% to stay fully hidden despite it.
+            <span
+              key={line}
+              className="block overflow-hidden px-[0.1em] -mx-[0.1em] pt-[0.1em] -mt-[0.1em] pb-[0.28em] -mb-[0.28em]"
+            >
               <motion.span
                 className="block"
-                initial={{ y: "120%" }}
+                initial={{ y: "140%" }}
                 animate={{ y: 0 }}
                 transition={{ duration: 1.1, delay: 0.2 + i * 0.14, ease: EASE }}
                 style={i === 1 ? { color: "var(--color-gold)" } : undefined}

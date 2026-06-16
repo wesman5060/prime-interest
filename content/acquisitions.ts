@@ -26,11 +26,11 @@ export const ACQUISITIONS_INTRO = {
   eyebrow: "Acquisitions",
   headline: "We Are\nAcquiring Land",
   lead:
-    "Prime Interest maintains an active acquisition program across metro Atlanta and North Georgia. We work directly with landowners, brokers, and investment partners to identify land with development potential — and we handle the rezoning and entitlement ourselves.",
+    "Prime Interest maintains an active acquisition program across the state of Georgia. We work directly with landowners, brokers, and investment partners to identify land with development potential — and we handle the rezoning and entitlement ourselves.",
 };
 
 export const BUY_BOX: BuyBoxItem[] = [
-  { label: "Geography", value: "Metro Atlanta & North Georgia" },
+  { label: "Geography", value: "Anywhere in Georgia" },
   { label: "Acreage", value: "All sizes — 1 to 200+ acres" },
   { label: "Land Type", value: "Raw, agricultural, infill & assemblages" },
   { label: "Zoning", value: "Any — we handle rezoning & entitlement" },

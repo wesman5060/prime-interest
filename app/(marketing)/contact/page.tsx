@@ -88,7 +88,7 @@ export default function ContactPage() {
                     Acquisitions
                   </p>
                   <p className="text-sm leading-relaxed" style={{ color: "var(--color-text-muted)" }}>
-                    Prime Interest actively acquires raw and improved land across metro Atlanta and North Georgia. All sizes considered.
+                    Prime Interest actively acquires raw and improved land anywhere in Georgia. All sizes considered.
                   </p>
                 </div>
               </div>

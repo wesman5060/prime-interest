@@ -93,7 +93,7 @@ export default async function HomePage() {
                   Active Acquisitions
                 </p>
                 <h2 className="font-display font-bold text-white leading-[1.05] mb-6" style={{ fontSize: "clamp(1.75rem, 3vw, 2.75rem)" }}>
-                  We are continuously acquiring land<br className="hidden md:block" /> across metro Atlanta and North Georgia.
+                  We are continuously acquiring land<br className="hidden md:block" /> across the state of Georgia.
                 </h2>
                 <p className="text-base leading-relaxed max-w-2xl" style={{ color: "var(--color-text-muted)", lineHeight: 1.8 }}>
                   Raw land, entitled parcels, and assemblages — all sizes considered. We work directly with landowners, brokers, and partners, and handle rezoning and entitlement ourselves.
@@ -213,8 +213,8 @@ export default async function HomePage() {
                   className="font-display font-bold text-white leading-[0.95]"
                   style={{ fontSize: "clamp(2rem, 4vw, 3.5rem)" }}
                 >
-                  Thirty years on the<br className="hidden md:block" />{" "}
-                  <span style={{ color: "var(--color-gold)" }}>Coolray Field corridor.</span>
+                  Thirty-five years of work<br className="hidden md:block" />{" "}
+                  <span style={{ color: "var(--color-gold)" }}>in Marty&rsquo;s hometown.</span>
                 </h2>
               </AnimatedSection>
             </div>
@@ -243,16 +243,16 @@ export default async function HomePage() {
                     className="font-display text-[10px] tracking-[0.3em] uppercase mb-5 tabular-nums"
                     style={{ color: "var(--color-gold)" }}
                   >
-                    01 · Corridor Story · Buford &amp; Sugar Hill
+                    01 · Story · Buford, Georgia
                   </p>
                   <p
                     className="text-lg md:text-2xl text-white leading-snug mb-6"
                     style={{ fontStyle: "italic" }}
                   >
-                    A stretch of Highway 20 and South Lee Street that nobody was paying attention to in 1990 — and what&rsquo;s there now.
+                    Marty grew up in Buford. He&rsquo;s worked land here ever since.
                   </p>
                   <p className="text-sm leading-relaxed max-w-2xl" style={{ color: "var(--color-text-muted)", lineHeight: 1.8 }}>
-                    Mall of Georgia. Coolray Field. The Northside Medical campus. Six active and completed Prime Interest projects within a mile and a half of the office Marty bought in 1990 — and the patient decades of rezoning, assemblage, and entitlement that connect them.
+                    Mall of Georgia. Coolray Field. The Northside Medical campus. Several Prime Interest projects sit within a few miles of the office Marty opened in 1998 — not because of a corridor play, but because Buford is home.
                   </p>
                 </div>
                 <div className="md:col-span-4 md:text-right">

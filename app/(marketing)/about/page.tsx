@@ -28,7 +28,7 @@ const TIMELINE = [
   {
     year: "2000s",
     heading: "Prime Interest Properties",
-    body: "Marty forms Prime Interest Properties with friend and former teacher Larry Cheek — a board member of Peoples Bank & Trust, the Buford bank that has long backed the firm's developments. Together they deliver single-family and commercial projects across North Georgia.",
+    body: "Marty forms Prime Interest Properties with friend and former teacher Larry Cheek — a board member of Peoples Bank & Trust, the Buford bank that has long backed the firm's developments. Together they deliver single-family and commercial projects across Georgia.",
   },
   {
     year: "2008+",
@@ -61,7 +61,7 @@ export default async function AboutPage() {
       <div className="pt-40 pb-24 px-8 max-w-7xl mx-auto">
         <AnimatedSection>
           <p className="text-xs tracking-[0.4em] uppercase mb-6" style={{ color: "var(--color-gold)" }}>
-            Est. 1990 &nbsp;·&nbsp; Buford, Georgia
+            Buford, Georgia &nbsp;·&nbsp; In the work since 1990
           </p>
         </AnimatedSection>
         <AnimatedSection delay={0.1}>
@@ -186,7 +186,7 @@ export default async function AboutPage() {
               Have Land to Sell?
             </h2>
             <p className="text-lg mb-12 max-w-xl mx-auto" style={{ color: "var(--color-text-muted)" }}>
-              Prime Interest actively acquires land across metro Atlanta and North Georgia. If you have a site, we want to hear from you.
+              Prime Interest actively acquires land across the state of Georgia. If you have a site, we want to hear from you.
             </p>
             <Link
               href="/acquisitions"

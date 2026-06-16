@@ -52,9 +52,9 @@ export interface Story {
 export const STORIES: Story[] = [
   {
     slug: "coolray-field",
-    title: "The Coolray Field Corridor",
-    eyebrow: "Corridor Story · Buford & Sugar Hill",
-    dek: "Thirty years working a stretch of Highway 20 and South Lee Street that nobody was paying attention to — and what's there now.",
+    title: "Thirty-Five Years in Buford",
+    eyebrow: "Story · Buford, Georgia",
+    dek: "Marty grew up in Buford and built his career here. These are some of the deals that have happened near what's now Coolray Field.",
     mapCenter: [-83.992, 34.092],
     mapZoom: 12,
     pins: [
@@ -115,45 +115,41 @@ export const STORIES: Story[] = [
     ],
     sections: [
       {
-        heading: "Before the stadium",
+        heading: "From Buford",
         body: [
-          "When Marty Orr opened the doors of Prime Interest in 1990, the stretch of Gwinnett County between Buford and Lawrenceville was mostly pasture, gravel access roads, and a handful of family farms whose owners weren't sure what their land was worth or what to do with it. South Lee Street ran past the office to nowhere in particular. Highway 20 was a two-lane road into the country.",
-          "He bought a small office on South Lee Street in those early years because it was inexpensive, but also because it sat in the middle of a corridor he believed would eventually turn. The reasoning was unromantic: Lake Lanier was to the north, I-985 cut through the middle, the Mall of Georgia was in early planning south of town, and Atlanta's growth pressure was inevitable. The land would move. It was a matter of when, and of who was patient enough to wait.",
+          "Marty Orr grew up in Buford, Georgia. He entered land development in 1990 under the mentorship of W.T. \"Terry\" Dunahoo — a Barrow County surveyor, developer, and banker — and spent the early years laying roads, installing utilities, and learning the trade across Barrow and Gwinnett. In 1998 he founded Prime Interest and built the firm's headquarters a few miles from where he was raised, on a parcel along South Lee Street he had developed himself.",
+          "He has not moved. The office is still on South Lee Street. Most of his closest relationships — bankers, brokers, contractors, county staff — were built in this part of Gwinnett over the same thirty-five years.",
         ],
       },
       {
-        heading: "Mall of Georgia, and the first inflection",
+        heading: "The deals that happen close to home",
         body: [
-          "The first inflection point came in the late 1990s. Once construction of the Mall of Georgia became public, the seven-and-a-half-acre parcel Prime Interest had assembled along Highway 324 — originally separated by exemption plat and sold as estate lots — became commercial overnight. The plats were redrawn, the parcels were sold as commercial, and the corridor's character started to shift. Single-family rezonings followed. Then commercial. Then warehousing along Peachtree Industrial.",
-          "This is the part of land development that doesn't fit into a press release: a piece of paper at the county, an exemption plat refiled, and the same dirt suddenly worth several times what it was the month before. Prime Interest worked through dozens of these quiet transformations along the corridor in the late nineties and early two-thousands.",
+          "When you work a county for thirty-five years, the projects pile up near where you live. There is no corridor strategy behind the cluster of Prime Interest deals between Buford and Lawrenceville. No quiet land-banking play. No patient assemblage waiting for an inflection. Each transaction has its own story — a seller who knew Marty's name, a rezoning that worked out, a parcel that found the right partner — and most of them happened independently of one another.",
+          "They cluster here because Marty does business from a desk on South Lee Street, and because the people in this part of Gwinnett know who he is.",
         ],
         pullQuote: {
-          text: "The land would move. It was a matter of when, and of who was patient enough to wait.",
+          text: "There is no corridor strategy. There's just the place we're from, and the work that's come with it.",
         },
       },
       {
-        heading: "Coolray, and the second inflection",
+        heading: "What Coolray meant",
         body: [
-          "Coolray Field — then called Gwinnett Stadium — opened in April 2009. A Triple-A ballpark is not, on its own, a development thesis. But for the corridor it confirmed a direction. Restaurants and hospitality followed the stadium. Residential rooftops kept appearing. Northside Hospital began planning a major medical campus. Buford's downtown started its own renaissance a few miles north.",
-          "Prime Interest was already there. The South Lee Street office had been on the same parcel for nearly twenty years by then. The acquisitions Marty had quietly stitched together over the prior decade — small commercial rezonings, single-family subdivision sites with Century Communities, industrial assemblages along Peachtree Industrial — became the inventory for the next wave of partners.",
+          "Coolray Field — then called Gwinnett Stadium — opened in April 2009, a few miles south of the office. The Triple-A ballpark didn't create the area's growth. The Mall of Georgia, opened a decade earlier just south of the stadium site, had already begun pulling commercial activity north along Buford Drive. But the stadium confirmed a direction. Restaurants and hospitality followed it. Residential rooftops kept arriving. Northside Hospital began planning a major outpatient campus a mile and a half up the road.",
+          "Prime Interest watched all of this from the office on South Lee Street, the same office it had operated from since 1998.",
         ],
       },
       {
-        heading: "What's there now",
+        heading: "Some of the work",
         body: [
-          "Today the corridor carries two of Prime Interest's most visible active projects. The Northside Medical Office Buildings — two hundred thousand square feet of outpatient medical office, developed for Northside Hospital — sits a mile and a half north of the stadium. The Stables Motor Condos, a luxury storage condominium development for exotic cars and offices, is rising on four-and-a-half acres at the north end of South Lee Street, directly up the road from the original office.",
-          "Pugh Street Industrial Complex, twenty-three acres on Peachtree Industrial sold to the City of Buford and now being developed by Brookfield Properties, sits a few blocks west. Daly's Truck Driving School is on the same boulevard.",
-          "None of this was inevitable when Marty opened the office. It looked, at the time, like the wrong side of a county that hadn't decided what it wanted to be. The thesis was patient: build the relationships, rezone the parcels, and wait for the corridor to find its tenants. Thirty-five years later the corridor has found them.",
+          "Visible recent projects in the area include the Northside Medical Office Buildings — two hundred thousand square feet of outpatient medical office for Northside Hospital, a mile and a half north of the stadium — and The Stables Motor Condos, a luxury storage condominium development on four-and-a-half acres at the north end of South Lee Street.",
+          "Pugh Street Industrial Complex, twenty-three acres on Peachtree Industrial sold to the City of Buford and now being developed by Brookfield Properties, sits a few blocks west. Smaller deals over the years fill out the map: Daly's Truck Driving School on the same boulevard, the Highway 324 parcel adjacent to the Mall of Georgia, Ashley Falls on Wade Orr Road. None of them grew out of a master plan. They simply happened, one at a time, in the same few square miles.",
         ],
-        pullQuote: {
-          text: "It looked, at the time, like the wrong side of a county that hadn't decided what it wanted to be.",
-        },
       },
       {
-        heading: "How we think about it now",
+        heading: "Why we tell it this way",
         body: [
-          "Corridors take decades. We are honest about that with the landowners and partners we work with. The work that pays off in 2026 was acquired and entitled in the late nineties and early two-thousands; the work we are acquiring today is for the corridor that exists in 2040.",
-          "Our buy box hasn't changed much in thirty-five years. We are looking at metro Atlanta and North Georgia, at parcels that read \"wrong\" to most of the market because the use isn't obvious yet, and at sellers who would rather work with a principal than a chain of intermediaries. If that sounds like land you own or land you've come across, the door is the same one Marty has been walking through every morning since 1990.",
+          "We mention the Buford projects together not because they were part of a coordinated play, but because together they show what thirty-five years in one county actually looks like. Most of our visible recent work sits in the part of Georgia we know best. That is a feature, not a marketing line — landowners and brokers around here can ask anyone who has been in the business a while, and the people they ask have known Marty for decades.",
+          "Our buy box, though, has never been limited to one corner of the state. We acquire land anywhere in Georgia. For sellers outside this area, the same direct relationship is the one we try to extend — answered by the same principal at the same desk on South Lee Street.",
         ],
       },
     ],

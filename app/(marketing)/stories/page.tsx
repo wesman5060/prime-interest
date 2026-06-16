@@ -6,7 +6,7 @@ import { STORIES } from "@/content/stories";
 export const metadata: Metadata = {
   title: "Stories",
   description:
-    "Long-form case studies on the corridors and projects Prime Interest has shaped over thirty-five years in metro Atlanta and North Georgia.",
+    "Long-form case studies on the projects and places Prime Interest has worked over thirty-five years across Georgia.",
 };
 
 export default function StoriesIndex() {
@@ -41,7 +41,7 @@ export default function StoriesIndex() {
               className="text-lg md:text-xl max-w-3xl leading-relaxed"
               style={{ color: "var(--color-text-muted)", lineHeight: 1.8 }}
             >
-              Long-form case studies on the corridors and parcels Prime Interest has worked over the years — the decades-long arcs that a project tile can&rsquo;t carry on its own.
+              Long-form case studies on the projects and places Prime Interest has worked over the years — context that a project tile can&rsquo;t carry on its own.
             </p>
           </AnimatedSection>
         </div>

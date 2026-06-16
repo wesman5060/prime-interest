@@ -17,7 +17,7 @@ export const PROCESS_STEPS: ProcessStep[] = [
     number: "01",
     title: "Acquire",
     body:
-      "We identify and purchase raw and agricultural land across metro Atlanta and North Georgia — often parcels with untapped potential that other developers overlook. We work directly with landowners, brokers, and through assemblages.",
+      "We identify and purchase raw and agricultural land across Georgia — often parcels with untapped potential that other developers overlook. We work directly with landowners, brokers, and through assemblages.",
     example:
       "199 acres in Canton acquired adjacent to the Laurel Canyon project — agricultural land positioned for residential growth.",
   },

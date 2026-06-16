@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     template: "%s | Prime Interest",
   },
   description:
-    "Prime Interest Land Development — building Georgia's communities since 1990. 46 developments across metro Atlanta and beyond: residential, commercial, student housing, and mixed-use.",
+    "Prime Interest Land Development — building Georgia's communities since 1990. 46 developments across the state: residential, commercial, student housing, and mixed-use.",
   keywords: [
     "real estate development",
     "land development",

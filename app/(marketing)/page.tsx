@@ -190,6 +190,85 @@ export default async function HomePage() {
         </div>
       </section>
 
+      {/* Featured story */}
+      <section
+        className="relative overflow-hidden border-t"
+        style={{ borderColor: "rgba(255,255,255,0.06)", background: "var(--color-bg)" }}
+      >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/images/topo.svg"
+          alt=""
+          aria-hidden
+          className="pointer-events-none absolute -left-48 -bottom-40 w-[820px] max-w-none opacity-[0.05]"
+        />
+        <div className="relative max-w-7xl mx-auto px-8 py-28">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-10 items-end mb-12">
+            <div className="md:col-span-8">
+              <AnimatedSection>
+                <p className="text-[10px] tracking-[0.45em] uppercase mb-5" style={{ color: "var(--color-gold)" }}>
+                  Featured Story
+                </p>
+                <h2
+                  className="font-display font-bold text-white leading-[0.95]"
+                  style={{ fontSize: "clamp(2rem, 4vw, 3.5rem)" }}
+                >
+                  Thirty years on the<br className="hidden md:block" />{" "}
+                  <span style={{ color: "var(--color-gold)" }}>Coolray Field corridor.</span>
+                </h2>
+              </AnimatedSection>
+            </div>
+            <div className="md:col-span-4 md:text-right">
+              <AnimatedSection delay={0.15} direction="right">
+                <a
+                  href="/stories"
+                  className="inline-flex items-center gap-2 text-[11px] tracking-[0.25em] uppercase pb-1 border-b transition-all duration-300 hover:gap-4"
+                  style={{ borderColor: "rgba(201,169,110,0.3)", color: "var(--color-text-muted)" }}
+                >
+                  All stories <span style={{ color: "var(--color-gold)" }}>→</span>
+                </a>
+              </AnimatedSection>
+            </div>
+          </div>
+
+          <AnimatedSection delay={0.1}>
+            <a
+              href="/stories/coolray-field"
+              className="group block border p-8 md:p-12 transition-colors"
+              style={{ borderColor: "var(--color-border-custom)", background: "var(--color-surface)" }}
+            >
+              <div className="grid grid-cols-1 md:grid-cols-12 gap-10 items-baseline">
+                <div className="md:col-span-8">
+                  <p
+                    className="font-display text-[10px] tracking-[0.3em] uppercase mb-5 tabular-nums"
+                    style={{ color: "var(--color-gold)" }}
+                  >
+                    01 · Corridor Story · Buford &amp; Sugar Hill
+                  </p>
+                  <p
+                    className="text-lg md:text-2xl text-white leading-snug mb-6"
+                    style={{ fontStyle: "italic" }}
+                  >
+                    A stretch of Highway 20 and South Lee Street that nobody was paying attention to in 1990 — and what&rsquo;s there now.
+                  </p>
+                  <p className="text-sm leading-relaxed max-w-2xl" style={{ color: "var(--color-text-muted)", lineHeight: 1.8 }}>
+                    Mall of Georgia. Coolray Field. The Northside Medical campus. Six active and completed Prime Interest projects within a mile and a half of the office Marty bought in 1990 — and the patient decades of rezoning, assemblage, and entitlement that connect them.
+                  </p>
+                </div>
+                <div className="md:col-span-4 md:text-right">
+                  <span
+                    className="inline-flex items-center gap-2 text-[11px] tracking-[0.25em] uppercase font-medium transition-transform group-hover:translate-x-1"
+                    style={{ color: "var(--color-gold)" }}
+                  >
+                    Read the story <span aria-hidden>→</span>
+                  </span>
+                </div>
+              </div>
+            </a>
+          </AnimatedSection>
+        </div>
+      </section>
+
       <PartnersSection />
       <CTABand />
     </div>

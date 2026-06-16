@@ -2,6 +2,7 @@ import { getPortfolioStats } from "@/lib/content/stats";
 import AnimatedSection from "@/components/site/AnimatedSection";
 import AcquisitionForm from "@/components/site/AcquisitionForm";
 import CountUp from "@/components/site/CountUp";
+import FAQ from "@/components/site/FAQ";
 import type { Metadata } from "next";
 import {
   ACQUISITIONS_INTRO,
@@ -9,6 +10,7 @@ import {
   AUDIENCE_TRACKS,
   ACQUISITION_PROCESS,
 } from "@/content/acquisitions";
+import { LANDOWNER_FAQ } from "@/content/landowner-faq";
 
 export const metadata: Metadata = {
   title: "Acquisitions",
@@ -139,6 +141,33 @@ export default function AcquisitionsPage() {
               </div>
             </AnimatedSection>
           ))}
+        </div>
+      </div>
+
+      {/* ── FAQ ── */}
+      <div className="relative overflow-hidden" style={{ borderTop: "1px solid var(--color-border-custom)" }}>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/images/topo.svg"
+          alt=""
+          aria-hidden
+          className="pointer-events-none absolute -left-64 top-40 w-[820px] max-w-none opacity-[0.05]"
+        />
+        <div className="relative py-24 px-8 max-w-5xl mx-auto">
+          <AnimatedSection>
+            <p className="text-xs tracking-[0.3em] uppercase mb-4" style={{ color: "var(--color-gold)" }}>
+              Questions
+            </p>
+            <h2 className="font-display text-4xl md:text-5xl font-bold text-white mb-6 leading-none">
+              Common questions from landowners
+            </h2>
+            <p className="text-lg max-w-2xl mb-16" style={{ color: "var(--color-text-muted)" }}>
+              The conversations we have most often. If yours isn't here, ask it directly — Marty answers every inquiry himself.
+            </p>
+          </AnimatedSection>
+          <AnimatedSection delay={0.1}>
+            <FAQ items={LANDOWNER_FAQ} />
+          </AnimatedSection>
         </div>
       </div>
 

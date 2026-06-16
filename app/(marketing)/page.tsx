@@ -1,5 +1,5 @@
 import { getFeaturedProjects, getCompany, getProjects } from "@/lib/content/source";
-import { getPortfolioStats } from "@/lib/content/stats";
+import { getPortfolioStats, getAssetClassCounts } from "@/lib/content/stats";
 import Hero from "@/components/site/Hero";
 import CountUp from "@/components/site/CountUp";
 import RevealImage from "@/components/site/RevealImage";
@@ -16,6 +16,7 @@ export default async function HomePage() {
   ]);
   const stats = getPortfolioStats();
   const projectCount = allProjects.length;
+  const assetClasses = getAssetClassCounts();
 
   return (
     <div className="min-h-screen">
@@ -71,6 +72,85 @@ export default async function HomePage() {
             >
               View All {projectCount} Projects →
             </a>
+          </div>
+        </div>
+      </section>
+
+      {/* What we develop — asset-class breadth with live counts from content/projects.ts */}
+      <section
+        className="relative overflow-hidden border-t"
+        style={{ borderColor: "rgba(255,255,255,0.06)", background: "var(--color-bg)" }}
+      >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/images/topo.svg"
+          alt=""
+          aria-hidden
+          className="pointer-events-none absolute -right-56 -top-40 w-[760px] max-w-none opacity-[0.05]"
+        />
+        <div className="relative max-w-7xl mx-auto px-8 py-28">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-10 items-end mb-16">
+            <div className="md:col-span-8">
+              <AnimatedSection>
+                <p className="text-[10px] tracking-[0.45em] uppercase mb-5" style={{ color: "var(--color-gold)" }}>
+                  Capabilities
+                </p>
+                <h2
+                  className="font-display font-bold text-white leading-[0.9]"
+                  style={{ fontSize: "clamp(2.5rem, 5vw, 4.5rem)" }}
+                >
+                  What We<br />Develop
+                </h2>
+              </AnimatedSection>
+            </div>
+            <div className="md:col-span-4">
+              <AnimatedSection delay={0.15} direction="right">
+                <p className="text-base leading-relaxed" style={{ color: "var(--color-text-muted)", lineHeight: 1.8 }}>
+                  Prime Interest develops across every major asset class — from single-family communities to luxury apartments, mixed-use, and outpatient medical campuses.
+                </p>
+              </AnimatedSection>
+            </div>
+          </div>
+
+          <div
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px"
+            style={{ background: "var(--color-border-custom)" }}
+          >
+            {assetClasses.map((ac, i) => (
+              <AnimatedSection key={ac.key} delay={(i % 4) * 0.06}>
+                <div
+                  className="relative h-full p-7 flex flex-col justify-between min-h-[200px] group transition-colors"
+                  style={{ background: "var(--color-bg)" }}
+                >
+                  <div>
+                    <div className="flex items-baseline gap-3 mb-3">
+                      <CountUp
+                        value={`${ac.count}`}
+                        className="font-display text-3xl md:text-4xl font-bold leading-none tabular-nums"
+                        style={{ color: "var(--color-gold)" }}
+                      />
+                      <span
+                        className="text-[10px] tracking-[0.2em] uppercase tabular-nums"
+                        style={{ color: "var(--color-text-subtle)" }}
+                      >
+                        {ac.count === 1 ? "project" : "projects"}
+                      </span>
+                    </div>
+                    <p
+                      className="font-display text-lg font-bold text-white mb-3 leading-snug transition-colors group-hover:text-[color:var(--color-gold)]"
+                    >
+                      {ac.label}
+                    </p>
+                  </div>
+                  <p
+                    className="text-xs leading-relaxed"
+                    style={{ color: "var(--color-text-muted)", lineHeight: 1.7 }}
+                  >
+                    {ac.caption}
+                  </p>
+                </div>
+              </AnimatedSection>
+            ))}
           </div>
         </div>
       </section>
@@ -187,6 +267,90 @@ export default async function HomePage() {
               Our Full Story →
             </a>
           </AnimatedSection>
+        </div>
+      </section>
+
+      {/* Why Prime Interest — credibility band that pairs with the About story above */}
+      <section
+        className="relative overflow-hidden border-t"
+        style={{ borderColor: "rgba(255,255,255,0.06)", background: "var(--color-surface)" }}
+      >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/images/topo.svg"
+          alt=""
+          aria-hidden
+          className="pointer-events-none absolute -left-56 -bottom-40 w-[780px] max-w-none opacity-[0.05]"
+        />
+        <div className="relative max-w-7xl mx-auto px-8 py-28">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-10 items-end mb-16">
+            <div className="md:col-span-8">
+              <AnimatedSection>
+                <p className="text-[10px] tracking-[0.45em] uppercase mb-5" style={{ color: "var(--color-gold)" }}>
+                  Why Prime Interest
+                </p>
+                <h2
+                  className="font-display font-bold text-white leading-[0.9]"
+                  style={{ fontSize: "clamp(2.25rem, 4.5vw, 4rem)" }}
+                >
+                  Principal-led.<br />Patient.&nbsp;
+                  <span style={{ color: "var(--color-gold)" }}>Closes clean.</span>
+                </h2>
+              </AnimatedSection>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-px" style={{ background: "var(--color-border-custom)" }}>
+            {[
+              {
+                num: "01",
+                title: "Principal-led",
+                body:
+                  "Marty Orr reviews every inquiry personally. No business-development team, no chain of intermediaries — the person you reach is the person who decides.",
+              },
+              {
+                num: "02",
+                title: "Rezoning in-house",
+                body:
+                  "We handle entitlement ourselves. Most of a parcel's value is won or lost in the rezoning, and we've done it for thirty-five years across more than a dozen Georgia counties.",
+              },
+              {
+                num: "03",
+                title: "Single-closing track record",
+                body:
+                  "Our offers are not contingent on outside financing. When we sign a contract, we close. Sellers and brokers can verify that with anyone who has done business with us.",
+              },
+              {
+                num: "04",
+                title: "Relationships that compound",
+                body:
+                  "D.R. Horton, Beazer, Meritage, Century, American Campus Communities, Northside Hospital, Wood Partners, Brookfield. The relationships that built the portfolio are the ones still building it.",
+              },
+            ].map((item, i) => (
+              <AnimatedSection key={item.num} delay={(i % 4) * 0.06}>
+                <div
+                  className="h-full p-8 min-h-[260px]"
+                  style={{ background: "var(--color-surface)" }}
+                >
+                  <span
+                    className="font-display text-[10px] tracking-[0.3em] uppercase tabular-nums block mb-6"
+                    style={{ color: "var(--color-gold)" }}
+                  >
+                    § {item.num}
+                  </span>
+                  <h3 className="font-display text-xl font-bold text-white mb-4 leading-snug">
+                    {item.title}
+                  </h3>
+                  <p
+                    className="text-sm leading-relaxed"
+                    style={{ color: "var(--color-text-muted)", lineHeight: 1.85 }}
+                  >
+                    {item.body}
+                  </p>
+                </div>
+              </AnimatedSection>
+            ))}
+          </div>
         </div>
       </section>
 

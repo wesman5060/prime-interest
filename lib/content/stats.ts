@@ -61,3 +61,81 @@ export function computePortfolioStats(
 export function getPortfolioStats(asOfYear?: number): PortfolioStats {
   return computePortfolioStats(localProjects, asOfYear);
 }
+
+/**
+ * Asset-class breakdown for the homepage "What We Develop" band.
+ *
+ * Project `type` values get rolled up into the customer-facing categories the
+ * firm actually pitches. Counts are pulled live from `content/projects.ts`, so
+ * adding or retyping a project automatically updates the home page.
+ */
+export interface AssetClassCount {
+  key: string;
+  label: string;
+  /** Short descriptor shown under the label. */
+  caption: string;
+  count: number;
+}
+
+export function getAssetClassCounts(): AssetClassCount[] {
+  const byType = new Map<string, number>();
+  for (const p of localProjects) {
+    byType.set(p.type, (byType.get(p.type) ?? 0) + 1);
+  }
+  const get = (...keys: string[]) =>
+    keys.reduce((sum, k) => sum + (byType.get(k) ?? 0), 0);
+
+  const groups: AssetClassCount[] = [
+    {
+      key: "residential",
+      label: "Residential",
+      caption: "Single-family subdivisions, lot deliveries, and master-planned communities",
+      count: get("single-family", "subdivision"),
+    },
+    {
+      key: "townhomes",
+      label: "Townhomes",
+      caption: "Attached for-sale product, developed for national and regional builders",
+      count: get("townhomes"),
+    },
+    {
+      key: "apartments",
+      label: "Luxury Apartments",
+      caption: "Mid-rise multifamily for institutional operators",
+      count: get("luxury-apartments"),
+    },
+    {
+      key: "student",
+      label: "Student Housing",
+      caption: "Purpose-built student communities with national REIT partners",
+      count: get("student-housing"),
+    },
+    {
+      key: "mixed-use",
+      label: "Mixed-Use",
+      caption: "Residential, retail, and amenity components on a single site",
+      count: get("mixed-use"),
+    },
+    {
+      key: "commercial",
+      label: "Commercial & Retail",
+      caption: "Strip centers, outparcels, and ground-up commercial assemblages",
+      count: get("commercial"),
+    },
+    {
+      key: "medical",
+      label: "Medical Office",
+      caption: "Outpatient campuses developed for major hospital systems",
+      count: get("medical-office"),
+    },
+    {
+      key: "industrial",
+      label: "Industrial",
+      caption: "Industrial assemblages and flex space along key Georgia corridors",
+      count: get("industrial"),
+    },
+  ];
+
+  // Drop empty categories so the grid never shows a 0.
+  return groups.filter((g) => g.count > 0);
+}

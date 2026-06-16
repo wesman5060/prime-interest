@@ -3,7 +3,6 @@ import AnimatedSection from "@/components/site/AnimatedSection";
 import Timeline from "@/components/site/Timeline";
 import Link from "next/link";
 import type { Metadata } from "next";
-import { RANKINGS, FEATURED_AWARD } from "@/content/recognition";
 
 export const metadata: Metadata = {
   title: "About",
@@ -43,8 +42,8 @@ const TIMELINE = [
   },
   {
     year: "2019–2022",
-    heading: "Regional Recognition",
-    body: "Prime Interest earns consecutive rankings among the largest commercial real estate developers in the region: #5 (2019), #7 (2020), #12 (2021), #13 (2022). In 2022, the company receives the Washington Contractor Award in the Multi-Family / Mixed-Use / Hospitality category.",
+    heading: "Scaling Up",
+    body: "Prime Interest takes on its largest and most complex work yet — partnering with national builders and REITs on luxury apartments, student housing, and mixed-use developments across metro Atlanta, including the $65M Holbrook in Sugar Hill and the Northside Medical Office Buildings near Coolray Field.",
   },
   {
     year: "Today",
@@ -153,46 +152,6 @@ export default async function AboutPage() {
         </AnimatedSection>
 
         <Timeline items={TIMELINE} />
-      </div>
-
-      {/* ── Rankings ── */}
-      <div style={{ background: "var(--color-surface)", borderTop: "1px solid var(--color-border-custom)", borderBottom: "1px solid var(--color-border-custom)" }}>
-        <div className="py-24 px-8 max-w-7xl mx-auto">
-          <AnimatedSection>
-            <p className="text-xs tracking-[0.3em] uppercase mb-4" style={{ color: "var(--color-gold)" }}>Recognition</p>
-            <h2 className="font-display text-4xl md:text-5xl font-bold text-white mb-16 leading-none">
-              Regional Rankings
-            </h2>
-          </AnimatedSection>
-
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
-            {RANKINGS.map((r, i) => (
-              <AnimatedSection key={r.year} delay={i * 0.08}>
-                <div className="p-8 text-center border" style={{ borderColor: "var(--color-border-gold)", background: "var(--color-surface-2)" }}>
-                  <p className="text-xs tracking-[0.2em] uppercase mb-4" style={{ color: "var(--color-text-subtle)" }}>{r.year}</p>
-                  <p className="font-display text-6xl font-bold leading-none mb-3" style={{ color: "var(--color-gold)" }}>{r.rank}</p>
-                  <p className="text-[10px] tracking-[0.15em] uppercase" style={{ color: "var(--color-text-muted)" }}>{r.note}</p>
-                </div>
-              </AnimatedSection>
-            ))}
-          </div>
-
-          {/* Award callout */}
-          <AnimatedSection>
-            <div className="flex flex-col md:flex-row items-start md:items-center gap-8 p-10 border" style={{ borderColor: "var(--color-border-gold)", background: "var(--color-gold-dim)" }}>
-              <div className="w-16 h-16 shrink-0 flex items-center justify-center border-2" style={{ borderColor: "var(--color-gold)" }}>
-                <span className="text-2xl" style={{ color: "var(--color-gold)" }}>★</span>
-              </div>
-              <div>
-                <p className="text-xs tracking-[0.25em] uppercase mb-2" style={{ color: "var(--color-gold)" }}>{FEATURED_AWARD.year} Award</p>
-                <p className="font-display text-xl font-bold text-white mb-1">{FEATURED_AWARD.title}</p>
-                <p className="text-sm" style={{ color: "var(--color-text-muted)" }}>
-                  {FEATURED_AWARD.category}
-                </p>
-              </div>
-            </div>
-          </AnimatedSection>
-        </div>
       </div>
 
       {/* ── Partners ── */}

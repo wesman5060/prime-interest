@@ -48,10 +48,10 @@ export const AUDIENCE_TRACKS: AudienceTrack[] = [
   },
   {
     key: "broker",
-    label: "Brokers",
-    heading: "If you represent a seller",
+    label: "Brokers & Finders",
+    heading: "If you represent a seller — or know of land",
     body:
-      "We respect and protect co-broke arrangements. Bring us a deal that fits our criteria and you'll work with a principal who closes clean and fast — backed by thirty-five years of relationships and a track record of single-closing transactions.",
+      "We respect and protect co-broke arrangements, and we pay finder's fees at closing. Bring us a deal that fits our criteria and you'll work with a principal who closes clean and fast — backed by thirty-five years of relationships and a track record of single-closing transactions.",
   },
   {
     key: "investor",

@@ -10,7 +10,7 @@ export const company: CompanyInfo = {
   state: "GA",
   zip: "30518",
   phone: "770-945-3241",
-  fax: "770-945-0472",
+  cell: "770-596-3251",
   email: "martyorr@bellsouth.net",
   story: [
     "Prime Interest began with a single conviction: that raw Georgia land, in the right hands, becomes something far greater than its asking price. Marty D. Orr entered development in 1990 under the mentorship of W.T. \"Terry\" Dunahoo — a respected Barrow County surveyor, developer, and banker — and learned the business from the ground up, laying miles of roads and utilities across Barrow and Gwinnett Counties.",
@@ -22,7 +22,7 @@ export const company: CompanyInfo = {
     {
       name: "Marty D. Orr",
       title: "Founder & Principal",
-      bio: "Marty D. Orr has spent more than three decades turning Georgia land into communities. He learned the trade hands-on in the 1990s — installing infrastructure, building homes, and managing his own closings — before founding Prime Interest in 1998. He has personally handled the rezoning and entitlement of his properties throughout his career, the work where most of a parcel's value is won or lost. Under his direction the firm has grown from a single-family subdivision developer into a full-spectrum operation spanning luxury apartments, student housing, mixed-use retail, medical office, and motor condominiums — and one of the most recognized commercial developers in the region.",
+      bio: "Marty D. Orr has spent more than three decades turning Georgia land into communities. He learned the trade hands-on in the 1990s — installing infrastructure, building homes, and managing his own closings — before founding Prime Interest in 1998. He has personally handled the rezoning and entitlement of his properties throughout his career, the work where most of a parcel's value is won or lost. Under his direction the firm has grown from a single-family subdivision developer into a full-spectrum operation spanning luxury apartments, student housing, mixed-use retail, medical office, and motor condominiums across more than a dozen Georgia counties.",
     },
   ],
   partners: [

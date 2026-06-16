@@ -87,7 +87,10 @@ export default function Footer() {
             <span>4235 South Lee St</span>
             <span>Buford, GA 30518</span>
             <a href="tel:7709453241" className="hover:text-[color:var(--color-gold)] transition-colors mt-2">
-              770-945-3241
+              Office&nbsp;&nbsp;770-945-3241
+            </a>
+            <a href="tel:7705963251" className="hover:text-[color:var(--color-gold)] transition-colors">
+              Cell&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;770-596-3251
             </a>
             <a href="mailto:martyorr@bellsouth.net" className="hover:text-[color:var(--color-gold)] transition-colors">
               martyorr@bellsouth.net

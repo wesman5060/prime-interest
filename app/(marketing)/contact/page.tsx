@@ -64,14 +64,14 @@ export default function ContactPage() {
                       className="block text-sm transition-colors duration-200 hover:text-[color:var(--color-gold)]"
                       style={{ color: "var(--color-text-muted)" }}
                     >
-                      770-945-3241
+                      <span className="text-[color:var(--color-text-subtle)] mr-2">Office</span>770-945-3241
                     </a>
                     <a
-                      href="tel:7709450472"
+                      href="tel:7705963251"
                       className="block text-sm transition-colors duration-200 hover:text-[color:var(--color-gold)]"
                       style={{ color: "var(--color-text-muted)" }}
                     >
-                      Fax: 770-945-0472
+                      <span className="text-[color:var(--color-text-subtle)] mr-2">Cell</span>770-596-3251
                     </a>
                     <a
                       href="mailto:martyorr@bellsouth.net"

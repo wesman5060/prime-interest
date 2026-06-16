@@ -56,7 +56,7 @@ export interface CompanyInfo {
   state: string;
   zip: string;
   phone: string;
-  fax: string;
+  cell: string;
   email: string;
   story: string[];
   principals: Principal[];

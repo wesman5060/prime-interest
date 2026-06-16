@@ -5,7 +5,6 @@ import CountUp from "@/components/site/CountUp";
 import RevealImage from "@/components/site/RevealImage";
 import ProjectCard from "@/components/site/ProjectCard";
 import PartnersSection from "@/components/site/PartnersSection";
-import RecognitionStrip from "@/components/site/RecognitionStrip";
 import CTABand from "@/components/site/CTABand";
 import AnimatedSection from "@/components/site/AnimatedSection";
 
@@ -191,7 +190,6 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <RecognitionStrip />
       <PartnersSection />
       <CTABand />
     </div>

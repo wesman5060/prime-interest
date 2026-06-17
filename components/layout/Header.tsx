@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
-import GlobeMark from "@/components/site/GlobeMark";
+import Logo from "@/components/site/Logo";
 
 const nav = [
   { label: "Approach", href: "/approach" },
@@ -37,12 +37,8 @@ export default function Header() {
     >
       <div className="max-w-7xl mx-auto px-8 py-5 flex items-center justify-between">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-3 group">
-          <GlobeMark size={36} strokeWidth={1.1} />
-          <div className="flex flex-col leading-none">
-            <span className="font-display text-sm font-bold tracking-[0.2em] text-white uppercase">Prime Interest</span>
-            <span className="text-[9px] tracking-[0.25em] uppercase" style={{ color: "var(--color-gold)" }}>Land Development</span>
-          </div>
+        <Link href="/" className="group transition-opacity duration-300 hover:opacity-90">
+          <Logo variant="inline" size={36} />
         </Link>
 
         {/* Desktop nav — lg+: between 768-1024px the five items + CTA get crushed, so tablets use the menu */}

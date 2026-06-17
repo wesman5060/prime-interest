@@ -1,5 +1,5 @@
 import Link from "next/link";
-import GlobeMark from "@/components/site/GlobeMark";
+import Logo from "@/components/site/Logo";
 import Year from "@/components/site/Year";
 
 export default function Footer() {
@@ -44,15 +44,11 @@ export default function Footer() {
 
         {/* Brand */}
         <div>
-          <div className="flex items-center gap-3 mb-4">
-            <GlobeMark size={44} strokeWidth={1} />
-            <div className="flex flex-col leading-none">
-              <span className="font-display text-lg font-bold tracking-[0.15em] text-white uppercase">Prime Interest</span>
-              <span className="text-[9px] tracking-[0.25em] uppercase mt-1" style={{ color: "var(--color-gold)" }}>Land Development</span>
-            </div>
+          <div className="mb-4">
+            <Logo variant="inline" size={48} />
           </div>
           <p className="text-xs mt-2" style={{ color: "var(--color-text-subtle)" }}>
-            Building Georgia's Future Since 1990
+            Building Georgia&rsquo;s Future Since 1990
           </p>
         </div>
 

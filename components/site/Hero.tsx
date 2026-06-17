@@ -5,6 +5,7 @@ import Link from "next/link";
 import { motion, AnimatePresence, useScroll, useTransform, useReducedMotion, type Variants } from "framer-motion";
 import { getPortfolioStats } from "@/lib/content/stats";
 import CountUp from "@/components/site/CountUp";
+import MagneticButton from "@/components/site/MagneticButton";
 
 const stats = getPortfolioStats();
 const STAT_BAR = [
@@ -187,23 +188,29 @@ export default function Hero() {
           variants={fadeUp}
           className="flex flex-col sm:flex-row gap-4 justify-center items-center"
         >
-          <Link
-            href="/projects"
-            className="gold-sheen group inline-flex items-center gap-3 px-10 py-4 text-[11px] tracking-[0.3em] uppercase font-medium transition-all duration-400 hover:gap-5"
-            style={{ background: "var(--color-gold)", color: "#000" }}
-          >
-            View All Projects <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
-          </Link>
-          <Link
-            href="/acquisitions"
-            className="inline-flex items-center gap-3 px-10 py-4 text-[11px] tracking-[0.3em] uppercase transition-all duration-300 hover:bg-white/8"
-            style={{
-              border: "1px solid rgba(201,169,110,0.4)",
-              color: "rgba(255,255,255,0.7)",
-            }}
-          >
-            Acquisitions
-          </Link>
+          <MagneticButton strength={14} radius={110}>
+            <Link
+              href="/projects"
+              data-cursor-label="View Projects"
+              className="gold-sheen group inline-flex items-center gap-3 px-10 py-4 text-[11px] tracking-[0.3em] uppercase font-medium transition-all duration-400 hover:gap-5"
+              style={{ background: "var(--color-gold)", color: "#000" }}
+            >
+              View All Projects <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
+            </Link>
+          </MagneticButton>
+          <MagneticButton strength={10} radius={100}>
+            <Link
+              href="/acquisitions"
+              data-cursor-label="Acquisitions"
+              className="inline-flex items-center gap-3 px-10 py-4 text-[11px] tracking-[0.3em] uppercase transition-all duration-300 hover:bg-white/8"
+              style={{
+                border: "1px solid rgba(201,169,110,0.4)",
+                color: "rgba(255,255,255,0.7)",
+              }}
+            >
+              Acquisitions
+            </Link>
+          </MagneticButton>
         </motion.div>
       </motion.div>
 

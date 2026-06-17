@@ -4,7 +4,6 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import GlobeMark from "@/components/site/GlobeMark";
-import MagneticButton from "@/components/site/MagneticButton";
 
 const nav = [
   { label: "Approach", href: "/approach" },
@@ -73,11 +72,9 @@ export default function Header() {
         {/* Right cluster: Call (always visible), Get in Touch (lg+), hamburger (sub-lg) */}
         <div className="flex items-center gap-3 lg:gap-4">
           {/* Click-to-call — visible at every breakpoint. Icon-only on mobile, icon + number on desktop. */}
-          <MagneticButton strength={8} radius={70}>
           <a
             href="tel:7709453241"
             aria-label="Call our office at 770-945-3241"
-            data-cursor-label="Call Office"
             className="group inline-flex items-center gap-2.5 transition-all duration-300 border px-3 lg:px-4 py-2.5 text-[11px] tracking-[0.2em] uppercase font-medium hover:bg-[color:var(--color-gold)] hover:text-black"
             style={{ borderColor: "var(--color-gold)", color: "var(--color-gold)" }}
           >
@@ -97,19 +94,15 @@ export default function Header() {
             </svg>
             <span className="hidden md:inline tabular-nums">770-945-3241</span>
           </a>
-          </MagneticButton>
 
           {/* CTA — desktop only */}
-          <MagneticButton strength={10} radius={90} className="hidden lg:inline-block">
           <Link
             href="/contact"
-            data-cursor-label="Get in Touch"
-            className="gold-sheen inline-flex items-center gap-2 px-6 py-2.5 text-[11px] tracking-[0.2em] uppercase font-medium transition-all duration-300 hover:gap-4"
+            className="gold-sheen hidden lg:inline-flex items-center gap-2 px-6 py-2.5 text-[11px] tracking-[0.2em] uppercase font-medium transition-all duration-300 hover:gap-4"
             style={{ background: "var(--color-gold)", color: "#000" }}
           >
             Get in Touch <span>→</span>
           </Link>
-          </MagneticButton>
 
           {/* Mobile + tablet hamburger */}
           <button

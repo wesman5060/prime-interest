@@ -254,22 +254,6 @@ body {
   .gold-sheen::after { display: none; }
 }
 
-/* ── Custom cursor ── */
-/* When CustomCursor is mounted, hide the native pointer on fine-pointer
-   devices and let our gold dot do the work. Touch devices never see this
-   class so tap behaviour is untouched. */
-html.has-custom-cursor,
-html.has-custom-cursor * {
-  cursor: none !important;
-}
-/* Restore native cursor for inputs/textareas so users can still see where
-   they're typing. */
-html.has-custom-cursor input,
-html.has-custom-cursor textarea,
-html.has-custom-cursor select {
-  cursor: text !important;
-}
-
 /* ── Designed-not-generated craft layer ── */
 
 /* Brand text selection */

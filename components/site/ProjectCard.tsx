@@ -40,7 +40,6 @@ export default function ProjectCard({ project, index = 0, variant = "default", c
     >
       <Link
         href={`/projects/${project.slug}`}
-        data-cursor-label="View Project"
         className="group relative block overflow-hidden"
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}

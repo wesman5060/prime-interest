@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import AnimatedSection from "@/components/site/AnimatedSection";
+import BreadcrumbsJsonLd from "@/components/site/BreadcrumbsJsonLd";
 import CountUp from "@/components/site/CountUp";
 import { COUNTIES } from "@/content/counties";
 import { projects } from "@/content/projects";
@@ -46,6 +47,7 @@ export default function CountiesIndexPage() {
 
   return (
     <div className="min-h-screen">
+      <BreadcrumbsJsonLd items={[{ name: "Markets", path: "/counties" }]} />
       <div className="relative overflow-hidden">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import AnimatedSection from "@/components/site/AnimatedSection";
+import BreadcrumbsJsonLd from "@/components/site/BreadcrumbsJsonLd";
 
 export const metadata: Metadata = {
   title: "Terms",
@@ -74,6 +75,7 @@ const SECTIONS: { heading: string; body: string[] }[] = [
 export default function TermsPage() {
   return (
     <div className="min-h-screen">
+      <BreadcrumbsJsonLd items={[{ name: "Terms", path: "/terms" }]} />
       <div className="relative overflow-hidden">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img

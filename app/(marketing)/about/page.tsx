@@ -1,6 +1,7 @@
 import { getCompany } from "@/lib/content/source";
 import AnimatedSection from "@/components/site/AnimatedSection";
 import Timeline from "@/components/site/Timeline";
+import BreadcrumbsJsonLd from "@/components/site/BreadcrumbsJsonLd";
 import Link from "next/link";
 import type { Metadata } from "next";
 
@@ -57,6 +58,7 @@ export default async function AboutPage() {
 
   return (
     <div className="min-h-screen">
+      <BreadcrumbsJsonLd items={[{ name: "About", path: "/about" }]} />
       {/* ── Page Header ── */}
       <div className="pt-40 pb-24 px-8 max-w-7xl mx-auto">
         <AnimatedSection>

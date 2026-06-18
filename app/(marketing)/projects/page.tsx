@@ -1,5 +1,6 @@
 import { getProjects } from "@/lib/content/source";
 import ProjectsExplorer from "@/components/site/ProjectsExplorer";
+import BreadcrumbsJsonLd from "@/components/site/BreadcrumbsJsonLd";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -12,6 +13,7 @@ export default async function ProjectsPage() {
 
   return (
     <div className="min-h-screen pt-32 pb-24">
+      <BreadcrumbsJsonLd items={[{ name: "Projects", path: "/projects" }]} />
       <div className="mx-auto max-w-7xl px-8">
         <p className="mb-6 text-xs uppercase tracking-[0.3em]" style={{ color: "var(--color-gold)" }}>
           Portfolio

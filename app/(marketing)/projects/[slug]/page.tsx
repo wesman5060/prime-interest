@@ -4,9 +4,33 @@ import { getProjectImage, hasRealPhotos } from "@/lib/project-image";
 import ProjectGallery from "@/components/site/ProjectGallery";
 import ProjectCard from "@/components/site/ProjectCard";
 import AnimatedSection from "@/components/site/AnimatedSection";
+import BreadcrumbsJsonLd from "@/components/site/BreadcrumbsJsonLd";
 import Link from "next/link";
 import type { Metadata } from "next";
 import type { Project } from "@/lib/content/types";
+
+/** Map a project.type to the most accurate Schema.org type, with a Place fallback. */
+function schemaTypeForProject(type: Project["type"]): string {
+  switch (type) {
+    case "luxury-apartments":
+      return "ApartmentComplex";
+    case "townhomes":
+    case "single-family":
+    case "subdivision":
+      return "Residence";
+    case "mixed-use":
+    case "commercial":
+      return "Place";
+    case "medical-office":
+      return "MedicalBusiness";
+    case "industrial":
+      return "Place";
+    case "student-housing":
+      return "Residence";
+    default:
+      return "Place";
+  }
+}
 
 export async function generateStaticParams() {
   const projects = await getProjects();
@@ -76,8 +100,43 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
     { label: "County", value: `${project.county} County` },
   ].filter(Boolean) as { label: string; value: string | number }[];
 
+  const placeJsonLd = {
+    "@context": "https://schema.org",
+    "@type": schemaTypeForProject(project.type),
+    name: project.name,
+    description: project.description,
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: project.location,
+      addressLocality: project.city ?? undefined,
+      addressRegion: "GA",
+      addressCountry: "US",
+    },
+    geo: project.coordinates
+      ? {
+          "@type": "GeoCoordinates",
+          longitude: project.coordinates[0],
+          latitude: project.coordinates[1],
+        }
+      : undefined,
+    image: getProjectImage(project),
+    url: `https://prime-interest.com/projects/${project.slug}`,
+    isPartOf: { "@id": "https://prime-interest.com/#organization" },
+  };
+
   return (
     <div className="min-h-screen pt-32 pb-24">
+      <BreadcrumbsJsonLd
+        items={[
+          { name: "Projects", path: "/projects" },
+          { name: project.name, path: `/projects/${project.slug}` },
+        ]}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(placeJsonLd) }}
+      />
+
       <div className="max-w-5xl mx-auto px-8">
         <a
           href="/projects"

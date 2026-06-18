@@ -1,6 +1,7 @@
 import ContactForm from "@/components/site/ContactForm";
 import AnimatedSection from "@/components/site/AnimatedSection";
 import RevealImage from "@/components/site/RevealImage";
+import BreadcrumbsJsonLd from "@/components/site/BreadcrumbsJsonLd";
 import OfficeMapClient from "@/components/site/OfficeMapClient";
 import type { Metadata } from "next";
 
@@ -17,6 +18,7 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   return (
     <div className="min-h-screen pt-40 pb-24">
+      <BreadcrumbsJsonLd items={[{ name: "Contact", path: "/contact" }]} />
       <div className="mx-auto max-w-6xl px-8">
         <AnimatedSection>
           <p className="mb-6 text-xs uppercase tracking-[0.4em]" style={{ color: "var(--color-gold)" }}>

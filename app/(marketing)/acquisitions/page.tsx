@@ -3,6 +3,7 @@ import AnimatedSection from "@/components/site/AnimatedSection";
 import AcquisitionForm from "@/components/site/AcquisitionForm";
 import CountUp from "@/components/site/CountUp";
 import FAQ from "@/components/site/FAQ";
+import BreadcrumbsJsonLd from "@/components/site/BreadcrumbsJsonLd";
 import type { Metadata } from "next";
 import {
   ACQUISITIONS_INTRO,
@@ -23,6 +24,7 @@ export default function AcquisitionsPage() {
 
   return (
     <div className="min-h-screen">
+      <BreadcrumbsJsonLd items={[{ name: "Acquisitions", path: "/acquisitions" }]} />
       {/* ── Header ── */}
       <div className="relative overflow-hidden">
         {/* eslint-disable-next-line @next/next/no-img-element */}

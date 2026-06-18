@@ -1,6 +1,7 @@
 import { getProjects, getCompany } from "@/lib/content/source";
 import { getPortfolioStats } from "@/lib/content/stats";
 import AnimatedSection from "@/components/site/AnimatedSection";
+import BreadcrumbsJsonLd from "@/components/site/BreadcrumbsJsonLd";
 import CountUp from "@/components/site/CountUp";
 import Link from "next/link";
 import type { Metadata } from "next";
@@ -41,6 +42,7 @@ export default async function ApproachPage() {
 
   return (
     <div className="min-h-screen">
+      <BreadcrumbsJsonLd items={[{ name: "Approach", path: "/approach" }]} />
       {/* ── Page Header ── */}
       <div className="relative overflow-hidden">
         {/* eslint-disable-next-line @next/next/no-img-element */}

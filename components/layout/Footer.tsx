@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Logo from "@/components/site/Logo";
+import GlobeMark from "@/components/site/GlobeMark";
 import Year from "@/components/site/Year";
 
 export default function Footer() {
@@ -44,8 +44,37 @@ export default function Footer() {
 
         {/* Brand */}
         <div>
-          <div className="mb-4">
-            <Logo variant="inline" size={48} />
+          <div className="relative flex items-center gap-3 mb-4 w-fit">
+            <span
+              aria-hidden
+              className="pointer-events-none absolute -inset-x-8 -inset-y-4"
+              style={{
+                background:
+                  "radial-gradient(ellipse at center, rgba(232,201,138,0.18) 0%, rgba(201,169,110,0.06) 50%, transparent 80%)",
+                filter: "blur(3px)",
+              }}
+            />
+            <GlobeMark size={64} strokeWidth={1.3} showContinents color="var(--color-gold-light)" />
+            <div className="relative flex flex-col items-center leading-none">
+              <span
+                className="font-display font-bold"
+                style={{
+                  fontSize: 36,
+                  color: "var(--color-gold-light)",
+                  lineHeight: 1,
+                  letterSpacing: "0.005em",
+                  textShadow: "0 0 16px rgba(232,201,138,0.4)",
+                }}
+              >
+                Prime Interest
+              </span>
+              <span
+                className="text-[12px] tracking-[0.28em] uppercase mt-[9px]"
+                style={{ color: "var(--color-gold)", opacity: 0.85 }}
+              >
+                Land<span style={{ margin: "0 0.45em", display: "inline-block", verticalAlign: "1px", fontSize: "0.85em" }}>&#9670;</span>Development
+              </span>
+            </div>
           </div>
           <p className="text-xs mt-2" style={{ color: "var(--color-text-subtle)" }}>
             Building Georgia&rsquo;s Future Since 1990

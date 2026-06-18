@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
-import Logo from "@/components/site/Logo";
+import GlobeMark from "@/components/site/GlobeMark";
 
 const nav = [
   { label: "Approach", href: "/approach" },
@@ -37,8 +37,41 @@ export default function Header() {
     >
       <div className="max-w-7xl mx-auto px-8 py-5 flex items-center justify-between">
         {/* Logo */}
-        <Link href="/" className="group transition-opacity duration-300 hover:opacity-90">
-          <Logo variant="inline" size={36} />
+        <Link href="/" className="relative flex items-center gap-2.5 sm:gap-3 group">
+          <span
+            aria-hidden
+            className="pointer-events-none absolute -inset-x-6 -inset-y-3"
+            style={{
+              background:
+                "radial-gradient(ellipse at center, rgba(232,201,138,0.18) 0%, rgba(201,169,110,0.06) 45%, transparent 75%)",
+              filter: "blur(2px)",
+            }}
+          />
+          <span className="block sm:hidden">
+            <GlobeMark size={38} strokeWidth={1.3} showContinents color="var(--color-gold-light)" />
+          </span>
+          <span className="hidden sm:block">
+            <GlobeMark size={50} strokeWidth={1.4} showContinents color="var(--color-gold-light)" />
+          </span>
+          <div className="relative flex flex-col items-center leading-none">
+            <span
+              className="font-display font-bold whitespace-nowrap text-[20px] sm:text-[28px]"
+              style={{
+                color: "var(--color-gold-light)",
+                lineHeight: 1,
+                letterSpacing: "0.005em",
+                textShadow: "0 0 14px rgba(232,201,138,0.4)",
+              }}
+            >
+              Prime Interest
+            </span>
+            <span
+              className="whitespace-nowrap uppercase mt-[6px] sm:mt-[8px] text-[8.5px] sm:text-[11px] tracking-[0.22em] sm:tracking-[0.28em]"
+              style={{ color: "var(--color-gold)", opacity: 0.85 }}
+            >
+              Land<span style={{ margin: "0 0.45em", display: "inline-block", verticalAlign: "1px", fontSize: "0.85em" }}>&#9670;</span>Development
+            </span>
+          </div>
         </Link>
 
         {/* Desktop nav — lg+: between 768-1024px the five items + CTA get crushed, so tablets use the menu */}

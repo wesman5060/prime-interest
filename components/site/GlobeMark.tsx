@@ -36,7 +36,7 @@ export default function GlobeMark({
       {/* Americas silhouette — hand-tuned to fit inside the wireframe sphere.
           Sits underneath every line so the wireframe etches across it. */}
       {showContinents && (
-        <g opacity="0.45">
+        <g opacity="0.7">
           {/* North America */}
           <path
             d="M14.6 6.3 C 13.0 7.0, 11.7 8.4, 11.6 9.8 C 11.5 11.1, 12.2 11.6, 12.3 12.7 C 12.4 13.8, 11.7 14.2, 12.3 15.5 C 12.7 16.4, 13.7 17.0, 14.6 17.4 C 15.6 17.8, 16.8 17.7, 17.6 18.5 C 18.3 19.2, 18.5 20.3, 19.4 20.6 C 20.0 20.8, 20.5 20.5, 20.8 19.9 C 21.4 18.7, 20.5 17.7, 20.4 16.4 C 20.3 15.0, 21.7 14.5, 22.0 13.2 C 22.3 12.1, 21.7 11.4, 21.4 10.5 C 21.0 9.0, 20.3 7.9, 19.0 7.1 C 17.6 6.2, 16.0 5.8, 14.6 6.3 Z"

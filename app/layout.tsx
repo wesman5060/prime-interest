@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Geist } from "next/font/google";
 import { Playfair_Display } from "next/font/google";
-import { Analytics } from "@vercel/analytics/next";
 import LenisProvider from "@/components/providers/LenisProvider";
 import StructuredData from "@/components/site/StructuredData";
 import "./globals.css";
@@ -81,7 +80,6 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col bg-[color:var(--color-bg)] text-[color:var(--color-text)]">
         <StructuredData />
         <LenisProvider>{children}</LenisProvider>
-        <Analytics />
       </body>
     </html>
   );

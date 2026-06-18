@@ -127,10 +127,10 @@ export default function Footer() {
 
       <div className="border-t" style={{ borderColor: "var(--color-border)" }}>
         <div className="max-w-7xl mx-auto px-8 py-6 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-xs" style={{ color: "var(--color-text-subtle)" }}>
+          <p className="text-xs" style={{ color: "var(--color-text-muted)" }}>
             © <Year /> Prime Interest Land Development. All Rights Reserved.
           </p>
-          <div className="flex items-center gap-5 text-xs" style={{ color: "var(--color-text-subtle)" }}>
+          <div className="flex items-center gap-5 text-xs" style={{ color: "var(--color-text-muted)" }}>
             <Link href="/privacy" className="hover:text-[color:var(--color-gold)] transition-colors">Privacy</Link>
             <Link href="/terms" className="hover:text-[color:var(--color-gold)] transition-colors">Terms</Link>
             <span className="tracking-[0.15em] tabular-nums">

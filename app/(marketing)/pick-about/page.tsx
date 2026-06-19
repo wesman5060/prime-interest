@@ -7,29 +7,35 @@ export const metadata: Metadata = {
 };
 
 /**
- * Temporary picker page — 10 candidate images for the home page About teaser,
- * shown at the actual 4:5 aspect with their numbers. Delete this route once a
- * winner is chosen.
+ * Temporary picker — 10 candidates for the About-teaser slot, second round.
+ * Theme: construction site + professionals reviewing plats / blueprints.
+ * Delete this route once a winner is chosen.
  */
-const CAPTIONS: { n: number; tag: string; desc: string }[] = [
-  { n: 1,  tag: "REAL PHOTO", desc: "Drone view of Georgia suburban hills with big puffy clouds" },
-  { n: 2,  tag: "REAL PHOTO", desc: "Dramatic dusk through a Georgia development with mountains" },
-  { n: 3,  tag: "REAL PHOTO", desc: "Classic cul-de-sac aerial (completed community)" },
-  { n: 4,  tag: "AI",         desc: "Golden-hour aerial of a Georgia neighborhood, glowing sunset" },
-  { n: 5,  tag: "AI",         desc: "Misty mountain ridges at dawn (Blue Ridge feel)" },
-  { n: 6,  tag: "AI",         desc: "Winding road through pine forest with sunbeams" },
-  { n: 7,  tag: "AI",         desc: "Top-down red clay with new road snaking through forest" },
-  { n: 8,  tag: "AI",         desc: "Long straight country road at sunset, mountains in distance" },
-  { n: 9,  tag: "AI",         desc: "Premium completed community at dusk, lit windows glowing" },
-  { n: 10, tag: "AI",         desc: "Overhead red clay clearing surrounded by dense pine forest" },
+const CAPTIONS: { n: number; tag: "STRONG" | "OK" | "WEAK"; desc: string }[] = [
+  { n:  1, tag: "STRONG", desc: "Two developers leaning on truck tailgate over a plat, red clay site + pines, golden hour" },
+  { n:  2, tag: "STRONG", desc: "Three engineers studying a blueprint on a folding table, red clay site, rolling hills" },
+  { n:  3, tag: "WEAK",   desc: "Over-shoulder of plat review — landscape reads more desert than Georgia" },
+  { n:  4, tag: "STRONG", desc: "Senior developer pointing across a site, holding a rolled plan, mountains behind" },
+  { n:  5, tag: "STRONG", desc: "Two professionals walking on red clay with a tablet, pine forest backdrop" },
+  { n:  6, tag: "WEAK",   desc: "Aerial top-down of two figures standing on a plat in a circular clearing" },
+  { n:  7, tag: "OK",     desc: "Closeup of hands on a plat, hard hat resting on top (slightly off hand count)" },
+  { n:  8, tag: "STRONG", desc: "Two surveyors with tripod + total station on red clay, pine forest" },
+  { n:  9, tag: "OK",     desc: "Two pros reviewing plans at dusk on truck hood, headlights glowing (truck text garbled)" },
+  { n: 10, tag: "OK",     desc: "Senior man holding a plat against a red clay site (plat text garbled)" },
 ];
+
+function tagColor(tag: "STRONG" | "OK" | "WEAK") {
+  if (tag === "STRONG") return "var(--color-gold)";
+  if (tag === "OK") return "var(--color-text-muted)";
+  return "var(--color-text-subtle)";
+}
 
 export default function PickAbout() {
   return (
     <div className="min-h-screen pt-32 pb-24 px-8">
       <div className="max-w-7xl mx-auto">
         <p className="text-xs tracking-[0.4em] uppercase mb-4" style={{ color: "var(--color-gold)" }}>
-          About-teaser candidates &middot; pick one
+          About-teaser candidates &middot; round 2 &middot; site / plat review
         </p>
         <h1 className="font-display text-4xl md:text-5xl font-bold text-white mb-12 leading-none">
           Which image for &ldquo;Our Story&rdquo;?
@@ -54,7 +60,7 @@ export default function PickAbout() {
                 </span>
                 <span
                   className="text-[9px] tracking-[0.18em] uppercase"
-                  style={{ color: c.tag === "AI" ? "var(--color-text-subtle)" : "var(--color-text-muted)" }}
+                  style={{ color: tagColor(c.tag) }}
                 >
                   {c.tag}
                 </span>

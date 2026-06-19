@@ -1,6 +1,6 @@
 import { getProject, getProjects } from "@/lib/content/source";
 import { notFound } from "next/navigation";
-import { getProjectImage, hasRealPhotos } from "@/lib/project-image";
+import { getProjectImage, getProjectImages, hasRealPhotos } from "@/lib/project-image";
 import ProjectGallery from "@/components/site/ProjectGallery";
 import ProjectCard from "@/components/site/ProjectCard";
 import AnimatedSection from "@/components/site/AnimatedSection";
@@ -167,7 +167,7 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
         <p className="text-lg mb-16" style={{ color: "var(--color-text-muted)" }}>{project.location}</p>
 
         <ProjectGallery
-          images={hasRealPhotos(project) ? project.images : [getProjectImage(project)]}
+          images={hasRealPhotos(project) ? getProjectImages(project) : [getProjectImage(project)]}
           name={project.name}
           isRepresentative={!hasRealPhotos(project)}
         />

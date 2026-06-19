@@ -57,7 +57,9 @@ function staticMapUrl(entry: CountyEntry, pins: { coords: [number, number] }[]):
           .map((p) => `pin-s+c9a96e(${p.coords[0]},${p.coords[1]})`)
           .join(",") + "/";
   const [lng, lat] = entry.center;
-  return `https://api.mapbox.com/styles/v1/mapbox/dark-v11/static/${pinStr}${lng},${lat},${entry.zoom},0/1200x500@2x?access_token=${token}`;
+  // 1x resolution — saves ~3x bandwidth versus @2x and at 1200x500 displayed
+  // it still renders sharp on retina via CSS scaling.
+  return `https://api.mapbox.com/styles/v1/mapbox/dark-v11/static/${pinStr}${lng},${lat},${entry.zoom},0/1200x500?access_token=${token}`;
 }
 
 export default async function CountyPage({

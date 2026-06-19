@@ -91,6 +91,30 @@ export default function StructuredData() {
     description: `${stats.projectCount}+ developments across Georgia since ${stats.developingSince}.`,
   };
 
+  // Person schema for Marty — ties the human to the LocalBusiness record so
+  // Google can present him in the Knowledge Panel as the firm's principal.
+  const principal = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "@id": "https://prime-interest.com/#marty-orr",
+    name: company.principals[0].name,
+    jobTitle: company.principals[0].title,
+    description: company.principals[0].bio,
+    worksFor: { "@id": "https://prime-interest.com/#organization" },
+    affiliation: { "@id": "https://prime-interest.com/#organization" },
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: company.address,
+      addressLocality: company.city,
+      addressRegion: company.state,
+      postalCode: company.zip,
+      addressCountry: "US",
+    },
+    telephone: company.phone,
+    email: company.email,
+    url: "https://prime-interest.com/about",
+  };
+
   return (
     <>
       <script
@@ -100,6 +124,10 @@ export default function StructuredData() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(website) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(principal) }}
       />
     </>
   );

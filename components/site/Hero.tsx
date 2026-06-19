@@ -107,7 +107,7 @@ export default function Hero() {
               autoPlay
               muted
               playsInline
-              preload="auto"
+              preload={clipIndex === 0 ? "auto" : "metadata"}
               onEnded={advance}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}

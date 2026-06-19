@@ -7,21 +7,21 @@ export const metadata: Metadata = {
 };
 
 /**
- * Temporary picker — 10 candidates for the About-teaser slot, second round.
- * Theme: construction site + professionals reviewing plats / blueprints.
- * Delete this route once a winner is chosen.
+ * Temporary picker — 10 real Pexels stock photos for the About-teaser slot,
+ * round 3 (replacing the AI batch). Theme: construction site + plat /
+ * blueprint review. Delete this route once a winner is chosen.
  */
 const CAPTIONS: { n: number; tag: "STRONG" | "OK" | "WEAK"; desc: string }[] = [
-  { n:  1, tag: "STRONG", desc: "Two developers leaning on truck tailgate over a plat, red clay site + pines, golden hour" },
-  { n:  2, tag: "STRONG", desc: "Three engineers studying a blueprint on a folding table, red clay site, rolling hills" },
-  { n:  3, tag: "WEAK",   desc: "Over-shoulder of plat review — landscape reads more desert than Georgia" },
-  { n:  4, tag: "STRONG", desc: "Senior developer pointing across a site, holding a rolled plan, mountains behind" },
-  { n:  5, tag: "STRONG", desc: "Two professionals walking on red clay with a tablet, pine forest backdrop" },
-  { n:  6, tag: "WEAK",   desc: "Aerial top-down of two figures standing on a plat in a circular clearing" },
-  { n:  7, tag: "OK",     desc: "Closeup of hands on a plat, hard hat resting on top (slightly off hand count)" },
-  { n:  8, tag: "STRONG", desc: "Two surveyors with tripod + total station on red clay, pine forest" },
-  { n:  9, tag: "OK",     desc: "Two pros reviewing plans at dusk on truck hood, headlights glowing (truck text garbled)" },
-  { n: 10, tag: "OK",     desc: "Senior man holding a plat against a red clay site (plat text garbled)" },
+  { n:  1, tag: "STRONG", desc: "Two engineers studying a blueprint at an active construction site, crane behind" },
+  { n:  2, tag: "STRONG", desc: "Same shoot as 01, tighter framing of the two engineers + blueprint" },
+  { n:  3, tag: "OK",     desc: "Surveyor with theodolite in front of a John Deere bulldozer (from behind)" },
+  { n:  4, tag: "STRONG", desc: "Silhouettes of a survey team at golden hour, atmospheric and editorial" },
+  { n:  5, tag: "STRONG", desc: "Three surveyors in vests examining a map together in a dense forest" },
+  { n:  6, tag: "WEAK",   desc: "Hands pointing at blueprints on a rough workbench (not premium)" },
+  { n:  7, tag: "STRONG", desc: "Closeup of a hand pointing at a detailed civil engineering plat" },
+  { n:  8, tag: "WEAK",   desc: "Two pros holding blueprint in a concrete loft renovation (wrong context)" },
+  { n:  9, tag: "OK",     desc: "Single surveyor with theodolite, golden hour closeup portrait" },
+  { n: 10, tag: "OK",     desc: "Surveyor crouching at tripod base, John Deere bulldozer behind" },
 ];
 
 function tagColor(tag: "STRONG" | "OK" | "WEAK") {
@@ -35,7 +35,7 @@ export default function PickAbout() {
     <div className="min-h-screen pt-32 pb-24 px-8">
       <div className="max-w-7xl mx-auto">
         <p className="text-xs tracking-[0.4em] uppercase mb-4" style={{ color: "var(--color-gold)" }}>
-          About-teaser candidates &middot; round 2 &middot; site / plat review
+          About-teaser candidates &middot; round 3 &middot; real Pexels stock
         </p>
         <h1 className="font-display text-4xl md:text-5xl font-bold text-white mb-12 leading-none">
           Which image for &ldquo;Our Story&rdquo;?

@@ -129,20 +129,6 @@ export default function Hero() {
         className="relative z-20 text-center px-6 max-w-6xl mx-auto w-full"
         style={{ opacity, y: contentY }}
       >
-        <motion.div
-          custom={0}
-          initial="hidden"
-          animate="visible"
-          variants={fadeUp}
-          className="flex items-center justify-center gap-4 mb-10"
-        >
-          <div className="h-px w-12" style={{ background: "var(--color-gold)" }} />
-          <span className="text-[10px] tracking-[0.4em] uppercase tabular-nums" style={{ color: "var(--color-gold)" }}>
-            34.0963° N&nbsp;&nbsp;84.0001° W &nbsp;·&nbsp; Buford, Georgia
-          </span>
-          <div className="h-px w-12" style={{ background: "var(--color-gold)" }} />
-        </motion.div>
-
         <h1
           className="font-display font-bold text-white leading-[0.88] tracking-tight mb-8"
           style={{ fontSize: "clamp(4rem, 12vw, 10rem)" }}

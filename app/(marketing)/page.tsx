@@ -245,7 +245,7 @@ export default async function HomePage() {
             {/* Pull quote */}
             <blockquote className="mb-8 pl-6" style={{ borderLeft: "2px solid var(--color-gold)" }}>
               <p className="text-lg italic leading-relaxed" style={{ color: "rgba(255,255,255,0.5)" }}>
-                "The value isn't in the land you buy — it's in what you're able to turn it into."
+                &ldquo;The value isn&rsquo;t in the land you buy &mdash; it&rsquo;s in what you&rsquo;re able to turn it into.&rdquo;
               </p>
               <footer className="mt-3 text-[10px] tracking-[0.2em] uppercase" style={{ color: "var(--color-gold)" }}>
                 — Marty D. Orr, Founder

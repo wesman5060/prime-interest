@@ -131,7 +131,7 @@ export default async function AboutPage() {
                   className="text-2xl md:text-3xl font-display font-bold leading-snug mb-12 pl-8"
                   style={{ borderLeft: "3px solid var(--color-gold)", color: "var(--color-gold-light)" }}
                 >
-                  "The value isn't in the land you buy — it's in what you're able to turn it into."
+                  &ldquo;The value isn&rsquo;t in the land you buy &mdash; it&rsquo;s in what you&rsquo;re able to turn it into.&rdquo;
                 </blockquote>
               </AnimatedSection>
               <AnimatedSection delay={0.2}>

@@ -133,9 +133,6 @@ export default function Footer() {
           <div className="flex items-center gap-5 text-xs" style={{ color: "var(--color-text-muted)" }}>
             <Link href="/privacy" className="hover:text-[color:var(--color-gold)] transition-colors">Privacy</Link>
             <Link href="/terms" className="hover:text-[color:var(--color-gold)] transition-colors">Terms</Link>
-            <span className="tracking-[0.15em] tabular-nums">
-              34.0963° N&nbsp;&nbsp;84.0001° W &nbsp;·&nbsp; Buford, Georgia
-            </span>
           </div>
         </div>
       </div>

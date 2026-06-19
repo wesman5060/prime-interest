@@ -216,9 +216,6 @@ export default function CapabilitiesPage() {
           <p className="text-xs">
             {company.tagline}
           </p>
-          <p className="text-xs tabular-nums tracking-[0.15em]">
-            34.0963&deg; N &middot; 84.0001&deg; W
-          </p>
         </div>
 
         {/* Print button (hidden in print) */}

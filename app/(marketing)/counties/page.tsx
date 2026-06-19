@@ -165,7 +165,7 @@ export default function CountiesIndexPage() {
               We buy land anywhere in Georgia.
             </h2>
             <p className="text-base mb-10 max-w-2xl mx-auto" style={{ color: "var(--color-text-muted)", lineHeight: 1.8 }}>
-              Our portfolio is concentrated in metro Atlanta and north Georgia, but our buy
+              Our portfolio is concentrated in metro Atlanta and North Georgia, but our buy
               box is the entire state. If you have land for sale anywhere in Georgia, we want
               to hear about it.
             </p>

@@ -23,14 +23,14 @@ export default function StructuredData() {
   const localBusiness = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
-    "@id": "https://prime-interest.com/#organization",
+    "@id": "https://primeinterestinc.com/#organization",
     name: company.name,
     alternateName: "Prime Interest",
     description:
       "Land development and entitlement firm building communities across Georgia. Active acquisition program for raw land, agricultural land, and assemblages of any size statewide.",
-    url: "https://prime-interest.com",
-    logo: "https://prime-interest.com/og.jpg",
-    image: "https://prime-interest.com/og.jpg",
+    url: "https://primeinterestinc.com",
+    logo: "https://primeinterestinc.com/og.jpg",
+    image: "https://primeinterestinc.com/og.jpg",
     telephone: company.phone,
     email: company.email,
     foundingDate: String(company.founded),
@@ -83,10 +83,10 @@ export default function StructuredData() {
   const website = {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    "@id": "https://prime-interest.com/#website",
+    "@id": "https://primeinterestinc.com/#website",
     name: company.name,
-    url: "https://prime-interest.com",
-    publisher: { "@id": "https://prime-interest.com/#organization" },
+    url: "https://primeinterestinc.com",
+    publisher: { "@id": "https://primeinterestinc.com/#organization" },
     inLanguage: "en-US",
     description: `${stats.projectCount}+ developments across Georgia since ${stats.developingSince}.`,
   };
@@ -96,12 +96,12 @@ export default function StructuredData() {
   const principal = {
     "@context": "https://schema.org",
     "@type": "Person",
-    "@id": "https://prime-interest.com/#marty-orr",
+    "@id": "https://primeinterestinc.com/#marty-orr",
     name: company.principals[0].name,
     jobTitle: company.principals[0].title,
     description: company.principals[0].bio,
-    worksFor: { "@id": "https://prime-interest.com/#organization" },
-    affiliation: { "@id": "https://prime-interest.com/#organization" },
+    worksFor: { "@id": "https://primeinterestinc.com/#organization" },
+    affiliation: { "@id": "https://primeinterestinc.com/#organization" },
     address: {
       "@type": "PostalAddress",
       streetAddress: company.address,
@@ -112,7 +112,7 @@ export default function StructuredData() {
     },
     telephone: company.phone,
     email: company.email,
-    url: "https://prime-interest.com/about",
+    url: "https://primeinterestinc.com/about",
   };
 
   return (

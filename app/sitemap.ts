@@ -3,7 +3,7 @@ import type { MetadataRoute } from "next";
 import { getProjects } from "@/lib/content/source";
 import { COUNTIES } from "@/content/counties";
 
-const BASE = "https://prime-interest.com";
+const BASE = "https://primeinterestinc.com";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const projects = await getProjects();

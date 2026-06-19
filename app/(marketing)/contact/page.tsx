@@ -128,7 +128,7 @@ export default function ContactPage() {
                 <span className="transition-transform duration-200 group-hover:translate-x-1">→</span>
               </a>
             </div>
-            {/* Office photo from the original prime-interest.com, AI-upscaled 4x + enhanced. Swap if a new shot becomes available. */}
+            {/* Office photo from the original primeinterestinc.com, AI-upscaled 4x + enhanced. Swap if a new shot becomes available. */}
             <RevealImage
               src="/images/office.jpg"
               alt="Prime Interest Land Development office — 4235 South Lee St, Buford, GA"

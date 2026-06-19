@@ -107,7 +107,7 @@ export default async function AboutPage() {
             <div className="md:col-span-4">
               <AnimatedSection>
                 <p className="text-xs tracking-[0.3em] uppercase mb-6" style={{ color: "var(--color-gold)" }}>Leadership</p>
-                {/* PLACEHOLDER: low-res photo pulled from the original prime-interest.com — swap when Marty provides a current headshot */}
+                {/* PLACEHOLDER: low-res photo pulled from the original primeinterestinc.com — swap when Marty provides a current headshot */}
                 <div className="relative mb-8 overflow-hidden" style={{ maxWidth: "256px", border: "1px solid var(--color-border-gold)" }}>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img

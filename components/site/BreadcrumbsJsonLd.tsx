@@ -5,7 +5,7 @@
  * Pass `items` in order from the top of the hierarchy to the current page.
  * The component prepends Home automatically — don't include it yourself.
  */
-const BASE = "https://prime-interest.com";
+const BASE = "https://primeinterestinc.com";
 
 interface Crumb {
   name: string;

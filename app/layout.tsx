@@ -19,7 +19,7 @@ const playfair = Playfair_Display({
 });
 
 // Update this once the production domain is finalized; sitemap.ts will follow.
-const SITE_URL = "https://prime-interest.com";
+const SITE_URL = "https://primeinterestinc.com";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),

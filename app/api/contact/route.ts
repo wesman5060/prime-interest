@@ -62,7 +62,7 @@ export async function POST(req: NextRequest) {
         ``,
         `Prime Interest Land Development`,
         `4235 South Lee St, Buford, GA 30518`,
-        `www.prime-interest.com`,
+        `www.primeinterestinc.com`,
       ].join("\n"),
     }),
   ]);

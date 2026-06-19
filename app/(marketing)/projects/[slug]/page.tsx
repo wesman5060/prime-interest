@@ -120,8 +120,8 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
         }
       : undefined,
     image: getProjectImage(project),
-    url: `https://prime-interest.com/projects/${project.slug}`,
-    isPartOf: { "@id": "https://prime-interest.com/#organization" },
+    url: `https://primeinterestinc.com/projects/${project.slug}`,
+    isPartOf: { "@id": "https://primeinterestinc.com/#organization" },
   };
 
   return (

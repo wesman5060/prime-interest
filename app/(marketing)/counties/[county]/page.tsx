@@ -100,13 +100,13 @@ export default async function CountyPage({
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: "https://prime-interest.com/" },
-      { "@type": "ListItem", position: 2, name: "Markets", item: "https://prime-interest.com/counties" },
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://primeinterestinc.com/" },
+      { "@type": "ListItem", position: 2, name: "Markets", item: "https://primeinterestinc.com/counties" },
       {
         "@type": "ListItem",
         position: 3,
         name: `${entry.name} County`,
-        item: `https://prime-interest.com/counties/${entry.slug}`,
+        item: `https://primeinterestinc.com/counties/${entry.slug}`,
       },
     ],
   };

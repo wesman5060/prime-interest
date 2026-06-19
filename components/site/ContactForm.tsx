@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { submitContact } from "@/lib/supabase";
 
 const schema = z.object({
   name: z.string().min(2, "Please enter your name"),
@@ -36,12 +37,7 @@ export default function ContactForm() {
     setState("loading");
     setErrorMsg("");
     try {
-      const res = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(values),
-      });
-      if (!res.ok) throw new Error(await res.text());
+      await submitContact(values);
       setState("success");
       reset();
     } catch (e) {

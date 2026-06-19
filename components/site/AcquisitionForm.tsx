@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { submitAcquisition } from "@/lib/supabase";
 
 const schema = z.object({
   role: z.enum(["owner", "broker", "investor"], {
@@ -52,12 +53,7 @@ export default function AcquisitionForm() {
     setState("loading");
     setErrorMsg("");
     try {
-      const res = await fetch("/api/acquisitions", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...values, source: "acquisitions-page" }),
-      });
-      if (!res.ok) throw new Error(await res.text());
+      await submitAcquisition({ ...values, source: "acquisitions-page" });
       setState("success");
       reset();
     } catch (e) {

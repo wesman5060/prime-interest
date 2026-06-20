@@ -86,12 +86,12 @@ export default function AcquisitionsPage() {
           </h2>
         </AnimatedSection>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px" style={{ background: "var(--color-border-custom)" }}>
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-px" style={{ background: "var(--color-border-custom)" }}>
           {BUY_BOX.map((item, i) => (
             <AnimatedSection key={item.label} delay={i * 0.05}>
-              <div className="p-8 h-full" style={{ background: "var(--color-bg)" }}>
-                <p className="text-[10px] tracking-[0.25em] uppercase mb-3" style={{ color: "var(--color-gold)" }}>{item.label}</p>
-                <p className="text-lg font-medium text-white leading-snug">{item.value}</p>
+              <div className="p-5 md:p-8 h-full" style={{ background: "var(--color-bg)" }}>
+                <p className="text-[10px] tracking-[0.25em] uppercase mb-2 md:mb-3" style={{ color: "var(--color-gold)" }}>{item.label}</p>
+                <p className="text-base md:text-lg font-medium text-white leading-snug">{item.value}</p>
               </div>
             </AnimatedSection>
           ))}

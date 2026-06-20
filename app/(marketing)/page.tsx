@@ -23,7 +23,7 @@ export default async function HomePage() {
       <Hero />
 
       {/* Featured Projects */}
-      <section className="py-36">
+      <section className="py-20 md:py-36">
         <div className="max-w-7xl mx-auto px-8">
 
           {/* Section header */}
@@ -88,8 +88,8 @@ export default async function HomePage() {
           aria-hidden
           className="pointer-events-none absolute -right-56 -top-40 w-[760px] max-w-none opacity-[0.05]"
         />
-        <div className="relative max-w-7xl mx-auto px-8 py-28">
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-10 items-end mb-16">
+        <div className="relative max-w-7xl mx-auto px-8 py-20 md:py-28">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-10 items-end mb-12 md:mb-16">
             <div className="md:col-span-8">
               <AnimatedSection>
                 <p className="text-[10px] tracking-[0.45em] uppercase mb-5" style={{ color: "var(--color-gold)" }}>
@@ -113,13 +113,13 @@ export default async function HomePage() {
           </div>
 
           <div
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px"
+            className="grid grid-cols-2 lg:grid-cols-4 gap-px"
             style={{ background: "var(--color-border-custom)" }}
           >
             {assetClasses.map((ac, i) => (
               <AnimatedSection key={ac.key} delay={(i % 4) * 0.06}>
                 <div
-                  className="relative h-full p-7 flex flex-col justify-between min-h-[200px] group transition-colors"
+                  className="relative h-full p-5 md:p-7 flex flex-col justify-between min-h-[150px] md:min-h-[200px] group transition-colors"
                   style={{ background: "var(--color-bg)" }}
                 >
                   <div>
@@ -165,7 +165,7 @@ export default async function HomePage() {
           aria-hidden
           className="pointer-events-none absolute -right-40 -top-56 w-[700px] max-w-none opacity-[0.06]"
         />
-        <div className="relative max-w-7xl mx-auto px-8 py-28">
+        <div className="relative max-w-7xl mx-auto px-8 py-20 md:py-28">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-10 items-center">
             <div className="md:col-span-8">
               <AnimatedSection>
@@ -197,10 +197,10 @@ export default async function HomePage() {
 
       {/* About teaser */}
       <section
-        className="py-36 border-t"
+        className="py-20 md:py-36 border-t"
         style={{ borderColor: "rgba(255,255,255,0.06)" }}
       >
-        <div className="max-w-7xl mx-auto px-8 grid grid-cols-1 md:grid-cols-2 gap-20 items-center">
+        <div className="max-w-7xl mx-auto px-8 grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-20 items-center">
 
           {/* Image side */}
           <AnimatedSection direction="left">
@@ -282,8 +282,8 @@ export default async function HomePage() {
           aria-hidden
           className="pointer-events-none absolute -left-56 -bottom-40 w-[780px] max-w-none opacity-[0.05]"
         />
-        <div className="relative max-w-7xl mx-auto px-8 py-28">
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-10 items-end mb-16">
+        <div className="relative max-w-7xl mx-auto px-8 py-20 md:py-28">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-10 items-end mb-12 md:mb-16">
             <div className="md:col-span-8">
               <AnimatedSection>
                 <p className="text-[10px] tracking-[0.45em] uppercase mb-5" style={{ color: "var(--color-gold)" }}>
@@ -329,7 +329,7 @@ export default async function HomePage() {
             ].map((item, i) => (
               <AnimatedSection key={item.num} delay={(i % 4) * 0.06}>
                 <div
-                  className="h-full p-8 min-h-[260px]"
+                  className="h-full p-7 md:p-8 min-h-0 md:min-h-[260px]"
                   style={{ background: "var(--color-surface)" }}
                 >
                   <span

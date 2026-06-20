@@ -11,7 +11,7 @@ import { PROCESS_STEPS, APPROACH_INTRO } from "@/content/approach";
 export const metadata: Metadata = {
   title: "Approach",
   description:
-    "How Prime Interest Land Development works — acquiring Georgia land, navigating entitlement and rezoning, and delivering finished developments to leading builders and REITs.",
+    "How Prime Interest, Inc. works — acquiring Georgia land, navigating entitlement and rezoning, and delivering finished developments to leading builders and REITs.",
 };
 
 const TYPE_LABELS: Record<ProjectType, string> = {

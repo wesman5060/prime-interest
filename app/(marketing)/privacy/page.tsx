@@ -6,7 +6,7 @@ import BreadcrumbsJsonLd from "@/components/site/BreadcrumbsJsonLd";
 export const metadata: Metadata = {
   title: "Privacy",
   description:
-    "How Prime Interest Land Development handles the information you share through the website — what we collect, how we use it, and how to ask us to delete it.",
+    "How Prime Interest, Inc. handles the information you share through the website — what we collect, how we use it, and how to ask us to delete it.",
 };
 
 const UPDATED = "June 18, 2026";
@@ -15,7 +15,7 @@ const SECTIONS: { heading: string; body: string[] }[] = [
   {
     heading: "Who we are",
     body: [
-      "Prime Interest Land Development is a Buford, Georgia land development firm operated by Marty D. Orr. This policy covers primeinterestinc.com and any successor domain we operate.",
+      "Prime Interest, Inc. is a Buford, Georgia land development firm operated by Marty D. Orr. This policy covers primeinterestinc.com and any successor domain we operate.",
       "Questions about your data can be sent directly to Marty at martyorr@bellsouth.net, or to our office at 770-945-3241.",
     ],
   },

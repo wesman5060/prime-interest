@@ -12,7 +12,7 @@ const DIRECTIONS_URL = `https://www.google.com/maps/dir/?api=1&destination=${enc
 
 export const metadata: Metadata = {
   title: "Contact",
-  description: "Get in touch with Prime Interest Land Development — land acquisitions, partnerships, and general inquiries.",
+  description: "Get in touch with Prime Interest, Inc. — land acquisitions, partnerships, and general inquiries.",
 };
 
 export default function ContactPage() {
@@ -39,8 +39,7 @@ export default function ContactPage() {
                 <div>
                   <p className="text-xs tracking-[0.3em] uppercase mb-6" style={{ color: "var(--color-gold)" }}>Office</p>
                   <address className="not-italic space-y-3 text-base" style={{ color: "var(--color-text-muted)" }}>
-                    <p className="font-medium text-white text-lg">Prime Interest</p>
-                    <p className="text-sm">Land Development</p>
+                    <p className="font-medium text-white text-lg">Prime Interest, Inc.</p>
                     <p className="text-sm pt-2">
                       4235 South Lee St<br />
                       Buford, GA 30518
@@ -131,7 +130,7 @@ export default function ContactPage() {
             {/* Office photo from the original primeinterestinc.com, AI-upscaled 4x + enhanced. Swap if a new shot becomes available. */}
             <RevealImage
               src="/images/office.jpg"
-              alt="Prime Interest Land Development office — 4235 South Lee St, Buford, GA"
+              alt="Prime Interest, Inc. office — 4235 South Lee St, Buford, GA"
               className="mb-6 w-full border border-[color:var(--color-border-custom)]"
               imgClassName="w-full h-auto object-cover"
             />

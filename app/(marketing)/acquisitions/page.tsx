@@ -16,7 +16,7 @@ import { LANDOWNER_FAQ } from "@/content/landowner-faq";
 export const metadata: Metadata = {
   title: "Acquisitions",
   description:
-    "Prime Interest Land Development actively acquires land across the state of Georgia. We work with landowners, brokers, and partners — and handle rezoning and entitlement ourselves.",
+    "Prime Interest, Inc. actively acquires land across the state of Georgia. We work with landowners, brokers, and partners — and handle rezoning and entitlement ourselves.",
 };
 
 export default function AcquisitionsPage() {

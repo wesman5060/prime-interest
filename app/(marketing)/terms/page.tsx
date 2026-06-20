@@ -6,7 +6,7 @@ import BreadcrumbsJsonLd from "@/components/site/BreadcrumbsJsonLd";
 export const metadata: Metadata = {
   title: "Terms",
   description:
-    "Terms of use for the Prime Interest Land Development website — what the site is, what it is not, and the rules for using it.",
+    "Terms of use for the Prime Interest, Inc. website — what the site is, what it is not, and the rules for using it.",
 };
 
 const UPDATED = "June 18, 2026";
@@ -15,7 +15,7 @@ const SECTIONS: { heading: string; body: string[] }[] = [
   {
     heading: "Purpose of the site",
     body: [
-      "This website describes the work, history, and acquisition program of Prime Interest Land Development. The content is informational. Submitting a property through the acquisitions form, or otherwise contacting us, is the beginning of a conversation — not the formation of a contract, listing agreement, brokerage relationship, or offer.",
+      "This website describes the work, history, and acquisition program of Prime Interest, Inc. The content is informational. Submitting a property through the acquisitions form, or otherwise contacting us, is the beginning of a conversation — not the formation of a contract, listing agreement, brokerage relationship, or offer.",
       "Nothing on this site is a solicitation to buy or sell real estate where such a solicitation would require a license we do not hold. We are a developer, not a brokerage.",
     ],
   },

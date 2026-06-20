@@ -24,11 +24,11 @@ const SITE_URL = "https://primeinterestinc.com";
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Prime Interest Land Development",
+    default: "Prime Interest, Inc.",
     template: "%s | Prime Interest",
   },
   description:
-    "Prime Interest Land Development — building Georgia's communities since 1990. 46 developments across the state: residential, commercial, student housing, and mixed-use.",
+    "Prime Interest, Inc. — building Georgia's communities since 1990. 46 developments across the state: residential, commercial, student housing, and mixed-use.",
   keywords: [
     "real estate development",
     "land development",
@@ -45,12 +45,12 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    siteName: "Prime Interest Land Development",
+    siteName: "Prime Interest, Inc.",
     images: [{
       url: "/og.jpg",
       width: 1200,
       height: 630,
-      alt: "Prime Interest Land Development — Building Georgia's Communities Since 1990",
+      alt: "Prime Interest, Inc. — Building Georgia's Communities Since 1990",
     }],
   },
   twitter: {

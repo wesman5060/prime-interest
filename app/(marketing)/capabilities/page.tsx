@@ -10,7 +10,7 @@ import { projects } from "@/content/projects";
 export const metadata: Metadata = {
   title: "Capabilities",
   description:
-    "Prime Interest Land Development — capabilities one-pager. Asset classes, geography, partners, and the principal who answers every inquiry.",
+    "Prime Interest, Inc. — capabilities one-pager. Asset classes, geography, partners, and the principal who answers every inquiry.",
 };
 
 /**
@@ -60,8 +60,8 @@ export default function CapabilitiesPage() {
               Capabilities Overview
             </p>
             <h1 className="font-display text-5xl md:text-6xl font-bold leading-[0.95] text-white">
-              Prime Interest<br />
-              <span style={{ color: "var(--color-gold)" }}>Land Development</span>
+              Prime Interest,<br />
+              <span style={{ color: "var(--color-gold)" }}>Inc.</span>
             </h1>
             <p className="text-sm mt-4 tracking-[0.2em] uppercase tabular-nums" style={{ color: "var(--color-text-subtle)" }}>
               {company.address} &middot; {company.city}, {company.state} {company.zip}
@@ -104,7 +104,7 @@ export default function CapabilitiesPage() {
             About the firm
           </p>
           <p className="text-base leading-relaxed" style={{ color: "var(--color-text-muted)", lineHeight: 1.85 }}>
-            Prime Interest Land Development is a Buford, Georgia land development firm. Founded by{" "}
+            Prime Interest, Inc. is a Buford, Georgia land development firm. Founded by{" "}
             {company.principals[0].name} in {company.founded} after a decade working as a developer under W.T.{" "}
             &ldquo;Terry&rdquo; Dunahoo, the firm has delivered{" "}
             <strong className="text-white font-bold">

@@ -1,7 +1,7 @@
 import type { CompanyInfo } from "@/lib/content/types";
 
 export const company: CompanyInfo = {
-  name: "Prime Interest Land Development",
+  name: "Prime Interest, Inc.",
   tagline: "Building Georgia's Future Since 1990",
   founded: 1998,
   developingSince: 1990,

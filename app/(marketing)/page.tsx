@@ -207,7 +207,7 @@ export default async function HomePage() {
             <div className="relative">
               <RevealImage
                 src="/images/about.jpg"
-                alt="Prime Interest Land Development"
+                alt="Prime Interest, Inc."
                 className="aspect-[4/5] border border-[rgba(201,169,110,0.12)]"
                 imgClassName="w-full h-full object-cover"
               >

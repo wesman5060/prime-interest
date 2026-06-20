@@ -7,7 +7,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "About",
-  description: "The story of Prime Interest Land Development and founder Marty D. Orr — developing Georgia since 1990.",
+  description: "The story of Prime Interest, Inc. and founder Marty D. Orr — developing Georgia since 1990.",
 };
 
 const TIMELINE = [
@@ -112,7 +112,7 @@ export default async function AboutPage() {
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src="/images/original/marty.jpg"
-                    alt="Marty D. Orr, Founder & Principal of Prime Interest Land Development"
+                    alt="Marty D. Orr, Founder & Principal of Prime Interest, Inc."
                     className="w-full h-auto object-cover"
                   />
                   <div className="absolute inset-0 pointer-events-none" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.35) 0%, transparent 45%)" }} />

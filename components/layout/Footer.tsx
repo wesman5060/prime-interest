@@ -54,12 +54,16 @@ export default function Footer() {
                 filter: "blur(3px)",
               }}
             />
-            <GlobeMark size={64} strokeWidth={1.3} showContinents color="var(--color-gold-light)" />
+            <span className="block sm:hidden shrink-0">
+              <GlobeMark size={52} strokeWidth={1.3} showContinents color="var(--color-gold-light)" />
+            </span>
+            <span className="hidden sm:block shrink-0">
+              <GlobeMark size={64} strokeWidth={1.3} showContinents color="var(--color-gold-light)" />
+            </span>
             <div className="relative flex flex-col items-center leading-none">
               <span
-                className="font-display font-bold"
+                className="font-display font-bold whitespace-nowrap text-[28px] sm:text-[36px]"
                 style={{
-                  fontSize: 36,
                   color: "var(--color-gold-light)",
                   lineHeight: 1,
                   letterSpacing: "0.005em",
@@ -69,7 +73,7 @@ export default function Footer() {
                 Prime Interest
               </span>
               <span
-                className="text-[12px] tracking-[0.28em] uppercase mt-[9px]"
+                className="whitespace-nowrap uppercase mt-[7px] sm:mt-[9px] text-[10px] sm:text-[12px] tracking-[0.24em] sm:tracking-[0.28em]"
                 style={{ color: "var(--color-gold)", opacity: 0.85 }}
               >
                 Land<span style={{ margin: "0 0.45em", display: "inline-block", verticalAlign: "1px", fontSize: "0.85em" }}>&#9670;</span>Development

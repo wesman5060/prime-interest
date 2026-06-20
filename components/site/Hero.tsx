@@ -89,7 +89,7 @@ export default function Hero() {
   const showVideo = mounted && !reduceMotion;
 
   return (
-    <section ref={ref} className="relative h-screen min-h-[700px] flex items-center justify-center overflow-hidden pb-28 md:pb-0">
+    <section ref={ref} className="relative h-screen min-h-[640px] flex items-center justify-center overflow-hidden pt-24 pb-28 md:pt-0 md:pb-0">
       {/* Background: poster paints instantly and backstops every crossfade; videos layer on top. */}
       <motion.div className="absolute inset-0 z-0 scale-110" style={{ y: videoY }}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -131,7 +131,7 @@ export default function Hero() {
       >
         <h1
           className="font-display font-bold text-white leading-[0.88] tracking-tight mb-8"
-          style={{ fontSize: "clamp(4rem, 12vw, 10rem)" }}
+          style={{ fontSize: "clamp(3.25rem, 11vw, 10rem)" }}
         >
           {["Building", "Georgia's", "Future"].map((line, i) => (
             // Generous mask padding so Playfair's descenders/ascenders never

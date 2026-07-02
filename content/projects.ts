@@ -89,7 +89,7 @@ export const projects: Project[] = [
     acreage: 4.145,
     description:
       "Luxury storage condominiums for exotic cars and offices on 4.145 acres.",
-    images: [],
+    images: ["/images/projects/the-stables-motor-condos.jpg"],
     featured: true,
     coordinates: [-83.9932, 34.1198],
   },
@@ -452,7 +452,7 @@ export const projects: Project[] = [
     lots: 77,
     partner: "Landstar Corporation",
     description: "77-lot residential subdivision with Landstar Corporation.",
-    images: [],
+    images: ["/images/projects/brookside-subdivision.jpg"],
     coordinates: [-84.155, 34.208],
   },
   {
@@ -508,7 +508,7 @@ export const projects: Project[] = [
     partner: "Cauley-Stevens",
     description:
       "40 lots rezoned from Agricultural to RES-3, developed with Cauley-Stevens.",
-    images: [],
+    images: ["/images/projects/carriage-park.jpg"],
     coordinates: [-84.128, 34.196],
   },
   {
@@ -522,7 +522,7 @@ export const projects: Project[] = [
     partner: "Cauley-Stevens",
     description:
       "21 lots rezoned from Agricultural to RES-3, developed with Cauley-Stevens.",
-    images: [],
+    images: ["/images/projects/carriage-post.jpg"],
     coordinates: [-84.125, 34.194],
   },
   {

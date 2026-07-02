@@ -16,7 +16,7 @@ const JOBS = [];
 // Project photos + cached partner photos → 640w card variants.
 for (const dir of ["public/images/projects", "public/images/projects-cache"]) {
   for (const f of await readdir(dir)) {
-    if (!f.endsWith(".jpg") || f.includes("-640w") || f.includes("-960w")) continue;
+    if (!f.endsWith(".jpg") || f.includes("-640w") || f.includes("-960w") || f.includes("-1024w")) continue;
     JOBS.push({ src: path.join(dir, f), width: 640 });
   }
 }

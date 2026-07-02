@@ -44,8 +44,8 @@ for (const { src, width } of JOBS) {
     .resize(width, null, { withoutEnlargement: true })
     .jpeg({ quality: 76, mozjpeg: true })
     .toFile(out);
-  const webSrc = "/" + src.replace(/^public\//, "").replace(/\\/g, "/");
-  const webOut = "/" + out.replace(/^public\//, "").replace(/\\/g, "/");
+  const webSrc = "/" + src.replace(/\\/g, "/").replace(/^public\//, "");
+  const webOut = "/" + out.replace(/\\/g, "/").replace(/^public\//, "");
   manifest[webSrc] = { variant: webOut, variantWidth: info.width, originalWidth: meta.width };
   console.log(`${webSrc} -> ${webOut} (${info.width}w, ${Math.round(info.size / 1024)}KB)`);
 }

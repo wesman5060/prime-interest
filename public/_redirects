@@ -1,3 +1,7 @@
-# Canonical host: the Cloudflare Pages default domain 301s to the real one
-# so search engines never index two copies of the site.
+# Canonical host: every other hostname 301s to the real one so search
+# engines never see two copies of the site as duplicate content.
+# (This is what was blocking Google indexing — www.primeinterestinc.com was
+# serving a full 200 OK duplicate of every page instead of redirecting,
+# and Google refuses to index either copy of a true duplicate pair.)
 https://prime-interest.pages.dev/* https://primeinterestinc.com/:splat 301
+https://www.primeinterestinc.com/* https://primeinterestinc.com/:splat 301

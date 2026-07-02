@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import type { Project } from "@/lib/content/types";
 import { getProjectImage } from "@/lib/project-image";
+import { respSrcSet } from "@/lib/responsive";
 
 function statusColor(status: Project["status"]) {
   return status === "completed" || status === "fully-leased" ? "#6DC87A" : "var(--color-gold)";
@@ -69,7 +70,13 @@ export default function ProjectCard({ project, index = 0, variant = "default", c
         <div className={`relative overflow-hidden ${feature ? "h-[260px] md:h-[424px]" : "h-[220px]"}`}>
           <motion.img
             src={getProjectImage(project)}
+            {...respSrcSet(getProjectImage(project))}
+            sizes={feature
+              ? "(min-width: 768px) 66vw, 100vw"
+              : "(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"}
             alt={project.name}
+            loading={index > 1 ? "lazy" : "eager"}
+            decoding="async"
             className="img-grade w-full h-full object-cover"
             animate={{ scale: hovered ? 1.08 : 1 }}
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}

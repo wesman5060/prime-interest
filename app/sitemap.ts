@@ -9,28 +9,28 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const projects = await getProjects();
 
   const staticRoutes: MetadataRoute.Sitemap = [
-    { url: BASE,                   lastModified: new Date(), changeFrequency: "monthly", priority: 1.0 },
-    { url: `${BASE}/approach`,     lastModified: new Date(), changeFrequency: "monthly", priority: 0.9 },
-    { url: `${BASE}/projects`,     lastModified: new Date(), changeFrequency: "weekly",  priority: 0.9 },
-    { url: `${BASE}/acquisitions`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.95 },
-    { url: `${BASE}/about`,        lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
-    { url: `${BASE}/contact`,      lastModified: new Date(), changeFrequency: "yearly",  priority: 0.7 },
-    { url: `${BASE}/counties`,     lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
-    { url: `${BASE}/capabilities`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.6 },
-    { url: `${BASE}/privacy`,      lastModified: new Date(), changeFrequency: "yearly",  priority: 0.3 },
-    { url: `${BASE}/terms`,        lastModified: new Date(), changeFrequency: "yearly",  priority: 0.3 },
+    { url: BASE,                   changeFrequency: "monthly", priority: 1.0 },
+    { url: `${BASE}/approach`,     changeFrequency: "monthly", priority: 0.9 },
+    { url: `${BASE}/projects`,     changeFrequency: "weekly",  priority: 0.9 },
+    { url: `${BASE}/acquisitions`, changeFrequency: "monthly", priority: 0.95 },
+    { url: `${BASE}/about`,        changeFrequency: "monthly", priority: 0.8 },
+    { url: `${BASE}/contact`,      changeFrequency: "yearly",  priority: 0.7 },
+    { url: `${BASE}/counties`,     changeFrequency: "monthly", priority: 0.8 },
+    { url: `${BASE}/capabilities`, changeFrequency: "monthly", priority: 0.6 },
+    { url: `${BASE}/privacy`,      changeFrequency: "yearly",  priority: 0.3 },
+    { url: `${BASE}/terms`,        changeFrequency: "yearly",  priority: 0.3 },
   ];
 
   const projectRoutes: MetadataRoute.Sitemap = projects.map((p) => ({
     url: `${BASE}/projects/${p.slug}`,
-    lastModified: new Date(),
+    
     changeFrequency: "monthly",
     priority: 0.7,
   }));
 
   const countyRoutes: MetadataRoute.Sitemap = COUNTIES.map((c) => ({
     url: `${BASE}/counties/${c.slug}`,
-    lastModified: new Date(),
+    
     changeFrequency: "monthly",
     priority: 0.75,
   }));

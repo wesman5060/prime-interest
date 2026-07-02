@@ -19,7 +19,7 @@ export const PROCESS_STEPS: ProcessStep[] = [
     body:
       "We identify and purchase raw and agricultural land across Georgia — often parcels with untapped potential that other developers overlook. We work directly with landowners, brokers, and through assemblages.",
     example:
-      "199 acres in Canton acquired adjacent to the Laurel Canyon project — agricultural land positioned for residential growth.",
+      "199 lots in Canton entitled adjacent to the Laurel Canyon project — agricultural land converted for residential growth.",
   },
   {
     number: "02",
@@ -51,5 +51,5 @@ export const APPROACH_INTRO = {
   eyebrow: "What We Do",
   headline: "From Raw Land\nto Community",
   lead:
-    "Prime Interest is a land development company. For thirty-five years we have acquired Georgia land, navigated the entitlement and rezoning process, and delivered finished, shovel-ready developments to the country's leading builders and REITs.",
+    "Prime Interest is a land development company. For more than three decades we have acquired Georgia land, navigated the entitlement and rezoning process, and delivered finished, shovel-ready developments to the country's leading builders and REITs.",
 };

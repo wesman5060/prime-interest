@@ -164,7 +164,7 @@ export default function AcquisitionsPage() {
               Common questions from landowners
             </h2>
             <p className="text-lg max-w-2xl mb-16" style={{ color: "var(--color-text-muted)" }}>
-              The conversations we have most often. If yours isn't here, ask it directly — Marty answers every inquiry himself.
+              The conversations we have most often. If yours isn’t here, ask it directly — Marty answers every inquiry himself.
             </p>
           </AnimatedSection>
           <AnimatedSection delay={0.1}>
@@ -182,7 +182,7 @@ export default function AcquisitionsPage() {
               Start the Conversation
             </h2>
             <p className="text-lg mb-16 max-w-2xl" style={{ color: "var(--color-text-muted)" }}>
-              Share a few details and we'll take it from there. Every submission is reviewed directly — confidential, and with no obligation.
+              Share a few details and we’ll take it from there. Every submission is reviewed directly — confidential, and with no obligation.
             </p>
           </AnimatedSection>
           <AnimatedSection delay={0.1}>

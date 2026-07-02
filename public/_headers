@@ -1,0 +1,14 @@
+# Cloudflare Pages custom headers.
+# Images change rarely; a week of browser caching removes the revalidation
+# round-trip Lighthouse flags, without risking long-stale photo swaps.
+/images/*
+  Cache-Control: public, max-age=604800
+
+/videos/*
+  Cache-Control: public, max-age=604800
+
+/favicon-*.png
+  Cache-Control: public, max-age=604800
+
+/apple-touch-icon.png
+  Cache-Control: public, max-age=604800

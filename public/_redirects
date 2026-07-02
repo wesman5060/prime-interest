@@ -1,0 +1,3 @@
+# Canonical host: the Cloudflare Pages default domain 301s to the real one
+# so search engines never index two copies of the site.
+https://prime-interest.pages.dev/* https://primeinterestinc.com/:splat 301

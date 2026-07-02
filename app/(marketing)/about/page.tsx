@@ -68,7 +68,7 @@ export default async function AboutPage() {
         </AnimatedSection>
         <AnimatedSection delay={0.1}>
           <h1 className="font-display font-bold leading-[0.88] text-white mb-0" style={{ fontSize: "clamp(3.5rem, 10vw, 9rem)" }}>
-            Thirty-Five<br />
+            Thirty-Six<br />
             <span style={{ color: "var(--color-gold)" }}>Years of</span><br />
             Georgia Land
           </h1>

@@ -1,0 +1,292 @@
+{
+  "/public/images/projects/ashley-falls.jpg": {
+    "variant": "/public/images/projects/ashley-falls-640w.jpg",
+    "variantWidth": 640,
+    "originalWidth": 1024
+  },
+  "/public/images/projects/brookside-subdivision.jpg": {
+    "variant": "/public/images/projects/brookside-subdivision-640w.jpg",
+    "variantWidth": 640,
+    "originalWidth": 1024
+  },
+  "/public/images/projects/carramore-subdivision.jpg": {
+    "variant": "/public/images/projects/carramore-subdivision-640w.jpg",
+    "variantWidth": 640,
+    "originalWidth": 1024
+  },
+  "/public/images/projects/carriage-park.jpg": {
+    "variant": "/public/images/projects/carriage-park-640w.jpg",
+    "variantWidth": 640,
+    "originalWidth": 860
+  },
+  "/public/images/projects/carriage-post.jpg": {
+    "variant": "/public/images/projects/carriage-post-640w.jpg",
+    "variantWidth": 640,
+    "originalWidth": 1024
+  },
+  "/public/images/projects/dalys-truck-driving-school.jpg": {
+    "variant": "/public/images/projects/dalys-truck-driving-school-640w.jpg",
+    "variantWidth": 640,
+    "originalWidth": 1024
+  },
+  "/public/images/projects/governors-quarters.jpg": {
+    "variant": "/public/images/projects/governors-quarters-640w.jpg",
+    "variantWidth": 640,
+    "originalWidth": 1024
+  },
+  "/public/images/projects/hadley-township.jpg": {
+    "variant": "/public/images/projects/hadley-township-640w.jpg",
+    "variantWidth": 640,
+    "originalWidth": 900
+  },
+  "/public/images/projects/lincoln-park.jpg": {
+    "variant": "/public/images/projects/lincoln-park-640w.jpg",
+    "variantWidth": 640,
+    "originalWidth": 1024
+  },
+  "/public/images/projects/madison-subdivision.jpg": {
+    "variant": "/public/images/projects/madison-subdivision-640w.jpg",
+    "variantWidth": 640,
+    "originalWidth": 1024
+  },
+  "/public/images/projects/muirfield.jpg": {
+    "variant": "/public/images/projects/muirfield-640w.jpg",
+    "variantWidth": 640,
+    "originalWidth": 1024
+  },
+  "/public/images/projects/peachtree-preserve.jpg": {
+    "variant": "/public/images/projects/peachtree-preserve-640w.jpg",
+    "variantWidth": 640,
+    "originalWidth": 1024
+  },
+  "/public/images/projects/puckett-creek.jpg": {
+    "variant": "/public/images/projects/puckett-creek-640w.jpg",
+    "variantWidth": 640,
+    "originalWidth": 1024
+  },
+  "/public/images/projects/stonemont.jpg": {
+    "variant": "/public/images/projects/stonemont-640w.jpg",
+    "variantWidth": 640,
+    "originalWidth": 1024
+  },
+  "/public/images/projects/the-stables-motor-condos.jpg": {
+    "variant": "/public/images/projects/the-stables-motor-condos-640w.jpg",
+    "variantWidth": 640,
+    "originalWidth": 1024
+  },
+  "/public/images/projects/union-grove-subdivision.jpg": {
+    "variant": "/public/images/projects/union-grove-subdivision-640w.jpg",
+    "variantWidth": 640,
+    "originalWidth": 1024
+  },
+  "/public/images/projects-cache/038e2facccb8.jpg": {
+    "variant": "/public/images/projects-cache/038e2facccb8-640w.jpg",
+    "variantWidth": 640,
+    "originalWidth": 730
+  },
+  "/public/images/projects-cache/2b12eff3c7f1.jpg": {
+    "variant": "/public/images/projects-cache/2b12eff3c7f1-640w.jpg",
+    "variantWidth": 640,
+    "originalWidth": 1600
+  },
+  "/public/images/projects-cache/2dfca9f66314.jpg": {
+    "variant": "/public/images/projects-cache/2dfca9f66314-640w.jpg",
+    "variantWidth": 640,
+    "originalWidth": 768
+  },
+  "/public/images/projects-cache/34046da3aad0.jpg": {
+    "variant": "/public/images/projects-cache/34046da3aad0-640w.jpg",
+    "variantWidth": 640,
+    "originalWidth": 1600
+  },
+  "/public/images/projects-cache/395722e3243a.jpg": {
+    "variant": "/public/images/projects-cache/395722e3243a-640w.jpg",
+    "variantWidth": 640,
+    "originalWidth": 1000
+  },
+  "/public/images/projects-cache/3da6dabfc542.jpg": {
+    "variant": "/public/images/projects-cache/3da6dabfc542-640w.jpg",
+    "variantWidth": 640,
+    "originalWidth": 1406
+  },
+  "/public/images/projects-cache/462c4b958f2b.jpg": {
+    "variant": "/public/images/projects-cache/462c4b958f2b-640w.jpg",
+    "variantWidth": 640,
+    "originalWidth": 1000
+  },
+  "/public/images/projects-cache/564b6c463a13.jpg": {
+    "variant": "/public/images/projects-cache/564b6c463a13-640w.jpg",
+    "variantWidth": 640,
+    "originalWidth": 732
+  },
+  "/public/images/projects-cache/5a12baadc87f.jpg": {
+    "variant": "/public/images/projects-cache/5a12baadc87f-640w.jpg",
+    "variantWidth": 640,
+    "originalWidth": 1004
+  },
+  "/public/images/projects-cache/6177bf5b636e.jpg": {
+    "variant": "/public/images/projects-cache/6177bf5b636e-640w.jpg",
+    "variantWidth": 640,
+    "originalWidth": 768
+  },
+  "/public/images/projects-cache/62f7504ea214.jpg": {
+    "variant": "/public/images/projects-cache/62f7504ea214-640w.jpg",
+    "variantWidth": 640,
+    "originalWidth": 728
+  },
+  "/public/images/projects-cache/6c07571ea19d.jpg": {
+    "variant": "/public/images/projects-cache/6c07571ea19d-640w.jpg",
+    "variantWidth": 640,
+    "originalWidth": 1600
+  },
+  "/public/images/projects-cache/6d5caaa5399a.jpg": {
+    "variant": "/public/images/projects-cache/6d5caaa5399a-640w.jpg",
+    "variantWidth": 640,
+    "originalWidth": 730
+  },
+  "/public/images/projects-cache/766193080cf4.jpg": {
+    "variant": "/public/images/projects-cache/766193080cf4-640w.jpg",
+    "variantWidth": 640,
+    "originalWidth": 1600
+  },
+  "/public/images/projects-cache/7755ba439b81.jpg": {
+    "variant": "/public/images/projects-cache/7755ba439b81-640w.jpg",
+    "variantWidth": 640,
+    "originalWidth": 750
+  },
+  "/public/images/projects-cache/8212c42dda34.jpg": {
+    "variant": "/public/images/projects-cache/8212c42dda34-640w.jpg",
+    "variantWidth": 640,
+    "originalWidth": 768
+  },
+  "/public/images/projects-cache/8a245f7a0f31.jpg": {
+    "variant": "/public/images/projects-cache/8a245f7a0f31-640w.jpg",
+    "variantWidth": 640,
+    "originalWidth": 730
+  },
+  "/public/images/projects-cache/9a3f1db10aa7.jpg": {
+    "variant": "/public/images/projects-cache/9a3f1db10aa7-640w.jpg",
+    "variantWidth": 640,
+    "originalWidth": 730
+  },
+  "/public/images/projects-cache/9dc00a657dc1.jpg": {
+    "variant": "/public/images/projects-cache/9dc00a657dc1-640w.jpg",
+    "variantWidth": 640,
+    "originalWidth": 730
+  },
+  "/public/images/projects-cache/a710ed6a4754.jpg": {
+    "variant": "/public/images/projects-cache/a710ed6a4754-640w.jpg",
+    "variantWidth": 640,
+    "originalWidth": 750
+  },
+  "/public/images/projects-cache/aa3be11ed9fd.jpg": {
+    "variant": "/public/images/projects-cache/aa3be11ed9fd-640w.jpg",
+    "variantWidth": 640,
+    "originalWidth": 816
+  },
+  "/public/images/projects-cache/aa6599b863b7.jpg": {
+    "variant": "/public/images/projects-cache/aa6599b863b7-640w.jpg",
+    "variantWidth": 640,
+    "originalWidth": 768
+  },
+  "/public/images/projects-cache/b1f00e06e659.jpg": {
+    "variant": "/public/images/projects-cache/b1f00e06e659-640w.jpg",
+    "variantWidth": 640,
+    "originalWidth": 1600
+  },
+  "/public/images/projects-cache/bdad7e835f5f.jpg": {
+    "variant": "/public/images/projects-cache/bdad7e835f5f-640w.jpg",
+    "variantWidth": 640,
+    "originalWidth": 1000
+  },
+  "/public/images/projects-cache/bf2107a5e5ab.jpg": {
+    "variant": "/public/images/projects-cache/bf2107a5e5ab-640w.jpg",
+    "variantWidth": 640,
+    "originalWidth": 1600
+  },
+  "/public/images/projects-cache/bfce33652320.jpg": {
+    "variant": "/public/images/projects-cache/bfce33652320-640w.jpg",
+    "variantWidth": 640,
+    "originalWidth": 730
+  },
+  "/public/images/projects-cache/c304bc2744c5.jpg": {
+    "variant": "/public/images/projects-cache/c304bc2744c5-640w.jpg",
+    "variantWidth": 640,
+    "originalWidth": 1017
+  },
+  "/public/images/projects-cache/c967c164fe38.jpg": {
+    "variant": "/public/images/projects-cache/c967c164fe38-640w.jpg",
+    "variantWidth": 640,
+    "originalWidth": 1088
+  },
+  "/public/images/projects-cache/ee5551bf0fc1.jpg": {
+    "variant": "/public/images/projects-cache/ee5551bf0fc1-640w.jpg",
+    "variantWidth": 640,
+    "originalWidth": 750
+  },
+  "/public/images/projects-cache/f5a1a70d0102.jpg": {
+    "variant": "/public/images/projects-cache/f5a1a70d0102-640w.jpg",
+    "variantWidth": 640,
+    "originalWidth": 670
+  },
+  "/public/images/projects-cache/fb9ae62b58a7.jpg": {
+    "variant": "/public/images/projects-cache/fb9ae62b58a7-640w.jpg",
+    "variantWidth": 640,
+    "originalWidth": 1600
+  },
+  "/images/luxury-apartments.jpg": {
+    "variant": "/images/luxury-apartments-640w.jpg",
+    "variantWidth": 640,
+    "originalWidth": 1344
+  },
+  "/images/student-housing.jpg": {
+    "variant": "/images/student-housing-640w.jpg",
+    "variantWidth": 640,
+    "originalWidth": 1344
+  },
+  "/images/mixed-use.jpg": {
+    "variant": "/images/mixed-use-640w.jpg",
+    "variantWidth": 640,
+    "originalWidth": 1344
+  },
+  "/images/medical-office.jpg": {
+    "variant": "/images/medical-office-640w.jpg",
+    "variantWidth": 640,
+    "originalWidth": 1344
+  },
+  "/images/commercial.jpg": {
+    "variant": "/images/commercial-640w.jpg",
+    "variantWidth": 640,
+    "originalWidth": 1344
+  },
+  "/images/industrial.jpg": {
+    "variant": "/images/industrial-640w.jpg",
+    "variantWidth": 640,
+    "originalWidth": 1344
+  },
+  "/images/single-family.jpg": {
+    "variant": "/images/single-family-640w.jpg",
+    "variantWidth": 640,
+    "originalWidth": 1344
+  },
+  "/images/townhomes.jpg": {
+    "variant": "/images/townhomes-640w.jpg",
+    "variantWidth": 640,
+    "originalWidth": 1344
+  },
+  "/images/subdivision.jpg": {
+    "variant": "/images/subdivision-640w.jpg",
+    "variantWidth": 640,
+    "originalWidth": 1344
+  },
+  "/images/hero-poster.jpg": {
+    "variant": "/images/hero-poster-960w.jpg",
+    "variantWidth": 960,
+    "originalWidth": 1920
+  },
+  "/images/office.jpg": {
+    "variant": "/images/office-960w.jpg",
+    "variantWidth": 960,
+    "originalWidth": 1800
+  }
+}

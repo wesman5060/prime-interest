@@ -1,6 +1,7 @@
 import Link from "next/link";
 import GlobeMark from "@/components/site/GlobeMark";
 import Year from "@/components/site/Year";
+import { company } from "@/content/company";
 
 export default function Footer() {
   return (
@@ -81,7 +82,7 @@ export default function Footer() {
             </div>
           </div>
           <p className="text-xs mt-2" style={{ color: "var(--color-text-subtle)" }}>
-            Building Georgia&rsquo;s Future Since 1990
+            {company.tagline}
           </p>
         </div>
 

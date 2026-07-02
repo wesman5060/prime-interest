@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist } from "next/font/google";
 import { Playfair_Display } from "next/font/google";
 import LenisProvider from "@/components/providers/LenisProvider";
@@ -23,25 +23,13 @@ const SITE_URL = "https://primeinterestinc.com";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
+  alternates: { canonical: "./" },
   title: {
-    default: "Prime Interest, Inc.",
+    default: "Prime Interest, Inc. — Georgia Land Development Since 1990",
     template: "%s | Prime Interest",
   },
   description:
-    "Prime Interest, Inc. — building Georgia's communities since 1990. Developments across the state: residential, commercial, student housing, and mixed-use.",
-  keywords: [
-    "real estate development",
-    "land development",
-    "Georgia",
-    "Atlanta",
-    "Buford",
-    "Gwinnett",
-    "residential",
-    "commercial",
-    "student housing",
-    "Marty Orr",
-    "Prime Interest",
-  ],
+    "Prime Interest, Inc. — building Georgia's future since 1990. Developments across the state: residential, commercial, student housing, and mixed-use.",
   openGraph: {
     type: "website",
     locale: "en_US",
@@ -50,7 +38,7 @@ export const metadata: Metadata = {
       url: "/og.jpg",
       width: 1200,
       height: 630,
-      alt: "Prime Interest, Inc. — Building Georgia's Communities Since 1990",
+      alt: "Prime Interest, Inc. — Building Georgia's Future Since 1990",
     }],
   },
   twitter: {
@@ -65,6 +53,10 @@ export const metadata: Metadata = {
     ],
     apple: "/apple-touch-icon.png",
   },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#000000",
 };
 
 export default function RootLayout({

@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { respSrcSet } from "@/lib/responsive";
 
 interface Props {
   src: string;
@@ -21,7 +22,11 @@ export default function RevealImage({ src, alt, className, imgClassName, childre
     <div className={`relative overflow-hidden ${className ?? ""}`}>
       <motion.img
         src={src}
+        {...respSrcSet(src)}
+        sizes="(min-width: 1024px) 60vw, 100vw"
         alt={alt}
+        loading="lazy"
+        decoding="async"
         initial={{ scale: 1.16 }}
         whileInView={{ scale: 1 }}
         viewport={{ once: true, amount: 0.25 }}

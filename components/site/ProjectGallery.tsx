@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
+import { respSrcSet, smallSrc } from "@/lib/responsive";
 
 interface Props {
   images: string[];
@@ -36,7 +37,11 @@ export default function ProjectGallery({ images, name, isRepresentative }: Props
         <img
           key={active}
           src={images[active]}
+          {...respSrcSet(images[active])}
+          sizes="(min-width: 1024px) 960px, 100vw"
           alt={`${name} — photo ${active + 1}`}
+          fetchPriority={active === 0 ? "high" : undefined}
+          decoding="async"
           className="img-grade h-full w-full object-cover transition-opacity duration-300"
         />
 
@@ -101,7 +106,7 @@ export default function ProjectGallery({ images, name, isRepresentative }: Props
               }}
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={src} alt="" className="img-grade w-full h-full object-cover" />
+              <img src={smallSrc(src)} alt="" loading="lazy" decoding="async" className="img-grade w-full h-full object-cover" />
             </button>
           ))}
         </div>

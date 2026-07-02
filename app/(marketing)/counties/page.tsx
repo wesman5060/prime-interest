@@ -9,7 +9,7 @@ import { projects } from "@/content/projects";
 export const metadata: Metadata = {
   title: "Markets",
   description:
-    "Prime Interest has developed across ten Georgia counties — from Whitfield in the northwest to Liberty on the coast. Each county page surfaces the portfolio for that market.",
+    "Prime Interest has developed across eleven Georgia counties — from Whitfield in the northwest to Liberty on the coast. Each county page surfaces the portfolio for that market.",
 };
 
 interface CountyRow {
@@ -67,7 +67,7 @@ export default function CountiesIndexPage() {
               className="font-display font-bold leading-[0.9] text-white mb-10"
               style={{ fontSize: "clamp(3rem, 8vw, 7rem)" }}
             >
-              Ten Georgia<br />
+              Eleven Georgia<br />
               <span style={{ color: "var(--color-gold)" }}>counties.</span>
             </h1>
           </AnimatedSection>
@@ -76,7 +76,7 @@ export default function CountiesIndexPage() {
               className="text-lg md:text-xl max-w-3xl leading-relaxed"
               style={{ color: "var(--color-text-muted)", lineHeight: 1.8 }}
             >
-              Marty has worked land in {totalCounties} Georgia counties over thirty-five years &mdash;
+              Marty has worked land in {totalCounties} Georgia counties over more than three decades &mdash;
               from Whitfield in the northwest to Liberty on the coast. The portfolio for
               each market is below.
             </p>
@@ -165,8 +165,8 @@ export default function CountiesIndexPage() {
               We buy land anywhere in Georgia.
             </h2>
             <p className="text-base mb-10 max-w-2xl mx-auto" style={{ color: "var(--color-text-muted)", lineHeight: 1.8 }}>
-              Our portfolio is concentrated in metro Atlanta and North Georgia, but our buy
-              box is the entire state. If you have land for sale anywhere in Georgia, we want
+              Our portfolio is concentrated in metro Atlanta and North Georgia, but we buy
+              across the entire state. If you have land for sale anywhere in Georgia, we want
               to hear about it.
             </p>
             <Link

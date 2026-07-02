@@ -105,12 +105,12 @@ export default function CapabilitiesPage() {
           </p>
           <p className="text-base leading-relaxed" style={{ color: "var(--color-text-muted)", lineHeight: 1.85 }}>
             Prime Interest, Inc. is a Buford, Georgia land development firm. Founded by{" "}
-            {company.principals[0].name} in {company.founded} after a decade working as a developer under W.T.{" "}
+            {company.principals[0].name} in {company.founded} after eight years working as a developer under W.T.{" "}
             &ldquo;Terry&rdquo; Dunahoo, the firm has delivered{" "}
             <strong className="text-white font-bold">
               {stats.residentialDelivered.toLocaleString()}+ homes and lots across {stats.countyCount} Georgia counties
             </strong>
-            , spanning every major real estate asset class &mdash; single-family communities, townhomes, mid-rise apartments, student housing, mixed-use, medical office, commercial, and industrial. We handle our own rezoning and entitlement and close every transaction in-house.
+            , spanning every major real estate asset class &mdash; single-family communities, townhomes, mid-rise apartments, student housing, mixed-use, medical office, commercial, and industrial. We handle our own rezoning and entitlement.
           </p>
         </section>
 

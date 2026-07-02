@@ -29,7 +29,7 @@ export default function StructuredData() {
     description:
       "Land development and entitlement firm building communities across Georgia. Active acquisition program for raw land, agricultural land, and assemblages of any size statewide.",
     url: "https://primeinterestinc.com",
-    logo: "https://primeinterestinc.com/og.jpg",
+    logo: "https://primeinterestinc.com/favicon-512.png",
     image: "https://primeinterestinc.com/og.jpg",
     telephone: company.phone,
     email: company.email,
@@ -67,11 +67,10 @@ export default function StructuredData() {
       "Student housing",
       "Luxury apartments",
     ],
-    sameAs: [],
     openingHoursSpecification: {
       "@type": "OpeningHoursSpecification",
       dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-      opens: "09:00",
+      opens: "08:30",
       closes: "17:00",
     },
     aggregateRating: undefined as unknown,

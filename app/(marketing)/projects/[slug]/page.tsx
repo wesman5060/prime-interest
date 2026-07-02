@@ -42,10 +42,17 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const project = await getProject(slug);
   if (!project) return {};
   const image = getProjectImage(project);
+  const description = `${project.description} A Prime Interest development in ${project.county} County, Georgia.`;
   return {
     title: project.name,
-    description: project.description,
+    description,
     openGraph: {
+      title: `${project.name} | Prime Interest`,
+      description,
+      url: `/projects/${project.slug}`,
+      siteName: "Prime Interest, Inc.",
+      type: "website",
+      locale: "en_US",
       images: [{ url: image, width: 1200, height: 630, alt: project.name }],
     },
     twitter: { card: "summary_large_image", images: [image] },
@@ -121,7 +128,6 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
       : undefined,
     image: getProjectImage(project),
     url: `https://primeinterestinc.com/projects/${project.slug}`,
-    isPartOf: { "@id": "https://primeinterestinc.com/#organization" },
   };
 
   return (
@@ -138,13 +144,13 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
       />
 
       <div className="max-w-5xl mx-auto px-8">
-        <a
+        <Link
           href="/projects"
           className="inline-flex items-center gap-2 text-xs tracking-[0.2em] uppercase mb-12 transition-colors hover:text-[color:var(--color-gold)]"
           style={{ color: "var(--color-text-muted)" }}
         >
-          ← Back to Map
-        </a>
+          ← All Developments
+        </Link>
 
         <div className="flex items-center gap-4 mb-6">
           <span

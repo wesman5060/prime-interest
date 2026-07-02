@@ -32,7 +32,7 @@ export const LANDOWNER_FAQ: FAQItem[] = [
   },
   {
     q: "Do you pay cash, or are you tied to financing contingencies?",
-    a: "We close clean. Our offers are not contingent on outside financing falling into place, and we have a thirty-five-year track record of single-closing transactions. If we sign a contract, we close.",
+    a: "We close clean. Our offers are not contingent on outside financing falling into place, and we have a decades-long track record of single-closing transactions. If we sign a contract, we close.",
   },
   {
     q: "What about the taxes when I sell?",

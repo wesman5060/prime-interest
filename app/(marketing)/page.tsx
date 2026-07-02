@@ -256,7 +256,7 @@ export default async function HomePage() {
               From his first subdivisions in the 1990s to $65M mixed-use
               developments and student housing for thousands, Marty Orr has
               spent three decades turning raw Georgia land into communities —
-              alongside the country's most respected builders and REITs.
+              alongside the country’s most respected builders and REITs.
             </p>
 
             <a
@@ -312,11 +312,11 @@ export default async function HomePage() {
                 num: "02",
                 title: "Rezoning in-house",
                 body:
-                  "We handle entitlement ourselves. Most of a parcel's value is won or lost in the rezoning, and we've done it for thirty-five years across more than a dozen Georgia counties.",
+                  "We handle entitlement ourselves. Most of a parcel’s value is won or lost in the rezoning, and we’ve done it for more than three decades across eleven Georgia counties.",
               },
               {
                 num: "03",
-                title: "Single-closing track record",
+                title: "We close what we sign",
                 body:
                   "Our offers are not contingent on outside financing. When we sign a contract, we close. Sellers and brokers can verify that with anyone who has done business with us.",
               },

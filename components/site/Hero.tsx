@@ -8,7 +8,7 @@ import CountUp from "@/components/site/CountUp";
 
 const stats = getPortfolioStats();
 const STAT_BAR = [
-  { value: `${stats.projectCount}+`, label: "Developments" },
+  { value: `${stats.projectCount}`, label: "Developments" },
   { value: String(stats.developingSince), label: "Developing Since" },
   { value: `${stats.residentialDelivered.toLocaleString()}+`, label: "Homes Delivered" },
   { value: `${stats.countyCount}`, label: "Georgia Counties" },
@@ -95,8 +95,11 @@ export default function Hero() {
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={POSTER}
+          srcSet={`/images/hero-poster-960w.jpg 960w, ${POSTER} 1920w`}
+          sizes="100vw"
           alt=""
           aria-hidden
+          fetchPriority="high"
           className="absolute inset-0 h-full w-full object-cover"
         />
         {showVideo && (

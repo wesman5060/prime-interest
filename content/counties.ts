@@ -34,7 +34,7 @@ export const COUNTIES: CountyEntry[] = [
     center: [-84.028, 33.96],
     zoom: 9.5,
     descriptor:
-      "Atlanta's largest northern suburb and the county Prime Interest has called home since 1990. Anchored by the I-85 / I-985 corridor, Mall of Georgia, and Coolray Field.",
+      "Atlanta's largest northeastern suburban county, and the one Prime Interest has called home since 1990. Anchored by the I-85 / I-985 corridor, Mall of Georgia, and Coolray Field.",
   },
   {
     slug: "fulton",

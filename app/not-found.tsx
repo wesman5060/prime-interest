@@ -18,7 +18,7 @@ export default function NotFound() {
         Undeveloped<br />Land
       </h1>
       <p className="text-lg mb-12 max-w-md" style={{ color: "var(--color-text-muted)" }}>
-        There's nothing built at this address yet. Head back home, or explore
+        There’s nothing built at this address yet. Head back home, or explore
         the many developments we did build.
       </p>
       <div className="flex flex-col sm:flex-row gap-4">

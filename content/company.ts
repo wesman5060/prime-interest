@@ -2,7 +2,7 @@ import type { CompanyInfo } from "@/lib/content/types";
 
 export const company: CompanyInfo = {
   name: "Prime Interest, Inc.",
-  tagline: "Building Georgia's Future Since 1990",
+  tagline: "Building Georgia’s Future Since 1990",
   founded: 1998,
   developingSince: 1990,
   address: "4235 South Lee St",
@@ -22,7 +22,7 @@ export const company: CompanyInfo = {
     {
       name: "Marty D. Orr",
       title: "Founder & Principal",
-      bio: "Marty D. Orr has spent more than three decades turning Georgia land into communities. He learned the trade hands-on in the 1990s — installing infrastructure, building homes, and managing his own closings — before founding Prime Interest in 1998. He has personally handled the rezoning and entitlement of his properties throughout his career, the work where most of a parcel's value is won or lost. Under his direction the firm has grown from a single-family subdivision developer into a full-spectrum operation spanning luxury apartments, student housing, mixed-use retail, medical office, and motor condominiums across more than a dozen Georgia counties.",
+      bio: "Marty D. Orr has spent more than three decades turning Georgia land into communities. He learned the trade hands-on in the 1990s — installing infrastructure, building homes, and managing his own closings — before founding Prime Interest in 1998. He has personally handled the rezoning and entitlement of his properties throughout his career, the work where most of a parcel's value is won or lost. Under his direction the firm has grown from a single-family subdivision developer into a full-spectrum operation spanning luxury apartments, student housing, mixed-use retail, medical office, and motor condominiums across eleven Georgia counties.",
     },
   ],
   partners: [

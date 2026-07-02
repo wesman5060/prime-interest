@@ -88,7 +88,7 @@ export const projects: Project[] = [
     status: "under-development",
     acreage: 4.145,
     description:
-      "Luxury storage condominiums for exotic cars and offices on 4.145 acres.",
+      "Luxury motor condominiums with office space for exotic-car collectors, on 4.145 acres.",
     images: ["/images/projects/the-stables-motor-condos.jpg"],
     featured: true,
     coordinates: [-83.9932, 34.1198],
@@ -118,7 +118,7 @@ export const projects: Project[] = [
     acreage: 23.742,
     partner: "Brookfield Properties",
     description:
-      "23.742 acres sold to the City of Buford for an industrial complex assemblage on Peachtree Industrial Blvd., being developed by Brookfield Properties.",
+      "23.742 acres sold to the City of Buford for an industrial assemblage on Peachtree Industrial Blvd., now being developed by Brookfield Properties.",
     images: [],
     coordinates: [-84.003, 34.118],
   },
@@ -237,7 +237,7 @@ export const projects: Project[] = [
     price: "$65,000,000",
     partner: "Solomon Development Group / Trinity Senior Living",
     description:
-      "A 4-story retail and assisted living facility developed from a former mobile home park. A $65 million mixed-use project with Solomon Development Group and Trinity Senior Living.",
+      "A four-story retail and assisted-living development on the site of a former mobile home park — a $65 million mixed-use project with Solomon Development Group and Trinity Senior Living.",
     images: [
       "https://holbrooklife.com/wp-content/uploads/2023/01/sugar-hill-1.jpg",
       "https://holbrooklife.com/wp-content/uploads/2023/01/sugar-hill-2.jpg",
@@ -359,7 +359,7 @@ export const projects: Project[] = [
     acreage: 6.517,
     partner: "American Campus Communities",
     description:
-      "500-bed, 170-unit student housing community developed with American Campus Communities. Kennesaw State University is within walking distance (1/3 mile). Fully leased.",
+      "500-bed, 170-unit student housing community developed with American Campus Communities, a third of a mile from Kennesaw State University.",
     images: [
       "/images/projects/u-club-on-frey-1.jpg",
       "https://www.americancampus.com/getmedia/16b8f1d8-2f7d-450c-8e79-bc879949a685/496_03_Gallery_730x547.jpg",
@@ -379,7 +379,7 @@ export const projects: Project[] = [
     status: "completed",
     acreage: 4.199,
     description:
-      "4.199-acre commercial site acquired from Atlanta YWCA, developed for daycare and convenience store.",
+      "4.199-acre commercial site acquired from the Atlanta YWCA, developed for a daycare and a convenience store.",
     images: [],
     coordinates: [-84.4785, 33.7043],
   },
@@ -438,7 +438,7 @@ export const projects: Project[] = [
     type: "subdivision",
     status: "completed",
     lots: 30,
-    description: "30 residential lots, resold after development.",
+    description: "30 residential lots, sold after development.",
     images: [],
     coordinates: [-84.148, 34.215],
   },
@@ -464,7 +464,7 @@ export const projects: Project[] = [
     type: "commercial",
     status: "completed",
     description:
-      "Mixed commercial development; daycare resold for flooring company, adjacent lot sold for dentist office.",
+      "Mixed commercial development; the daycare was later resold to a flooring company, and the adjacent lot sold for a dental office.",
     images: [],
     coordinates: [-83.989, 34.109],
   },
@@ -493,7 +493,7 @@ export const projects: Project[] = [
     lots: 71,
     partner: "Breedlove Industries",
     description:
-      "71 lots rezoned from Agricultural to Res-3, sold to Breedlove Industries.",
+      "71 lots rezoned from Agricultural to RES-3, sold to Breedlove Industries.",
     images: [],
     coordinates: [-84.12, 34.19],
   },
@@ -639,9 +639,9 @@ export const projects: Project[] = [
     type: "subdivision",
     status: "developed",
     lots: 50,
-    partner: "Subdivision Developer's",
+    partner: "Subdivision Developer's, Inc.",
     description:
-      "50 lots rezoned from Agricultural to R-100, developed with Subdivision Developer's.",
+      "50 lots rezoned from Agricultural to R-100, developed with Subdivision Developer's, Inc.",
     images: [],
     coordinates: [-83.925, 34.008],
   },
@@ -667,9 +667,9 @@ export const projects: Project[] = [
     type: "subdivision",
     status: "developed",
     lots: 45,
-    partner: "Subdivision Developer's",
+    partner: "Subdivision Developer's, Inc.",
     description:
-      "45 lots rezoned from Agricultural to R-100, developed with Subdivision Developer's.",
+      "45 lots rezoned from Agricultural to R-100, developed with Subdivision Developer's, Inc.",
     images: [],
     coordinates: [-83.952, 33.968],
   },

@@ -150,7 +150,7 @@ export default async function ApproachPage() {
           <AnimatedSection>
             <p className="text-xs tracking-[0.3em] uppercase mb-4" style={{ color: "var(--color-gold)" }}>Delivery</p>
             <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-6 leading-tight max-w-3xl">
-              We deliver to the nation's leading builders and REITs.
+              We deliver to the nation’s leading builders and REITs.
             </h2>
             <p className="text-lg max-w-2xl mb-16" style={{ color: "var(--color-text-muted)" }}>
               {stats.partnerCount} builder and REIT partners have trusted Prime Interest to deliver shovel-ready land and finished developments.
@@ -178,7 +178,7 @@ export default async function ApproachPage() {
               It Starts With the Land
             </h2>
             <p className="text-lg mb-12 max-w-xl mx-auto" style={{ color: "var(--color-text-muted)" }}>
-              Every development on this site began as a parcel of Georgia land. If you own land or represent a seller, we'd like to hear from you.
+              Every development on this site began as a parcel of Georgia land. If you own land or represent a seller, we’d like to hear from you.
             </p>
             <Link
               href="/acquisitions"

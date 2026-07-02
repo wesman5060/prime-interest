@@ -15,26 +15,17 @@ const STAT_BAR = [
 ];
 
 /**
- * Two renditions per clip: 1080p for desktop (visually identical to 4K under
- * the dark overlays at a fraction of the bandwidth), 540p for phones.
+ * Two renditions per clip, self-hosted in /public/videos (originally Pexels
+ * stock, re-encoded: trimmed to 10.5s — the rotation advances at 9s so the
+ * tail was never shown — CRF 27/28, audio stripped, faststart). 1080p for
+ * desktop, 540p for phones. Self-hosting removes the third-party CDN
+ * dependency and its cookies.
  */
 const CLIPS = [
-  {
-    desktop: "https://videos.pexels.com/video-files/33945045/14403568_1920_1080_25fps.mp4",
-    mobile: "https://videos.pexels.com/video-files/33945045/14403566_960_540_25fps.mp4",
-  },
-  {
-    desktop: "https://videos.pexels.com/video-files/36525706/15488170_1920_1080_24fps.mp4",
-    mobile: "https://videos.pexels.com/video-files/36525706/15488166_960_540_24fps.mp4",
-  },
-  {
-    desktop: "https://videos.pexels.com/video-files/11491400/11491400-hd_1920_1080_30fps.mp4",
-    mobile: "https://videos.pexels.com/video-files/11491400/11491400-sd_960_540_30fps.mp4",
-  },
-  {
-    desktop: "https://videos.pexels.com/video-files/33327315/14191635_1920_1080_30fps.mp4",
-    mobile: "https://videos.pexels.com/video-files/33327315/14191633_960_540_30fps.mp4",
-  },
+  { desktop: "/videos/hero-1-desktop.mp4", mobile: "/videos/hero-1-mobile.mp4" },
+  { desktop: "/videos/hero-2-desktop.mp4", mobile: "/videos/hero-2-mobile.mp4" },
+  { desktop: "/videos/hero-3-desktop.mp4", mobile: "/videos/hero-3-mobile.mp4" },
+  { desktop: "/videos/hero-4-desktop.mp4", mobile: "/videos/hero-4-mobile.mp4" },
 ];
 
 /** First frame of clip 1 — paints instantly and backstops every crossfade. */

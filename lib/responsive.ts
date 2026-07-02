@@ -1,26 +1,29 @@
 import manifest from "./responsive-images.json";
 
-interface Variant {
-  variant: string;
-  variantWidth: number;
+interface Entry {
+  variants: { src: string; width: number }[];
   originalWidth: number;
 }
 
-const MAP = manifest as Record<string, Variant>;
+const MAP = manifest as Record<string, Entry>;
 
 /**
- * srcSet for a local image that has a generated small variant
+ * srcSet for a local image with generated variants
  * (scripts/build-responsive.mjs). Returns undefined for remote URLs and
- * images with no variant, so callers can spread the result safely:
+ * images with no variants, so callers can spread the result safely:
  *   <img src={src} {...respSrcSet(src)} sizes="..." />
  */
 export function respSrcSet(src: string): { srcSet: string } | undefined {
-  const v = MAP[src];
-  if (!v) return undefined;
-  return { srcSet: `${v.variant} ${v.variantWidth}w, ${src} ${v.originalWidth}w` };
+  const e = MAP[src];
+  if (!e) return undefined;
+  const candidates = [
+    ...e.variants.map((v) => `${v.src} ${v.width}w`),
+    `${src} ${e.originalWidth}w`,
+  ];
+  return { srcSet: candidates.join(", ") };
 }
 
-/** Small-variant path when one exists — for thumbnails that never need full size. */
+/** Smallest-variant path when one exists — for thumbnails that never need full size. */
 export function smallSrc(src: string): string {
-  return MAP[src]?.variant ?? src;
+  return MAP[src]?.variants[0]?.src ?? src;
 }

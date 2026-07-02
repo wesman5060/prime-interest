@@ -39,15 +39,24 @@ const manifest = {};
 for (const { src, width } of JOBS) {
   const meta = await sharp(src).metadata();
   if (!meta.width || meta.width <= width) continue; // nothing to gain
-  const out = src.replace(/\.jpg$/, `-${width}w.jpg`);
-  const info = await sharp(src)
-    .resize(width, null, { withoutEnlargement: true })
-    .jpeg({ quality: 76, mozjpeg: true })
-    .toFile(out);
   const webSrc = "/" + src.replace(/\\/g, "/").replace(/^public\//, "");
-  const webOut = "/" + out.replace(/\\/g, "/").replace(/^public\//, "");
-  manifest[webSrc] = { variant: webOut, variantWidth: info.width, originalWidth: meta.width };
-  console.log(`${webSrc} -> ${webOut} (${info.width}w, ${Math.round(info.size / 1024)}KB)`);
+  const entry = { variants: [], originalWidth: meta.width };
+  // Two tiers: `width` covers 1x card/phone renders; the mid tier covers
+  // high-DPR phones (~2.6x on common devices) that would otherwise pull
+  // the full-size original.
+  const widths = width === 640 ? [640, 1024] : [width];
+  for (const w of widths) {
+    if (meta.width <= w) continue;
+    const out = src.replace(/\.jpg$/, `-${w}w.jpg`);
+    const info = await sharp(src)
+      .resize(w, null, { withoutEnlargement: true })
+      .jpeg({ quality: 76, mozjpeg: true })
+      .toFile(out);
+    const webOut = "/" + out.replace(/\\/g, "/").replace(/^public\//, "");
+    entry.variants.push({ src: webOut, width: info.width });
+    console.log(`${webSrc} -> ${webOut} (${info.width}w, ${Math.round(info.size / 1024)}KB)`);
+  }
+  if (entry.variants.length) manifest[webSrc] = entry;
 }
 
 await writeFile("lib/responsive-images.json", JSON.stringify(manifest, null, 2));

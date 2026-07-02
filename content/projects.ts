@@ -105,7 +105,7 @@ export const projects: Project[] = [
     acreage: 51,
     description: "51 acres developed into 30 R-100 single-family lots.",
     images: [],
-    coordinates: [-84.2963, 33.7748],
+    coordinates: [-84.2146, 33.6745],
   },
   {
     slug: "pugh-street",
@@ -453,7 +453,7 @@ export const projects: Project[] = [
     partner: "Landstar Corporation",
     description: "77-lot residential subdivision with Landstar Corporation.",
     images: ["/images/projects/brookside-subdivision.jpg"],
-    coordinates: [-84.155, 34.208],
+    coordinates: [-84.2418, 34.2328],
   },
   {
     slug: "la-petite-daycare",
@@ -509,7 +509,7 @@ export const projects: Project[] = [
     description:
       "40 lots rezoned from Agricultural to RES-3, developed with Cauley-Stevens.",
     images: ["/images/projects/carriage-park.jpg"],
-    coordinates: [-84.128, 34.196],
+    coordinates: [-84.22, 34.211],
   },
   {
     slug: "carriage-post",
@@ -523,7 +523,7 @@ export const projects: Project[] = [
     description:
       "21 lots rezoned from Agricultural to RES-3, developed with Cauley-Stevens.",
     images: ["/images/projects/carriage-post.jpg"],
-    coordinates: [-84.125, 34.194],
+    coordinates: [-84.222, 34.2161],
   },
   {
     slug: "regency-park",
@@ -564,8 +564,8 @@ export const projects: Project[] = [
     partner: "Rip Star Development",
     description:
       "63-lot subdivision developed with Rip Star Development in Barrow County.",
-    images: [],
-    coordinates: [-83.715, 33.992],
+    images: ["/images/projects/lincoln-park.jpg"],
+    coordinates: [-83.7408, 34.037],
   },
   {
     slug: "morgans-crossing",
@@ -617,7 +617,7 @@ export const projects: Project[] = [
     description:
       "1.25-acre industrial lot rezoned C-2 for a sod and landscaping company.",
     images: [],
-    coordinates: [-83.998, 34.112],
+    coordinates: [-83.9766, 34.1431],
   },
   {
     slug: "old-hog-mountain-road",
@@ -696,8 +696,8 @@ export const projects: Project[] = [
     lots: 25,
     description:
       "25 lots rezoned from Agricultural to R-100. Sold all 25 lots in one closing.",
-    images: [],
-    coordinates: [-83.732, 33.99],
+    images: ["/images/projects/muirfield.jpg"],
+    coordinates: [-83.7891, 34.0229],
   },
   {
     slug: "stonebrooke",
@@ -721,7 +721,7 @@ export const projects: Project[] = [
     status: "developed",
     lots: 13,
     description: "13 lots rezoned from Agricultural to R-100.",
-    images: [],
-    coordinates: [-83.741, 33.996],
+    images: ["/images/projects/stonemont.jpg"],
+    coordinates: [-83.8249, 33.9787],
   },
 ];

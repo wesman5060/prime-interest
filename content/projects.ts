@@ -439,7 +439,7 @@ export const projects: Project[] = [
     status: "completed",
     lots: 30,
     description: "30 residential lots, resold after development.",
-    images: ["/images/projects/stone-subdivision.jpg"],
+    images: [],
     coordinates: [-84.148, 34.215],
   },
   {
@@ -452,7 +452,7 @@ export const projects: Project[] = [
     lots: 77,
     partner: "Landstar Corporation",
     description: "77-lot residential subdivision with Landstar Corporation.",
-    images: ["/images/projects/stone-subdivision.jpg"],
+    images: [],
     coordinates: [-84.155, 34.208],
   },
   {
@@ -494,7 +494,7 @@ export const projects: Project[] = [
     partner: "Breedlove Industries",
     description:
       "71 lots rezoned from Agricultural to Res-3, sold to Breedlove Industries.",
-    images: ["/images/projects/stone-subdivision.jpg"],
+    images: [],
     coordinates: [-84.12, 34.19],
   },
   {
@@ -508,7 +508,7 @@ export const projects: Project[] = [
     partner: "Cauley-Stevens",
     description:
       "40 lots rezoned from Agricultural to RES-3, developed with Cauley-Stevens.",
-    images: ["/images/projects/stone-subdivision.jpg"],
+    images: [],
     coordinates: [-84.128, 34.196],
   },
   {
@@ -522,7 +522,7 @@ export const projects: Project[] = [
     partner: "Cauley-Stevens",
     description:
       "21 lots rezoned from Agricultural to RES-3, developed with Cauley-Stevens.",
-    images: ["/images/projects/stone-subdivision.jpg"],
+    images: [],
     coordinates: [-84.125, 34.194],
   },
   {
@@ -564,7 +564,7 @@ export const projects: Project[] = [
     partner: "Rip Star Development",
     description:
       "63-lot subdivision developed with Rip Star Development in Barrow County.",
-    images: ["/images/projects/stone-subdivision.jpg"],
+    images: [],
     coordinates: [-83.715, 33.992],
   },
   {
@@ -642,7 +642,7 @@ export const projects: Project[] = [
     partner: "Subdivision Developer's",
     description:
       "50 lots rezoned from Agricultural to R-100, developed with Subdivision Developer's.",
-    images: ["/images/projects/stone-subdivision.jpg"],
+    images: [],
     coordinates: [-83.925, 34.008],
   },
   {
@@ -670,7 +670,7 @@ export const projects: Project[] = [
     partner: "Subdivision Developer's",
     description:
       "45 lots rezoned from Agricultural to R-100, developed with Subdivision Developer's.",
-    images: ["/images/projects/stone-subdivision.jpg"],
+    images: [],
     coordinates: [-83.952, 33.968],
   },
   {
@@ -683,7 +683,7 @@ export const projects: Project[] = [
     lots: 42,
     description:
       "42 lots rezoned from Agricultural to R-100. Sold all 42 lots in one closing.",
-    images: ["/images/projects/stone-subdivision.jpg"],
+    images: [],
     coordinates: [-83.728, 33.985],
   },
   {
@@ -696,7 +696,7 @@ export const projects: Project[] = [
     lots: 25,
     description:
       "25 lots rezoned from Agricultural to R-100. Sold all 25 lots in one closing.",
-    images: ["/images/projects/stone-subdivision.jpg"],
+    images: [],
     coordinates: [-83.732, 33.99],
   },
   {
@@ -709,7 +709,7 @@ export const projects: Project[] = [
     lots: 20,
     description:
       "20 lots rezoned from Agricultural to R-100.",
-    images: ["/images/projects/stone-subdivision.jpg"],
+    images: [],
     coordinates: [-83.958, 33.972],
   },
   {
@@ -721,7 +721,7 @@ export const projects: Project[] = [
     status: "developed",
     lots: 13,
     description: "13 lots rezoned from Agricultural to R-100.",
-    images: ["/images/projects/stone-subdivision.jpg"],
+    images: [],
     coordinates: [-83.741, 33.996],
   },
 ];

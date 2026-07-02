@@ -280,12 +280,7 @@ export const projects: Project[] = [
     partner: "Beazer Homes",
     description:
       "25.05-acre mixed subdivision with 55 single-family detached lots and 117 attached townhome lots, developed with Beazer Homes.",
-    images: [
-      "https://www.atlantatownhomes.com/wp-content/uploads/2016/06/Hadley-Township.jpg",
-      "https://www.atlantatownhomes.com/wp-content/uploads/2015/10/hadley-township-2a.jpg",
-      "https://firstwalk.com/wp-content/uploads/2017/09/23016896-170917.jpg",
-      "https://i0.wp.com/homeinsugarhill.com/wp-content/uploads/2018/01/Brick-Townhomes-New-Construction-In-Sugar-Hill-Hadley-Township.jpg",
-    ],
+    images: ["/images/projects/hadley-township.jpg"],
     coordinates: [-84.04, 34.1],
   },
   {
@@ -366,7 +361,7 @@ export const projects: Project[] = [
     description:
       "500-bed, 170-unit student housing community developed with American Campus Communities. Kennesaw State University is within walking distance (1/3 mile). Fully leased.",
     images: [
-      "https://www.americancampus.com/getmedia/745940ce-b948-4ca9-aa19-7c7d5206b695/496_01_Gallery_730x547.jpg",
+      "/images/projects/u-club-on-frey-1.jpg",
       "https://www.americancampus.com/getmedia/16b8f1d8-2f7d-450c-8e79-bc879949a685/496_03_Gallery_730x547.jpg",
       "https://www.americancampus.com/getmedia/adcf76b4-8a04-4833-845d-5bd2ab2717a4/496_05_Gallery_730x547.jpg",
       "https://www.americancampus.com/getmedia/dc646063-ba23-4141-939b-106dcdcff29a/496_06_Gallery_730x547.jpg",
@@ -444,7 +439,7 @@ export const projects: Project[] = [
     status: "completed",
     lots: 30,
     description: "30 residential lots, resold after development.",
-    images: [],
+    images: ["/images/projects/stone-subdivision.jpg"],
     coordinates: [-84.148, 34.215],
   },
   {
@@ -457,7 +452,7 @@ export const projects: Project[] = [
     lots: 77,
     partner: "Landstar Corporation",
     description: "77-lot residential subdivision with Landstar Corporation.",
-    images: [],
+    images: ["/images/projects/stone-subdivision.jpg"],
     coordinates: [-84.155, 34.208],
   },
   {
@@ -499,7 +494,7 @@ export const projects: Project[] = [
     partner: "Breedlove Industries",
     description:
       "71 lots rezoned from Agricultural to Res-3, sold to Breedlove Industries.",
-    images: [],
+    images: ["/images/projects/stone-subdivision.jpg"],
     coordinates: [-84.12, 34.19],
   },
   {
@@ -513,7 +508,7 @@ export const projects: Project[] = [
     partner: "Cauley-Stevens",
     description:
       "40 lots rezoned from Agricultural to RES-3, developed with Cauley-Stevens.",
-    images: [],
+    images: ["/images/projects/stone-subdivision.jpg"],
     coordinates: [-84.128, 34.196],
   },
   {
@@ -527,7 +522,7 @@ export const projects: Project[] = [
     partner: "Cauley-Stevens",
     description:
       "21 lots rezoned from Agricultural to RES-3, developed with Cauley-Stevens.",
-    images: [],
+    images: ["/images/projects/stone-subdivision.jpg"],
     coordinates: [-84.125, 34.194],
   },
   {
@@ -569,7 +564,7 @@ export const projects: Project[] = [
     partner: "Rip Star Development",
     description:
       "63-lot subdivision developed with Rip Star Development in Barrow County.",
-    images: [],
+    images: ["/images/projects/stone-subdivision.jpg"],
     coordinates: [-83.715, 33.992],
   },
   {
@@ -647,7 +642,7 @@ export const projects: Project[] = [
     partner: "Subdivision Developer's",
     description:
       "50 lots rezoned from Agricultural to R-100, developed with Subdivision Developer's.",
-    images: [],
+    images: ["/images/projects/stone-subdivision.jpg"],
     coordinates: [-83.925, 34.008],
   },
   {
@@ -675,7 +670,7 @@ export const projects: Project[] = [
     partner: "Subdivision Developer's",
     description:
       "45 lots rezoned from Agricultural to R-100, developed with Subdivision Developer's.",
-    images: [],
+    images: ["/images/projects/stone-subdivision.jpg"],
     coordinates: [-83.952, 33.968],
   },
   {
@@ -688,7 +683,7 @@ export const projects: Project[] = [
     lots: 42,
     description:
       "42 lots rezoned from Agricultural to R-100. Sold all 42 lots in one closing.",
-    images: [],
+    images: ["/images/projects/stone-subdivision.jpg"],
     coordinates: [-83.728, 33.985],
   },
   {
@@ -701,7 +696,7 @@ export const projects: Project[] = [
     lots: 25,
     description:
       "25 lots rezoned from Agricultural to R-100. Sold all 25 lots in one closing.",
-    images: [],
+    images: ["/images/projects/stone-subdivision.jpg"],
     coordinates: [-83.732, 33.99],
   },
   {
@@ -714,7 +709,7 @@ export const projects: Project[] = [
     lots: 20,
     description:
       "20 lots rezoned from Agricultural to R-100.",
-    images: [],
+    images: ["/images/projects/stone-subdivision.jpg"],
     coordinates: [-83.958, 33.972],
   },
   {
@@ -726,7 +721,7 @@ export const projects: Project[] = [
     status: "developed",
     lots: 13,
     description: "13 lots rezoned from Agricultural to R-100.",
-    images: [],
+    images: ["/images/projects/stone-subdivision.jpg"],
     coordinates: [-83.741, 33.996],
   },
 ];

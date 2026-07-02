@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     template: "%s | Prime Interest",
   },
   description:
-    "Prime Interest, Inc. — building Georgia's communities since 1990. 46 developments across the state: residential, commercial, student housing, and mixed-use.",
+    "Prime Interest, Inc. — building Georgia's communities since 1990. Many developments across the state: residential, commercial, student housing, and mixed-use.",
   keywords: [
     "real estate development",
     "land development",

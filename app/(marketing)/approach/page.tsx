@@ -126,7 +126,7 @@ export default async function ApproachPage() {
             What We Develop
           </h2>
           <p className="text-lg max-w-2xl mb-16" style={{ color: "var(--color-text-muted)" }}>
-            {stats.residentialDelivered.toLocaleString()}+ residential lots, units, and beds delivered across {stats.projectCount} developments — spanning every major asset class.
+            {stats.residentialDelivered.toLocaleString()}+ residential lots, units, and beds delivered across many developments — spanning every major asset class.
           </p>
         </AnimatedSection>
 

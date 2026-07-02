@@ -117,6 +117,15 @@ export const COUNTIES: CountyEntry[] = [
     descriptor:
       "Coastal Georgia, adjacent to Fort Stewart and within commuting distance of Savannah — an emerging market driven by base and port growth.",
   },
+  {
+    slug: "newton",
+    name: "Newton",
+    seat: "Covington",
+    center: [-83.86, 33.596],
+    zoom: 10,
+    descriptor:
+      "East-Atlanta county along the I-20 corridor, home to the Stanton Springs megasite — anchor of major industrial and data-center investment including Meta and Rivian.",
+  },
 ];
 
 export function getCountyBySlug(slug: string): CountyEntry | undefined {

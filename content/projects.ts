@@ -2,6 +2,22 @@ import type { Project } from "@/lib/content/types";
 
 export const projects: Project[] = [
   {
+    slug: "stanton-springs-water-reuse-facility",
+    name: "Stanton Springs Water Reuse Facility",
+    location: "Stanton Springs, Social Circle",
+    city: "Social Circle",
+    county: "Newton",
+    type: "industrial",
+    status: "under-development",
+    acreage: 207,
+    partner: "Newton County Water & Sewerage Authority",
+    description:
+      "Prime Interest provided 207 acres to the Newton County Water & Sewerage Authority for a water reuse facility at Stanton Springs in Social Circle, adjacent to Meta's data center and across from Rivian's electric vehicle manufacturing plant. The facility will serve industrial applications such as battery manufacturing and data center cooling.",
+    images: [],
+    featured: true,
+    coordinates: [-83.746, 33.667],
+  },
+  {
     slug: "alta-dalton",
     name: "Alta Dalton",
     location: "501 West Waugh St., Downtown Dalton",
@@ -378,7 +394,7 @@ export const projects: Project[] = [
     location: "Oakwood",
     city: "Oakwood",
     county: "Hall",
-    type: "mixed-use",
+    type: "luxury-apartments",
     status: "developed",
     units: 300,
     acreage: 35,

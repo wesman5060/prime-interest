@@ -5,7 +5,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Projects",
-  description: "46 developments across Georgia — residential, commercial, student housing, and mixed-use.",
+  description: "Many developments across Georgia — residential, commercial, student housing, and mixed-use.",
 };
 
 export default async function ProjectsPage() {
@@ -22,7 +22,7 @@ export default async function ProjectsPage() {
           All Developments
         </h1>
         <p className="mb-16 text-lg" style={{ color: "var(--color-text-muted)" }}>
-          {projects.length} developments across Georgia since 1990. Explore the map or filter the portfolio.
+          Many developments across Georgia since 1990. Explore the map or filter the portfolio.
         </p>
 
         <ProjectsExplorer projects={projects} />

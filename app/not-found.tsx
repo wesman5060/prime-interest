@@ -1,12 +1,9 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { getPortfolioStats } from "@/lib/content/stats";
 
 export const metadata: Metadata = {
   title: "Page Not Found",
 };
-
-const stats = getPortfolioStats();
 
 export default function NotFound() {
   return (
@@ -22,7 +19,7 @@ export default function NotFound() {
       </h1>
       <p className="text-lg mb-12 max-w-md" style={{ color: "var(--color-text-muted)" }}>
         There's nothing built at this address yet. Head back home, or explore
-        the {stats.projectCount} developments we did build.
+        the many developments we did build.
       </p>
       <div className="flex flex-col sm:flex-row gap-4">
         <Link

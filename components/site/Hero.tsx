@@ -162,7 +162,7 @@ export default function Hero() {
           className="text-base md:text-xl max-w-lg mx-auto mb-14 leading-relaxed font-light"
           style={{ color: "rgba(255,255,255,0.55)" }}
         >
-          {stats.projectCount} developments across Georgia — residential, commercial,
+          Many developments across Georgia — residential, commercial,
           student housing, and mixed-use projects that shape communities.
         </motion.p>
 

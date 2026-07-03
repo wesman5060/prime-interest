@@ -126,13 +126,15 @@ export default function ProjectsExplorer({ projects }: Props) {
             )}
           </div>
 
-          {/* Count badge */}
-          <div
-            className="shrink-0 px-3 py-2 text-[10px] tracking-[0.18em] uppercase whitespace-nowrap"
-            style={{ background: "rgba(0,0,0,0.75)", backdropFilter: "blur(10px)", border: "1px solid rgba(201,169,110,0.25)", color: "var(--color-gold)" }}
-          >
-            {filtered.length} / {projects.length}
-          </div>
+          {/* Count badge — only shown while a filter narrows the results; never states the full portfolio total */}
+          {anyFilter && (
+            <div
+              className="shrink-0 px-3 py-2 text-[10px] tracking-[0.18em] uppercase whitespace-nowrap"
+              style={{ background: "rgba(0,0,0,0.75)", backdropFilter: "blur(10px)", border: "1px solid rgba(201,169,110,0.25)", color: "var(--color-gold)" }}
+            >
+              {filtered.length} match{filtered.length === 1 ? "" : "es"}
+            </div>
+          )}
 
           {/* Type select */}
           <div className="relative">
@@ -287,8 +289,9 @@ export default function ProjectsExplorer({ projects }: Props) {
       <div className="mt-16">
         <div className="flex items-center justify-between mb-10">
           <p className="text-xs tracking-[0.2em] uppercase" style={{ color: "var(--color-text-subtle)" }}>
-            {filtered.length} {filtered.length === 1 ? "development" : "developments"}
-            {filtered.length < projects.length ? ` · ${projects.length - filtered.length} filtered out` : ""}
+            {anyFilter
+              ? `${filtered.length} matching ${filtered.length === 1 ? "development" : "developments"}`
+              : "Georgia Developments"}
           </p>
         </div>
 

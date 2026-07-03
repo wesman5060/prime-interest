@@ -186,7 +186,7 @@ export default function Hero() {
         </motion.div>
       </motion.div>
 
-      {/* Bottom stat bar — 2x2 grid on phones, single row on desktop */}
+      {/* Bottom stat bar — single row at every breakpoint */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}

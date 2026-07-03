@@ -8,7 +8,6 @@ import CountUp from "@/components/site/CountUp";
 
 const stats = getPortfolioStats();
 const STAT_BAR = [
-  { value: `${stats.projectCount}`, label: "Developments" },
   { value: String(stats.developingSince), label: "Developing Since" },
   { value: `${stats.residentialDelivered.toLocaleString()}+`, label: "Homes Delivered" },
   { value: `${stats.countyCount}`, label: "Georgia Counties" },
@@ -192,7 +191,7 @@ export default function Hero() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 1.6, duration: 0.8, ease: EASE }}
-        className="absolute bottom-0 left-0 right-0 z-20 grid grid-cols-2 md:grid-cols-4 gap-px"
+        className="absolute bottom-0 left-0 right-0 z-20 grid grid-cols-3 gap-px"
         style={{ borderTop: "1px solid rgba(255,255,255,0.08)", background: "rgba(255,255,255,0.08)" }}
       >
         {STAT_BAR.map((s) => (

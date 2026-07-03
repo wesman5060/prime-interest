@@ -1,4 +1,4 @@
-import { getFeaturedProjects, getCompany, getProjects } from "@/lib/content/source";
+import { getFeaturedProjects, getCompany } from "@/lib/content/source";
 import { getPortfolioStats, getAssetClassCounts } from "@/lib/content/stats";
 import Hero from "@/components/site/Hero";
 import CountUp from "@/components/site/CountUp";
@@ -9,13 +9,11 @@ import CTABand from "@/components/site/CTABand";
 import AnimatedSection from "@/components/site/AnimatedSection";
 
 export default async function HomePage() {
-  const [company, featured, allProjects] = await Promise.all([
+  const [company, featured] = await Promise.all([
     getCompany(),
     getFeaturedProjects(),
-    getProjects(),
   ]);
   const stats = getPortfolioStats();
-  const projectCount = allProjects.length;
   const assetClasses = getAssetClassCounts();
 
   return (
@@ -46,7 +44,7 @@ export default async function HomePage() {
                 className="hidden md:flex items-center gap-3 text-[11px] tracking-[0.25em] uppercase pb-1 border-b transition-all duration-300 hover:gap-5"
                 style={{ borderColor: "rgba(201,169,110,0.3)", color: "var(--color-text-muted)" }}
               >
-                View All {projectCount} <span style={{ color: "var(--color-gold)" }}>→</span>
+                View All Projects <span style={{ color: "var(--color-gold)" }}>→</span>
               </a>
             </AnimatedSection>
           </div>
@@ -70,7 +68,7 @@ export default async function HomePage() {
               className="inline-flex items-center gap-2 text-[11px] tracking-[0.25em] uppercase"
               style={{ color: "var(--color-gold)" }}
             >
-              View All {projectCount} Projects →
+              View All Projects →
             </a>
           </div>
         </div>

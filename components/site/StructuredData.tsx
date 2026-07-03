@@ -87,7 +87,7 @@ export default function StructuredData() {
     url: "https://primeinterestinc.com",
     publisher: { "@id": "https://primeinterestinc.com/#organization" },
     inLanguage: "en-US",
-    description: `${stats.projectCount}+ developments across Georgia since ${stats.developingSince}.`,
+    description: `Developments across Georgia since ${stats.developingSince}.`,
   };
 
   // Person schema for Marty — ties the human to the LocalBusiness record so

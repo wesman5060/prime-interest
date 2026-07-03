@@ -79,10 +79,9 @@ export default function CapabilitiesPage() {
         </header>
 
         {/* Stats */}
-        <section className="grid grid-cols-2 md:grid-cols-5 gap-px mb-12" style={{ background: "var(--color-border-custom)" }}>
+        <section className="grid grid-cols-2 md:grid-cols-4 gap-px mb-12" style={{ background: "var(--color-border-custom)" }}>
           {[
             { value: `${stats.yearsActive}+`, label: "Years Active" },
-            { value: `${stats.projectCount}`, label: "Developments" },
             { value: `${stats.residentialDelivered.toLocaleString()}+`, label: "Homes & Lots" },
             { value: `${stats.countyCount}`, label: "Counties" },
             { value: `${stats.partnerCount}`, label: "Partners" },

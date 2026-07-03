@@ -195,7 +195,7 @@ export const projects: Project[] = [
     name: "Stonecreek",
     location: "Highway 81, Loganville",
     city: "Loganville",
-    county: "Gwinnett",
+    county: "Walton",
     type: "single-family",
     status: "developed",
     lots: 128,

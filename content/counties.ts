@@ -126,6 +126,15 @@ export const COUNTIES: CountyEntry[] = [
     descriptor:
       "East-Atlanta county along the I-20 corridor, home to the Stanton Springs megasite — anchor of major industrial and data-center investment including Meta and Rivian.",
   },
+  {
+    slug: "walton",
+    name: "Walton",
+    seat: "Monroe",
+    center: [-83.713, 33.793],
+    zoom: 10,
+    descriptor:
+      "East-Atlanta exurban county along the US-78 corridor bordering Gwinnett, anchored by Monroe and the growing Loganville area.",
+  },
 ];
 
 export function getCountyBySlug(slug: string): CountyEntry | undefined {

@@ -101,7 +101,6 @@ export const projects: Project[] = [
     county: "DeKalb",
     type: "single-family",
     status: "completed",
-    lots: 30,
     acreage: 51,
     description:
       "Sold to DeKalb County, Ga. for a Park and Trail Connection of Greenspace for the future South River Greenway to protect critical habitat along the South River and Snapfinger Creek.",

@@ -39,3 +39,8 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Claude continuity notes (local only — never deploy)
+STATE.md
+LOG.md
+.backups/

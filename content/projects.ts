@@ -12,14 +12,14 @@ export const projects: Project[] = [
     acreage: 207,
     partner: "Newton County Water & Sewerage Authority",
     description:
-      "Prime Interest provided 207 acres to the Newton County Water & Sewerage Authority for a water reuse facility at Stanton Springs in Social Circle, adjacent to Meta's data center and across from Rivian's electric vehicle manufacturing plant. The facility will serve industrial applications such as battery manufacturing and data center cooling.",
-    images: [],
+      "Prime Interest sold 207 acres to the Newton County Water & Sewerage Authority for a water reuse facility at Stanton Springs in Social Circle, adjacent to Meta's data center and across from Rivian's electric vehicle manufacturing plant. The facility will serve industrial applications such as battery manufacturing and data center cooling.",
+    images: ["/images/projects/stanton-springs-water-reuse-facility.jpg"],
     featured: true,
     coordinates: [-83.746, 33.667],
   },
   {
     slug: "alta-dalton",
-    name: "Alta Dalton",
+    name: "Alta Dalton Midrise Apartments",
     location: "501 West Waugh St., Downtown Dalton",
     city: "Dalton",
     county: "Whitfield",
@@ -103,13 +103,14 @@ export const projects: Project[] = [
     status: "completed",
     lots: 30,
     acreage: 51,
-    description: "51 acres developed into 30 R-100 single-family lots.",
+    description:
+      "Sold to DeKalb County, Ga. for a Park and Trail Connection of Greenspace for the future South River Greenway to protect critical habitat along the South River and Snapfinger Creek.",
     images: [],
     coordinates: [-84.2146, 33.6745],
   },
   {
     slug: "pugh-street",
-    name: "Pugh Street Industrial Complex",
+    name: "Peachtree Mill Logistics Center",
     location: "Peachtree Industrial Blvd., Buford",
     city: "Buford",
     county: "Gwinnett",
@@ -195,7 +196,7 @@ export const projects: Project[] = [
     name: "Stonecreek",
     location: "Highway 81, Loganville",
     city: "Loganville",
-    county: "Walton",
+    county: "Barrow",
     type: "single-family",
     status: "developed",
     lots: 128,
@@ -298,7 +299,7 @@ export const projects: Project[] = [
   },
   {
     slug: "roswell-village",
-    name: "Roswell Village",
+    name: "The Village on Pine",
     location: "Chattahoochee Street, Roswell",
     city: "Roswell",
     county: "Fulton",
@@ -432,15 +433,15 @@ export const projects: Project[] = [
   },
   {
     slug: "kelly-crossing",
-    name: "Kelly Crossing Subdivision",
-    location: "Kelly Mill Road, Forsyth County",
+    name: "The Park at Kelly Mill",
+    location: "Bantry Way & Kelly Mill Road, Cumming",
     county: "Forsyth",
     type: "subdivision",
     status: "completed",
     lots: 30,
     description: "30 residential lots, sold after development.",
-    images: [],
-    coordinates: [-84.148, 34.215],
+    images: ["/images/projects/kelly-crossing.jpg"],
+    coordinates: [-84.2094048, 34.204634],
   },
   {
     slug: "brookside-subdivision",
@@ -457,7 +458,7 @@ export const projects: Project[] = [
   },
   {
     slug: "la-petite-daycare",
-    name: "La Petite Daycare",
+    name: "Bright Star Kids Academy",
     location: "Highway 20, City of Buford",
     city: "Buford",
     county: "Gwinnett",
@@ -486,7 +487,7 @@ export const projects: Project[] = [
   {
     slug: "rose-creek-phase-3",
     name: "Rose Creek Phase III",
-    location: "Forsyth County",
+    location: "Rose Creek Drive & Matt Highway, Cumming",
     county: "Forsyth",
     type: "subdivision",
     status: "completed",
@@ -494,8 +495,8 @@ export const projects: Project[] = [
     partner: "Breedlove Industries",
     description:
       "71 lots rezoned from Agricultural to RES-3, sold to Breedlove Industries.",
-    images: [],
-    coordinates: [-84.12, 34.19],
+    images: ["/images/projects/rose-creek-phase-3.jpg"],
+    coordinates: [-84.1321555, 34.2896189],
   },
   {
     slug: "carriage-park",
@@ -528,7 +529,7 @@ export const projects: Project[] = [
   {
     slug: "regency-park",
     name: "Regency Park Subdivision",
-    location: "Barrow County",
+    location: "Emperor Lane & Dee Kennedy Road, Hoschton",
     county: "Barrow",
     type: "single-family",
     status: "completed",
@@ -536,8 +537,8 @@ export const projects: Project[] = [
     partner: "Homeland Communities",
     description:
       "48 one-acre lots rezoned from Agricultural to R-100. Sold all 48 lots in one closing to Homeland Communities.",
-    images: [],
-    coordinates: [-83.722, 33.998],
+    images: ["/images/projects/regency-park.jpg"],
+    coordinates: [-83.8362994, 34.0647109],
   },
   {
     slug: "south-lee-street",
@@ -570,15 +571,15 @@ export const projects: Project[] = [
   {
     slug: "morgans-crossing",
     name: "Morgan's Crossing Subdivision",
-    location: "Gwinnett County",
+    location: "Ridge Road & Morgans Ridge Drive, Buford",
     county: "Gwinnett",
     type: "single-family",
     status: "completed",
     lots: 31,
     description:
       "31 lots rezoned from Agricultural to R-100. Sold all 31 lots in one closing.",
-    images: [],
-    coordinates: [-83.96, 33.88],
+    images: ["/images/projects/morgans-crossing.jpg"],
+    coordinates: [-83.9358775, 34.1203786],
   },
   {
     slug: "highway-124-hamilton-mill",
@@ -634,7 +635,7 @@ export const projects: Project[] = [
   {
     slug: "hamilton-springs",
     name: "Hamilton Springs Subdivision",
-    location: "Gwinnett County",
+    location: "Gold Springs Lane & Mineral Springs Road, Hoschton",
     county: "Gwinnett",
     type: "subdivision",
     status: "developed",
@@ -642,13 +643,13 @@ export const projects: Project[] = [
     partner: "Subdivision Developer's, Inc.",
     description:
       "50 lots rezoned from Agricultural to R-100, developed with Subdivision Developer's, Inc.",
-    images: [],
-    coordinates: [-83.925, 34.008],
+    images: ["/images/projects/hamilton-springs.jpg"],
+    coordinates: [-83.8779384, 34.057908],
   },
   {
     slug: "highway-324",
     name: "Highway 324",
-    location: "Buford, near Mall of Georgia",
+    location: "Highway 324 / Gravel Springs Rd. at Cross Rd., Buford",
     city: "Buford",
     county: "Gwinnett",
     type: "commercial",
@@ -656,13 +657,13 @@ export const projects: Project[] = [
     acreage: 7.5,
     description:
       "7.5-acre site next to Mall of Georgia; estate lots separated by exemption plat and sold as commercial after Mall of Georgia construction began.",
-    images: [],
-    coordinates: [-84.022, 34.075],
+    images: ["/images/projects/highway-324.jpg"],
+    coordinates: [-83.9782335, 34.0736369],
   },
   {
     slug: "indian-hills",
     name: "Indian Hills Subdivision",
-    location: "Gwinnett County",
+    location: "Wapakonata Trail & Indian Shoals Road SE, Bethlehem",
     county: "Gwinnett",
     type: "subdivision",
     status: "developed",
@@ -670,8 +671,8 @@ export const projects: Project[] = [
     partner: "Subdivision Developer's, Inc.",
     description:
       "45 lots rezoned from Agricultural to R-100, developed with Subdivision Developer's, Inc.",
-    images: [],
-    coordinates: [-83.952, 33.968],
+    images: ["/images/projects/indian-hills.jpg"],
+    coordinates: [-83.8189683, 33.9483075],
   },
   {
     slug: "harbins-station",
@@ -702,15 +703,15 @@ export const projects: Project[] = [
   {
     slug: "stonebrooke",
     name: "Stonebrooke Subdivision",
-    location: "Gwinnett County",
+    location: "Stonebrooke Drive & Kilcrease Drive, Auburn",
     county: "Gwinnett",
     type: "subdivision",
     status: "developed",
     lots: 20,
     description:
       "20 lots rezoned from Agricultural to R-100.",
-    images: [],
-    coordinates: [-83.958, 33.972],
+    images: ["/images/projects/stonebrooke.jpg"],
+    coordinates: [-83.822755, 33.9890811],
   },
   {
     slug: "stonemont",

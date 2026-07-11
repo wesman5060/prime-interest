@@ -71,6 +71,58 @@
     ],
     "originalWidth": 900
   },
+  "/images/projects/hamilton-springs.jpg": {
+    "variants": [
+      {
+        "src": "/images/projects/hamilton-springs-640w.jpg",
+        "width": 640
+      },
+      {
+        "src": "/images/projects/hamilton-springs-1024w.jpg",
+        "width": 1024
+      }
+    ],
+    "originalWidth": 1600
+  },
+  "/images/projects/highway-324.jpg": {
+    "variants": [
+      {
+        "src": "/images/projects/highway-324-640w.jpg",
+        "width": 640
+      },
+      {
+        "src": "/images/projects/highway-324-1024w.jpg",
+        "width": 1024
+      }
+    ],
+    "originalWidth": 1600
+  },
+  "/images/projects/indian-hills.jpg": {
+    "variants": [
+      {
+        "src": "/images/projects/indian-hills-640w.jpg",
+        "width": 640
+      },
+      {
+        "src": "/images/projects/indian-hills-1024w.jpg",
+        "width": 1024
+      }
+    ],
+    "originalWidth": 1600
+  },
+  "/images/projects/kelly-crossing.jpg": {
+    "variants": [
+      {
+        "src": "/images/projects/kelly-crossing-640w.jpg",
+        "width": 640
+      },
+      {
+        "src": "/images/projects/kelly-crossing-1024w.jpg",
+        "width": 1024
+      }
+    ],
+    "originalWidth": 1600
+  },
   "/images/projects/lincoln-park.jpg": {
     "variants": [
       {
@@ -88,6 +140,19 @@
       }
     ],
     "originalWidth": 1024
+  },
+  "/images/projects/morgans-crossing.jpg": {
+    "variants": [
+      {
+        "src": "/images/projects/morgans-crossing-640w.jpg",
+        "width": 640
+      },
+      {
+        "src": "/images/projects/morgans-crossing-1024w.jpg",
+        "width": 1024
+      }
+    ],
+    "originalWidth": 1600
   },
   "/images/projects/muirfield.jpg": {
     "variants": [
@@ -115,6 +180,58 @@
       }
     ],
     "originalWidth": 1024
+  },
+  "/images/projects/regency-park.jpg": {
+    "variants": [
+      {
+        "src": "/images/projects/regency-park-640w.jpg",
+        "width": 640
+      },
+      {
+        "src": "/images/projects/regency-park-1024w.jpg",
+        "width": 1024
+      }
+    ],
+    "originalWidth": 1600
+  },
+  "/images/projects/rose-creek-phase-3.jpg": {
+    "variants": [
+      {
+        "src": "/images/projects/rose-creek-phase-3-640w.jpg",
+        "width": 640
+      },
+      {
+        "src": "/images/projects/rose-creek-phase-3-1024w.jpg",
+        "width": 1024
+      }
+    ],
+    "originalWidth": 1600
+  },
+  "/images/projects/stanton-springs-water-reuse-facility.jpg": {
+    "variants": [
+      {
+        "src": "/images/projects/stanton-springs-water-reuse-facility-640w.jpg",
+        "width": 640
+      },
+      {
+        "src": "/images/projects/stanton-springs-water-reuse-facility-1024w.jpg",
+        "width": 1024
+      }
+    ],
+    "originalWidth": 1600
+  },
+  "/images/projects/stonebrooke.jpg": {
+    "variants": [
+      {
+        "src": "/images/projects/stonebrooke-640w.jpg",
+        "width": 640
+      },
+      {
+        "src": "/images/projects/stonebrooke-1024w.jpg",
+        "width": 1024
+      }
+    ],
+    "originalWidth": 1600
   },
   "/images/projects/stonemont.jpg": {
     "variants": [

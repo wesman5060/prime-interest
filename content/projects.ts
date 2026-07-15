@@ -259,7 +259,7 @@ export const projects: Project[] = [
     acreage: 2.6,
     partner: "Beazer Homes",
     description:
-      "2.6-acre, 30 townhome lot subdivision in Chamblee with Beazer Homes.",
+      "2.6-acre, 30 lot townhome subdivision in Chamblee with Beazer Homes.",
     images: [
       "https://www.atlantatownhomes.com/wp-content/uploads/2020/01/towns-at-north-peachtree-townhomes-3a.jpg",
       "https://www.atlantatownhomes.com/wp-content/uploads/2020/01/towns-at-north-peachtree-townhomes-4a.jpg",

@@ -104,7 +104,7 @@ export const projects: Project[] = [
     acreage: 51,
     description:
       "Sold to DeKalb County, Ga. for a Park and Trail Connection of Greenspace for the future South River Greenway to protect critical habitat along the South River and Snapfinger Creek.",
-    images: [],
+    images: ["/images/projects/dogwood-farm-road.jpg"],
     coordinates: [-84.2146, 33.6745],
   },
   {

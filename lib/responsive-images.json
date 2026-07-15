@@ -53,6 +53,19 @@
     ],
     "originalWidth": 1024
   },
+  "/images/projects/dogwood-farm-road.jpg": {
+    "variants": [
+      {
+        "src": "/images/projects/dogwood-farm-road-640w.jpg",
+        "width": 640
+      },
+      {
+        "src": "/images/projects/dogwood-farm-road-1024w.jpg",
+        "width": 1024
+      }
+    ],
+    "originalWidth": 1600
+  },
   "/images/projects/governors-quarters.jpg": {
     "variants": [
       {

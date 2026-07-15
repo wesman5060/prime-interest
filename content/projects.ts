@@ -12,7 +12,7 @@ export const projects: Project[] = [
     acreage: 207,
     partner: "Newton County Water & Sewerage Authority",
     description:
-      "Prime Interest sold 207 acres to the Newton County Water & Sewerage Authority for a water reuse facility at Stanton Springs in Social Circle, adjacent to Meta's data center and across from Rivian's electric vehicle manufacturing plant. The facility will serve industrial applications such as battery manufacturing and data center cooling.",
+      "Prime Interest sold 207 acres to the Newton County Water & Sewerage Authority for a water reuse facility at Stanton Springs in Social Circle, adjacent to Meta/Facebook's data center and across from Rivian's electric vehicle manufacturing plant. The facility will serve industrial applications such as battery manufacturing and data center cooling. Sewer spray fields are to be developed on the balance of the acreage.",
     images: ["/images/projects/stanton-springs-water-reuse-facility.jpg"],
     featured: true,
     coordinates: [-83.746, 33.667],

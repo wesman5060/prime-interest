@@ -683,7 +683,7 @@ export const projects: Project[] = [
     lots: 42,
     description:
       "42 lots rezoned from Agricultural to R-100. Sold all 42 lots in one closing.",
-    images: [],
+    images: ["/images/projects/harbins-station.jpg"],
     coordinates: [-83.728, 33.985],
   },
   {

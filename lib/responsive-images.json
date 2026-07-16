@@ -97,6 +97,19 @@
     ],
     "originalWidth": 1600
   },
+  "/images/projects/harbins-station.jpg": {
+    "variants": [
+      {
+        "src": "/images/projects/harbins-station-640w.jpg",
+        "width": 640
+      },
+      {
+        "src": "/images/projects/harbins-station-1024w.jpg",
+        "width": 1024
+      }
+    ],
+    "originalWidth": 1600
+  },
   "/images/projects/highway-324.jpg": {
     "variants": [
       {

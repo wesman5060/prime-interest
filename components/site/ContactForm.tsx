@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { submitContact } from "@/lib/supabase";
+import { emailToMarty } from "@/lib/notify";
 
 const schema = z.object({
   name: z.string().min(2, "Please enter your name"),
@@ -37,7 +38,24 @@ export default function ContactForm() {
     setState("loading");
     setErrorMsg("");
     try {
-      await submitContact(values);
+      // Primary: email the inquiry straight to Marty.
+      await emailToMarty(
+        `New inquiry from ${values.name}${values.company ? ` — ${values.company}` : ""}`,
+        values.email,
+        {
+          Name: values.name,
+          Email: values.email,
+          Phone: values.phone,
+          Company: values.company,
+          Message: values.message,
+        },
+      );
+      // Backup: also store the submission (best-effort; never blocks success).
+      try {
+        await submitContact(values);
+      } catch {
+        /* storage is a backup only — the email already reached Marty */
+      }
       setState("success");
       reset();
     } catch (e) {

@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { submitAcquisition } from "@/lib/supabase";
+import { emailToMarty } from "@/lib/notify";
 
 const schema = z.object({
   role: z.enum(["owner", "broker", "investor"], {
@@ -53,7 +54,28 @@ export default function AcquisitionForm() {
     setState("loading");
     setErrorMsg("");
     try {
-      await submitAcquisition({ ...values, source: "acquisitions-page" });
+      // Primary: email the land/acquisition inquiry straight to Marty.
+      await emailToMarty(
+        `New land inquiry from ${values.name} (${values.role})`,
+        values.email,
+        {
+          Role: values.role,
+          Name: values.name,
+          Email: values.email,
+          Phone: values.phone,
+          Location: values.location,
+          Acreage: values.acreage,
+          Price: values.price,
+          Timeline: values.timeline,
+          Notes: values.notes,
+        },
+      );
+      // Backup: also store the submission (best-effort; never blocks success).
+      try {
+        await submitAcquisition({ ...values, source: "acquisitions-page" });
+      } catch {
+        /* storage is a backup only — the email already reached Marty */
+      }
       setState("success");
       reset();
     } catch (e) {

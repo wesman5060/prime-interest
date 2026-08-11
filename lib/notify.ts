@@ -1,16 +1,20 @@
 /**
  * Emails form submissions straight to Marty's inbox.
  *
- * Uses FormSubmit (https://formsubmit.co) — a form-to-email relay that sends
- * from its own servers to an existing address. No new mailbox or domain is set
- * up here; it simply delivers to martyorr@bellsouth.net. On the very first
- * submission FormSubmit emails Marty a one-time confirmation link; once he
- * clicks it, every submission after that arrives in his inbox automatically.
+ * Posts to the `notify-marty` Supabase Edge Function, which sends the email
+ * server-side via Resend from the already-verified toolhoard.com sending domain
+ * (from "Prime Interest <inquiries@toolhoard.com>", reply-to = the prospect).
+ * No new mailbox or domain is set up, and Marty never has to click, confirm, or
+ * do anything — mail simply arrives at martyorr@bellsouth.net.
  *
- * The site also stores each submission in Supabase (see lib/supabase.ts) as a
- * backup, so nothing is lost even if an email ever fails.
+ * The Resend API key lives only in the edge function's server-side secret, so it
+ * is never exposed in the browser bundle. The site also stores each submission
+ * in Supabase (see lib/supabase.ts) as a backup, so nothing is lost even if an
+ * email ever fails.
  */
-const ENDPOINT = "https://formsubmit.co/ajax/martyorr@bellsouth.net";
+const SUPABASE_URL =
+  process.env.NEXT_PUBLIC_SUPABASE_URL ?? "https://qstnazchzxwphknhoxji.supabase.co";
+const ENDPOINT = `${SUPABASE_URL}/functions/v1/notify-marty`;
 
 const CALL_TO_ACTION = "Could not send right now — please call us at 770-945-3241.";
 
@@ -19,22 +23,17 @@ export async function emailToMarty(
   replyTo: string,
   fields: Record<string, string | undefined>,
 ): Promise<void> {
-  const payload: Record<string, string> = {
-    _subject: subject,
-    _template: "table",
-    _captcha: "false",
-    _replyto: replyTo,
-  };
+  const cleanFields: Record<string, string> = {};
   for (const [label, value] of Object.entries(fields)) {
-    if (value != null && value.trim() !== "") payload[label] = value.trim();
+    if (value != null && value.trim() !== "") cleanFields[label] = value.trim();
   }
 
   let res: Response;
   try {
     res = await fetch(ENDPOINT, {
       method: "POST",
-      headers: { "Content-Type": "application/json", Accept: "application/json" },
-      body: JSON.stringify(payload),
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ subject, replyTo, fields: cleanFields }),
     });
   } catch {
     throw new Error(CALL_TO_ACTION);
@@ -42,9 +41,8 @@ export async function emailToMarty(
 
   if (!res.ok) throw new Error(CALL_TO_ACTION);
 
-  const data = (await res.json().catch(() => null)) as { success?: boolean | string } | null;
-  // FormSubmit returns success:"true" (string) on the AJAX endpoint.
-  if (data && (data.success === false || data.success === "false")) {
+  const data = (await res.json().catch(() => null)) as { success?: boolean } | null;
+  if (!data || data.success !== true) {
     throw new Error(CALL_TO_ACTION);
   }
 }

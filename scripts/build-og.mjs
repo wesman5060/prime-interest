@@ -42,7 +42,7 @@ const svg = `
 
   <!-- sub -->
   <text x="96" y="478" fill="#bbbbbb" font-family="Geist, Inter, Helvetica, sans-serif" font-size="28" font-weight="400">Building Georgia's communities since 1990.</text>
-  <text x="96" y="520" fill="#888888" font-family="Geist, Inter, Helvetica, sans-serif" font-size="22" font-weight="400">46 developments · 3,500+ homes · 10 counties</text>
+  <text x="96" y="520" fill="#888888" font-family="Geist, Inter, Helvetica, sans-serif" font-size="22" font-weight="400">Residential · Commercial · Mixed-Use · Statewide</text>
 
   <!-- corner mark -->
   <g transform="translate(1040, 120)">

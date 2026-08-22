@@ -458,15 +458,42 @@ export const projects: Project[] = [
   {
     slug: "la-petite-daycare",
     name: "Bright Star Kids Academy",
-    location: "Highway 20, City of Buford",
+    location: "1980 Buford Highway, Buford",
     city: "Buford",
     county: "Gwinnett",
     type: "commercial",
     status: "completed",
     description:
-      "Mixed commercial development; the daycare was later resold to a flooring company, and the adjacent lot sold for a dental office.",
-    images: [],
-    coordinates: [-83.989, 34.109],
+      "Mixed commercial development; the daycare was later resold to a flooring company.",
+    images: ["/images/projects/bright-star-daycare.jpg"],
+    coordinates: [-84.002417, 34.108062],
+  },
+  {
+    slug: "morningside-dental-office",
+    name: "Morningside Dental Office",
+    location: "1900 Morningside Drive, Buford",
+    city: "Buford",
+    county: "Gwinnett",
+    type: "commercial",
+    status: "completed",
+    acreage: 1.13,
+    description:
+      "1.13-acre commercial site at 1900 Morningside Drive in Buford, sold and developed as a professional dental office.",
+    images: ["/images/projects/dental-office-morningside.jpg"],
+    coordinates: [-84.003032, 34.108072],
+  },
+  {
+    slug: "gravel-springs-garage-lofts",
+    name: "Gravel Springs Garage Lofts",
+    location: "3270 Gravel Springs Road, Buford",
+    city: "Buford",
+    county: "Gwinnett",
+    type: "commercial",
+    status: "completed",
+    description:
+      "Provided the land for a garage-loft and office / warehouse-condominium development at 3270 Gravel Springs Road in Buford.",
+    images: ["/images/projects/gravel-springs-garage-lofts.jpg"],
+    coordinates: [-83.97776, 34.07286],
   },
   {
     slug: "puckett-creek",
@@ -550,7 +577,7 @@ export const projects: Project[] = [
     acreage: 5.88,
     description:
       "5.88 acres rezoned from Agricultural to C-2 for office, retail, and warehousing.",
-    images: [],
+    images: ["/images/projects/south-lee-street.jpg"],
     coordinates: [-83.994, 34.122],
   },
   {

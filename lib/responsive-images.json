@@ -8,6 +8,19 @@
     ],
     "originalWidth": 1024
   },
+  "/images/projects/bright-star-daycare.jpg": {
+    "variants": [
+      {
+        "src": "/images/projects/bright-star-daycare-640w.jpg",
+        "width": 640
+      },
+      {
+        "src": "/images/projects/bright-star-daycare-1024w.jpg",
+        "width": 1024
+      }
+    ],
+    "originalWidth": 1600
+  },
   "/images/projects/brookside-subdivision.jpg": {
     "variants": [
       {
@@ -53,6 +66,19 @@
     ],
     "originalWidth": 1024
   },
+  "/images/projects/dental-office-morningside.jpg": {
+    "variants": [
+      {
+        "src": "/images/projects/dental-office-morningside-640w.jpg",
+        "width": 640
+      },
+      {
+        "src": "/images/projects/dental-office-morningside-1024w.jpg",
+        "width": 1024
+      }
+    ],
+    "originalWidth": 1600
+  },
   "/images/projects/dogwood-farm-road.jpg": {
     "variants": [
       {
@@ -74,6 +100,19 @@
       }
     ],
     "originalWidth": 1024
+  },
+  "/images/projects/gravel-springs-garage-lofts.jpg": {
+    "variants": [
+      {
+        "src": "/images/projects/gravel-springs-garage-lofts-640w.jpg",
+        "width": 640
+      },
+      {
+        "src": "/images/projects/gravel-springs-garage-lofts-1024w.jpg",
+        "width": 1024
+      }
+    ],
+    "originalWidth": 1600
   },
   "/images/projects/hadley-township.jpg": {
     "variants": [
@@ -228,6 +267,19 @@
       },
       {
         "src": "/images/projects/rose-creek-phase-3-1024w.jpg",
+        "width": 1024
+      }
+    ],
+    "originalWidth": 1600
+  },
+  "/images/projects/south-lee-street.jpg": {
+    "variants": [
+      {
+        "src": "/images/projects/south-lee-street-640w.jpg",
+        "width": 640
+      },
+      {
+        "src": "/images/projects/south-lee-street-1024w.jpg",
         "width": 1024
       }
     ],

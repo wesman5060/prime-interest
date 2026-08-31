@@ -71,6 +71,11 @@ function staticMapUrl(project: Project): string | null {
  * Related developments: same-county projects with real photos first, then at
  * most ONE same-county stock-fallback card (two identical fallback images side
  * by side reads as a glitch), topped up with photo-rich projects elsewhere.
+ *
+ * Because of that top-up, the grid is NOT guaranteed to be same-county — on 14
+ * of 49 pages it isn't. The heading above it is therefore deliberately
+ * county-neutral ("More Developments"); do not put the county name back in it
+ * (Marty's explicit request, 2026-08-24 — he caught the mismatch himself).
  */
 function relatedProjects(all: Project[], current: Project): Project[] {
   const sameCounty = all.filter((p) => p.slug !== current.slug && p.county === current.county);
@@ -237,7 +242,7 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
                 <div>
                   <p className="text-xs tracking-[0.3em] uppercase mb-4" style={{ color: "var(--color-gold)" }}>Keep Exploring</p>
                   <h2 className="font-display text-3xl md:text-4xl font-bold text-white leading-none">
-                    More in {project.county} County
+                    More Developments
                   </h2>
                 </div>
                 <Link

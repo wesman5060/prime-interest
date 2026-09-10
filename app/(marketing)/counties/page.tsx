@@ -9,7 +9,7 @@ import { projects } from "@/content/projects";
 export const metadata: Metadata = {
   title: "Markets",
   description:
-    "Prime Interest has developed across eleven Georgia counties — from Whitfield in the northwest to Liberty on the coast. Each county page surfaces the portfolio for that market.",
+    "Prime Interest has developed across eleven Georgia counties, from Whitfield in the northwest to Liberty on the coast. Browse the portfolio by county.",
 };
 
 interface CountyRow {

@@ -8,6 +8,7 @@ import BreadcrumbsJsonLd from "@/components/site/BreadcrumbsJsonLd";
 import Link from "next/link";
 import type { Metadata } from "next";
 import type { Project } from "@/lib/content/types";
+import { clampDescription } from "@/lib/utils";
 
 /** Map a project.type to the most accurate Schema.org type, with a Place fallback. */
 function schemaTypeForProject(type: Project["type"]): string {
@@ -43,11 +44,14 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!project) return {};
   const image = getProjectImage(project);
   const description = `${project.description} A Prime Interest development in ${project.county} County, Georgia.`;
+  // Search results show ~60 title characters; name the county when it still fits.
+  const withCounty = `${project.name} — ${project.county} County`;
+  const title = `${withCounty} | Prime Interest`.length <= 60 ? withCounty : project.name;
   return {
-    title: project.name,
-    description,
+    title,
+    description: clampDescription(description),
     openGraph: {
-      title: `${project.name} | Prime Interest`,
+      title: `${title} | Prime Interest`,
       description,
       url: `/projects/${project.slug}`,
       siteName: "Prime Interest, Inc.",

@@ -7,6 +7,7 @@ import ProjectCard from "@/components/site/ProjectCard";
 import { COUNTIES, getCountyBySlug, type CountyEntry } from "@/content/counties";
 import { projects } from "@/content/projects";
 import { company } from "@/content/company";
+import { clampDescription } from "@/lib/utils";
 
 export async function generateStaticParams() {
   return COUNTIES.map((c) => ({ county: c.slug }));
@@ -22,7 +23,7 @@ export async function generateMetadata({
   if (!entry) return {};
   return {
     title: `${entry.name} County`,
-    description: `${entry.name} County land development by Prime Interest. ${entry.descriptor}`,
+    description: clampDescription(`${entry.name} County land development by Prime Interest. ${entry.descriptor}`),
   };
 }
 

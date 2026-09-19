@@ -9,7 +9,7 @@ export const metadata: Metadata = {
     "How Prime Interest, Inc. handles the information you share through the website — what we collect, how we use it, and how to ask us to delete it.",
 };
 
-const UPDATED = "June 18, 2026";
+const UPDATED = "September 19, 2026";
 
 const SECTIONS: { heading: string; body: string[] }[] = [
   {
@@ -23,13 +23,15 @@ const SECTIONS: { heading: string; body: string[] }[] = [
     heading: "What we collect",
     body: [
       "We collect what you give us. If you submit a property through the acquisitions form, send a message through the contact form, or email us directly, we keep your name, contact details, the property information you shared, and any subsequent correspondence.",
+      "If you are a real estate broker or agent, we may also keep the business contact details you publish (your name, brokerage, business phone and business email), taken from property listings, brokerage websites and other public sources, so that we can ask you about land.",
       "We do not use third-party analytics that profile you across the web. Basic visitor data (which pages were viewed, what country the visit came from) may be logged by our hosting provider for security and performance purposes; that data is not connected to your identity.",
     ],
   },
   {
     heading: "How we use it",
     body: [
-      "Submissions and emails are used to evaluate properties, respond to your inquiry, and follow up if there is a deal to discuss. We do not sell or rent your information. We do not send marketing email — we contact you only about the inquiry you sent us.",
+      "Submissions and emails are used to evaluate properties, respond to your inquiry, and follow up if there is a deal to discuss. We do not sell or rent your information.",
+      "We do not send marketing email to the public. We may email real estate brokers and agents, at the business address they publish, to ask about land they have listed or expect to list. Every such email says how to stop further messages, and a request to stop is honored permanently: reply to the email, or write to martyorr@bellsouth.net.",
       "If we determine we are not interested in a property, we will tell you. We may keep your information in our records in case the situation changes in the future or in case the property becomes relevant to a partner we are working with.",
     ],
   },

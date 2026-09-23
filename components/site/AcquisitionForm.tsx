@@ -6,7 +6,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { submitAcquisition } from "@/lib/supabase";
 import { emailToMarty } from "@/lib/notify";
-import { HEARD_FROM_OPTIONS } from "@/lib/heard-from";
+import HeardFromSelect from "@/components/site/HeardFromSelect";
 
 const schema = z.object({
   role: z.enum(["owner", "broker", "investor"], {
@@ -169,19 +169,13 @@ export default function AcquisitionForm() {
       {/* How they found us — shows which channels actually bring submissions */}
       <div>
         <label className={labelClass} style={{ color: "var(--color-text-subtle)" }}>How Did You Hear About Us?</label>
-        <select
-          {...register("heard_from")}
-          defaultValue=""
+        <HeardFromSelect
+          registration={register("heard_from")}
+          value={watch("heard_from")}
+          placeholder="Select one (optional)"
           className={inputClass}
-          style={{ ...inputStyle, colorScheme: "dark" }}
-        >
-          <option value="">Select one (optional)</option>
-          {HEARD_FROM_OPTIONS.map((o) => (
-            <option key={o} value={o}>
-              {o}
-            </option>
-          ))}
-        </select>
+          style={inputStyle}
+        />
       </div>
 
       {/* Notes */}

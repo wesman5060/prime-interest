@@ -6,7 +6,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { submitContact } from "@/lib/supabase";
 import { emailToMarty } from "@/lib/notify";
-import { HEARD_FROM_OPTIONS } from "@/lib/heard-from";
+import HeardFromSelect from "@/components/site/HeardFromSelect";
 
 const schema = z.object({
   name: z.string().min(2, "Please enter your name"),
@@ -32,6 +32,7 @@ export default function ContactForm() {
   const {
     register,
     handleSubmit,
+    watch,
     reset,
     formState: { errors },
   } = useForm<FormValues>({ resolver: zodResolver(schema) });
@@ -132,21 +133,13 @@ export default function ContactForm() {
         </div>
       </div>
 
-      <div>
-        <select
-          {...register("heard_from")}
-          defaultValue=""
-          className={inputClass}
-          style={{ ...inputStyle, colorScheme: "dark" }}
-        >
-          <option value="">How did you hear about us? (optional)</option>
-          {HEARD_FROM_OPTIONS.map((o) => (
-            <option key={o} value={o}>
-              {o}
-            </option>
-          ))}
-        </select>
-      </div>
+      <HeardFromSelect
+        registration={register("heard_from")}
+        value={watch("heard_from")}
+        placeholder="How did you hear about us? (optional)"
+        className={inputClass}
+        style={inputStyle}
+      />
 
       <div>
         <textarea

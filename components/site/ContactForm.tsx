@@ -6,6 +6,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { submitContact } from "@/lib/supabase";
 import { emailToMarty } from "@/lib/notify";
+import { HEARD_FROM_OPTIONS } from "@/lib/heard-from";
 
 const schema = z.object({
   name: z.string().min(2, "Please enter your name"),
@@ -13,6 +14,7 @@ const schema = z.object({
   phone: z.string().optional(),
   company: z.string().optional(),
   message: z.string().min(10, "Please enter a message (at least 10 characters)"),
+  heard_from: z.string().optional(),
 });
 
 type FormValues = z.infer<typeof schema>;
@@ -48,6 +50,7 @@ export default function ContactForm() {
           Phone: values.phone,
           Company: values.company,
           Message: values.message,
+          "How they found us": values.heard_from,
         },
       );
       // Backup: also store the submission (best-effort; never blocks success).
@@ -127,6 +130,22 @@ export default function ContactForm() {
             autoComplete="organization"
           />
         </div>
+      </div>
+
+      <div>
+        <select
+          {...register("heard_from")}
+          defaultValue=""
+          className={inputClass}
+          style={{ ...inputStyle, colorScheme: "dark" }}
+        >
+          <option value="">How did you hear about us? (optional)</option>
+          {HEARD_FROM_OPTIONS.map((o) => (
+            <option key={o} value={o}>
+              {o}
+            </option>
+          ))}
+        </select>
       </div>
 
       <div>

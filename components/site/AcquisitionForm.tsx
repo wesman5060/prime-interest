@@ -6,6 +6,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { submitAcquisition } from "@/lib/supabase";
 import { emailToMarty } from "@/lib/notify";
+import { HEARD_FROM_OPTIONS } from "@/lib/heard-from";
 
 const schema = z.object({
   role: z.enum(["owner", "broker", "investor"], {
@@ -19,6 +20,7 @@ const schema = z.object({
   price: z.string().optional(),
   timeline: z.string().optional(),
   notes: z.string().optional(),
+  heard_from: z.string().optional(),
 });
 
 type FormValues = z.infer<typeof schema>;
@@ -68,6 +70,7 @@ export default function AcquisitionForm() {
           Price: values.price,
           Timeline: values.timeline,
           Notes: values.notes,
+          "How they found us": values.heard_from,
         },
       );
       // Backup: also store the submission (best-effort; never blocks success).
@@ -161,6 +164,24 @@ export default function AcquisitionForm() {
           <label className={labelClass} style={{ color: "var(--color-text-subtle)" }}>Phone</label>
           <input {...register("phone")} type="tel" placeholder="Optional" className={inputClass} style={inputStyle} autoComplete="tel" />
         </div>
+      </div>
+
+      {/* How they found us — shows which channels actually bring submissions */}
+      <div>
+        <label className={labelClass} style={{ color: "var(--color-text-subtle)" }}>How Did You Hear About Us?</label>
+        <select
+          {...register("heard_from")}
+          defaultValue=""
+          className={inputClass}
+          style={{ ...inputStyle, colorScheme: "dark" }}
+        >
+          <option value="">Select one (optional)</option>
+          {HEARD_FROM_OPTIONS.map((o) => (
+            <option key={o} value={o}>
+              {o}
+            </option>
+          ))}
+        </select>
       </div>
 
       {/* Notes */}

@@ -27,6 +27,7 @@ export interface AcquisitionSubmissionInput {
   timeline?: string;
   notes?: string;
   source?: string;
+  heard_from?: string;
 }
 
 export interface ContactSubmissionInput {
@@ -35,6 +36,7 @@ export interface ContactSubmissionInput {
   phone?: string;
   company?: string;
   message: string;
+  heard_from?: string;
 }
 
 export async function submitAcquisition(input: AcquisitionSubmissionInput) {

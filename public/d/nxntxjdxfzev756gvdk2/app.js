@@ -3,24 +3,30 @@
   "use strict";
 
   const BOT = {
-    rezone: { name: "Rezonings", one: "Rezoning", color: "#2f62c9" },
-    listing: { name: "For sale", one: "For sale", color: "#1b8a5e" },
-    assemblage: { name: "Assemblages", one: "Assemblage", color: "#c26a12" },
+    rezone: { name: "Rezonings", one: "Rezoning", color: "#2f62c9",
+      explain: "Land a county has been asked to rezone toward housing — spotted at the hearing, usually before it is ever listed for sale." },
+    listing: { name: "For sale", one: "For sale", color: "#1b8a5e",
+      explain: "Land listed for sale (mostly 10+ acres), each checked against county records for sewer, floodplain, zoning and the owner." },
+    assemblage: { name: "Assemblages", one: "Assemblage", color: "#c26a12",
+      explain: "Neighbouring lots that together clear 10 acres of good ground for townhomes or apartments — land nobody is selling as one piece." },
   };
-  const PAGE = 60;
+  const SIZES = [[0, "Any size"], [10, "10+ ac"], [25, "25+ ac"], [50, "50+ ac"], [100, "100+ ac"]];
+  const PAGE = 50;
+  const WES = "wesorr96@gmail.com";
   const $ = (id) => document.getElementById(id);
   const esc = (s) => String(s == null ? "" : s).replace(/[&<>"']/g, (c) =>
     ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 
-  let DATA, BYID = {}, prevSeen = null;
-  const st = { tab: "all", q: "", county: "", sort: "found", newonly: false, showgone: false, shown: PAGE };
+  let DATA, BYID = {}, prevSeen = null, marks = {}, viewed = {};
+  const st = { tab: "start", q: "", county: "", sort: "found", minAcres: 0, sewer: false,
+    mapOnly: false, showgone: false, showpassed: false, shown: PAGE };
+  let order = [];            // the list currently on screen, for Previous / Next
 
-  // ---- storage (a per-browser convenience; the page works without it) ----
+  // ---- per-device memory (works without it) --------------------------------
   function load(k) { try { return JSON.parse(localStorage.getItem(k)); } catch (e) { return null; } }
   function save(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) { /* private window */ } }
 
   // ---- decryption: data, cards and maps are published encrypted ------------
-  // The key is in the link after "#k=" and never leaves this browser.
   function hashParams() { return new URLSearchParams(location.hash.replace(/^#/, "")); }
   const KEY_TXT = hashParams().get("k") || "";
   let CRYPTO_KEY = null;
@@ -35,7 +41,7 @@
     return crypto.subtle.decrypt({ name: "AES-GCM", iv: buf.slice(0, 12) }, CRYPTO_KEY, buf.slice(12));
   }
   const imgCache = {};
-  async function imgUrl(name) {
+  function imgUrl(name) {
     if (!imgCache[name]) {
       imgCache[name] = getBin("img/" + name).then((ab) => {
         const ext = name.split(".").pop();
@@ -52,140 +58,220 @@
     names.forEach((n, i) => { html = html.split('src="../../img/' + n + '"').join('src="' + urls[i] + '"'); });
     return html;
   }
+  function linkFor(id) { return location.origin + location.pathname + "#k=" + KEY_TXT + (id ? "&f=" + encodeURIComponent(id) : ""); }
   function setHash(id, push) {
-    const h = "#k=" + KEY_TXT + (id ? "&f=" + encodeURIComponent(id) : "");
-    history[push ? "pushState" : "replaceState"]({ id }, "", location.pathname + location.search + h);
+    history[push ? "pushState" : "replaceState"]({ id }, "", linkFor(id).slice(location.origin.length));
   }
 
-  // ---- what counts as "no longer live" -----------------------------------
+  // ---- what a find is ---------------------------------------------------------
   function isGone(r) {
     return (r.bot === "listing" && r.state !== "current") || (r.bot === "assemblage" && r.state === "ruled_out");
   }
   function isNew(r) { return prevSeen ? !prevSeen.has(r.id) : false; }
+  function ppa(r) { return r.ppa || (r.price && r.acres ? r.price / r.acres : null); }
+  function money(v) { return v == null ? "" : "$" + Math.round(v).toLocaleString(); }
+  function acres(v) { return v == null ? "" : (v < 100 ? v.toFixed(1) : Math.round(v).toLocaleString()) + " acres"; }
 
-  function statusTag(r) {
-    const s = r.status || "";
-    let cls = "";
-    if (r.bot === "rezone") cls = /approv/i.test(s) ? "good" : /den|withdr/i.test(s) ? "bad" : "";
-    if (r.bot === "listing") cls = r.state === "current" ? "good" : r.state === "gone" ? "bad" : "";
-    if (r.bot === "assemblage") cls = r.state === "pick" || r.state === "runner_up" ? "pick" : r.state === "ruled_out" ? "bad" : "";
-    return `<span class="tag ${cls}">${esc(s)}</span>`;
+  function facts(r) {
+    const f = [];
+    if (r.acres != null) f.push(`<b>${esc(acres(r.acres))}</b>`);
+    if (r.bot === "listing" && r.price) f.push(`${esc(money(r.price))}` + (ppa(r) ? ` <span class="dim">(${esc(money(ppa(r)))}/ac)</span>` : ""));
+    if (r.bot === "rezone" && r.change_short) f.push(esc(r.change_short));
+    if (r.homes) f.push(`${r.homes.toLocaleString()} homes`);
+    return f.join('<span class="sep"> · </span>');
   }
+  function badge(r) { return `<span class="badge ${r.badge_kind || ""}">${esc(r.badge)}</span>`; }
 
-  // ---- filtering ----------------------------------------------------------
-  function base(r) {
-    if (!st.showgone && isGone(r)) return false;
+  // ---- filtering ----------------------------------------------------------------
+  function passes(r, opts) {
+    const o = Object.assign({ gone: st.showgone, passed: st.showpassed }, opts || {});
+    if (!o.gone && isGone(r)) return false;
+    if (!o.passed && marks[r.id] === "no") return false;
     if (st.county && r.county !== st.county) return false;
-    if (st.newonly && !isNew(r)) return false;
+    if (st.minAcres && !(r.acres >= st.minAcres)) return false;
+    if (st.sewer && !r.sewer_ok) return false;
     if (st.q) {
       const words = st.q.toLowerCase().split(/\s+/).filter(Boolean);
       if (!words.every((w) => r._text.includes(w))) return false;
     }
+    if (st.mapOnly && map && (r.lat == null || !map.getBounds().contains([r.lat, r.lon]))) return false;
     return true;
   }
   function inTab(r, tab) {
     if (tab === "all") return true;
-    if (tab === "overlap") return r.related.length > 0;
+    if (tab === "mine") return marks[r.id] === "yes";
     return r.bot === tab;
   }
-  function visible() {
-    const rows = DATA.records.filter((r) => base(r) && inTab(r, st.tab));
-    const key = {
-      found: (a, b) => (b.found || "").localeCompare(a.found || "") || (b.acres || 0) - (a.acres || 0),
-      acres: (a, b) => (b.acres || 0) - (a.acres || 0),
-      price: (a, b) => ppa(a) - ppa(b),
-      county: (a, b) => a.county.localeCompare(b.county) || (b.acres || 0) - (a.acres || 0),
-    }[st.sort];
-    return rows.sort(key);
-  }
-  function ppa(r) { return r.price && r.acres ? r.price / r.acres : Infinity; }
-
-  // ---- rendering ----------------------------------------------------------
-  function renderTabs() {
-    const base_ = DATA.records.filter(base);
-    const n = (t) => base_.filter((r) => inTab(r, t)).length;
-    const tabs = [["all", "Everything", ""], ["rezone", BOT.rezone.name, "rezone"],
-      ["listing", BOT.listing.name, "listing"], ["assemblage", BOT.assemblage.name, "assemblage"],
-      ["overlap", "In more than one", "overlap"]];
-    $("tabs").innerHTML = tabs.map(([t, label, dot]) =>
-      `<button class="tab" role="tab" data-tab="${t}" aria-selected="${st.tab === t}">` +
-      (dot ? `<i class="dot ${dot}"></i>` : "") + `${esc(label)} <span class="n">${n(t)}</span></button>`).join("");
+  const SORTS = {
+    found: (a, b) => (b.found || "").localeCompare(a.found || "") || (b.acres || 0) - (a.acres || 0),
+    acres: (a, b) => (b.acres || 0) - (a.acres || 0),
+    homes: (a, b) => (b.homes || 0) - (a.homes || 0) || (b.acres || 0) - (a.acres || 0),
+    price: (a, b) => (ppa(a) || Infinity) - (ppa(b) || Infinity),
+    county: (a, b) => a.county.localeCompare(b.county) || (b.acres || 0) - (a.acres || 0),
+  };
+  function listRows() {
+    const opts = st.tab === "mine" ? { gone: true, passed: true } : {};
+    return DATA.records.filter((r) => inTab(r, st.tab) && passes(r, opts)).sort(SORTS[st.sort]);
   }
 
+  // ---- "Start here": a short, explained first look ---------------------------
+  function startSections() {
+    const live = (r) => !isGone(r) && marks[r.id] !== "no";
+    const recs = DATA.records;
+    const sec = [];
+    const fresh = recs.filter((r) => isNew(r) && live(r)).sort(SORTS.acres);
+    if (fresh.length) sec.push({ title: "New since your last visit", why: "Found by a scout since you last opened this page.", rows: fresh.slice(0, 12), more: fresh.length, go: { tab: "all", sort: "found" } });
+    const pairs = [];
+    const seen = new Set();
+    for (const r of recs) for (const [oid, why] of r.related) {
+      const k = [r.id, oid].sort().join("|");
+      if (seen.has(k) || !BYID[oid]) continue;
+      seen.add(k);
+      pairs.push({ a: r, b: BYID[oid], why });
+    }
+    if (pairs.length) sec.push({ title: "Same land, found by two scouts", why: "The strongest signal on this page: one piece of ground turned up for two different reasons.", pairs });
+    const num = (r) => parseInt(r.badge.replace(/\D/g, "") || "99", 10);
+    const picks = recs.filter((r) => r.bot === "assemblage" && (r.state === "pick" || r.state === "runner_up"))
+      .sort((a, b) => (a.state === "pick" ? 0 : 1) - (b.state === "pick" ? 0 : 1) || num(a) - num(b));
+    if (picks.length) sec.push({ title: "Assemblage shortlist", why: "The ten best groups of lots across seven counties, each checked by eye and in the news, plus four runners-up.", rows: picks });
+    const rez = recs.filter((r) => r.bot === "rezone" && r.badge_kind === "good" && live(r)).sort(SORTS.acres);
+    if (rez.length) sec.push({ title: "Rezonings approved or recommended", why: "The county has said yes, or its staff or planning board recommended yes.", rows: rez.slice(0, 10), more: rez.length, go: { tab: "rezone", sort: "acres" } });
+    const big = recs.filter((r) => r.bot === "listing" && r.state === "current" && r.sewer_ok && r.acres >= 25 && live(r)).sort(SORTS.acres);
+    if (big.length) sec.push({ title: "For sale: 25+ acres with gravity sewer within 200 ft", why: "Big enough for a real project, with sewer measured at or near the land.", rows: big.slice(0, 10), more: big.length, go: { tab: "listing", minAcres: 25, sewer: true, sort: "acres" } });
+    return sec;
+  }
+
+  // ---- rendering ------------------------------------------------------------------
   function rowHtml(r) {
     const also = [...new Set(r.related.map(([id]) => BYID[id] && BYID[id].bot))].filter(Boolean)
-      .map((b) => `<span class="tag also">Also: ${esc(BOT[b].one)}</span>`).join("");
-    return `<li class="row${isGone(r) ? " dim" : ""}" tabindex="0" data-id="${esc(r.id)}">
-      <i class="dot ${r.bot}" title="${esc(BOT[r.bot].one)}"></i>
-      <div><h3>${esc(r.title)}</h3><div class="sub">${esc(r.sub)}</div></div>
-      <div class="facts">${r.headline.map((h) => `<span>${esc(h)}</span>`).join("")}</div>
-      <div class="tags">${isNew(r) ? '<span class="tag new">NEW</span>' : ""}${statusTag(r)}${also}
-        <span class="tag">${esc(BOT[r.bot].one)} · ${esc(foundTxt(r))}</span></div>
-    </li>`;
+      .map((b) => `<span class="tag also">Also ${esc(BOT[b].one.toLowerCase())}</span>`).join("");
+    const mk = marks[r.id] === "yes" ? '<span class="tag yes">★ Interested</span>' : marks[r.id] === "no" ? '<span class="tag">Passed</span>' : "";
+    return `<button type="button" class="row ${r.bot}${isGone(r) ? " gone" : ""}${viewed[r.id] ? " seen" : ""}" data-id="${esc(r.id)}">
+      <span class="kind">${esc(BOT[r.bot].one)}${viewed[r.id] ? ' <span class="seenmark">· viewed</span>' : ""}</span>
+      <span class="title">${esc(r.title)}</span>
+      <span class="sub">${esc(r.sub)}</span>
+      <span class="facts">${facts(r)}</span>
+      <span class="tags">${isNew(r) ? '<span class="tag new">NEW</span>' : ""}${badge(r)}${r.sewer_ok ? '<span class="tag sewer">Gravity sewer ≤200 ft</span>' : ""}${also}${mk}</span>
+    </button>`;
+  }
+
+  function renderTabs() {
+    const n = (t) => DATA.records.filter((r) => inTab(r, t) && passes(r, t === "mine" ? { gone: true, passed: true } : {})).length;
+    const mine = Object.values(marks).filter((v) => v === "yes").length;
+    const tabs = [["start", "Start here", ""], ["all", "Everything", n("all")], ["rezone", BOT.rezone.name, n("rezone")],
+      ["listing", BOT.listing.name, n("listing")], ["assemblage", BOT.assemblage.name, n("assemblage")], ["mine", "★ My picks", mine]];
+    $("tabs").innerHTML = tabs.map(([t, label, c]) =>
+      `<button class="tab${t === "start" ? " start" : ""}" role="tab" data-tab="${t}" aria-selected="${st.tab === t}">` +
+      (BOT[t] ? `<i class="dot ${t}"></i>` : "") + `${esc(label)}${c !== "" ? ` <span class="n">${c}</span>` : ""}</button>`).join("");
+    const ex = {
+      start: `A first look: the finds most worth your time, out of <b>${DATA.records.filter((r) => !isGone(r)).length}</b> live ones. Use the tabs above to go through everything.`,
+      all: "Every find from all three scouts. Use the size and sewer buttons to narrow it down.",
+      mine: "Finds you marked ★ Interested. Kept on this device.",
+    }[st.tab] || esc(BOT[st.tab].explain);
+    $("explain").innerHTML = ex;
+    $("controls").hidden = st.tab === "start";
+  }
+
+  function renderControls() {
+    $("sizechips").innerHTML = SIZES.map(([v, l]) =>
+      `<button type="button" class="chip" data-size="${v}" aria-pressed="${st.minAcres === v}">${l}</button>`).join("");
+    $("sewerchip").setAttribute("aria-pressed", String(st.sewer));
+  }
+
+  function cap(s) { return s ? s[0].toUpperCase() + s.slice(1) : s; }
+  function plainWhy(w) {
+    if (/^same parcel/.test(w)) return "Same parcel on the county record " + (w.match(/\(.*\)/) || [""])[0];
+    if (/touch/.test(w)) return "Right next door to each other";
+    if (/inside/.test(w)) return "One sits inside the other's boundary";
+    return cap(w);
+  }
+
+  function renderStart() {
+    const secs = startSections();
+    order = [];
+    const html = secs.map((s) => {
+      let body;
+      if (s.pairs) {
+        body = s.pairs.map((p) => { order.push(p.a, p.b); return `<div class="pair"><p class="pairwhy">${esc(plainWhy(p.why))}</p>${rowHtml(p.a)}${rowHtml(p.b)}</div>`; }).join("");
+      } else {
+        order.push(...s.rows);
+        body = s.rows.map(rowHtml).join("");
+      }
+      const more = s.go && s.more > s.rows.length
+        ? `<button type="button" class="seeall" data-go='${esc(JSON.stringify(s.go))}'>See all ${s.more} →</button>` : "";
+      return `<section class="sec"><h2>${esc(s.title)}</h2><p class="why">${esc(s.why)}</p><div class="rows">${body}</div>${more}</section>`;
+    }).join("");
+    $("list").innerHTML = html || '<p class="none">Nothing to show yet.</p>';
+    $("count").textContent = "";
+    $("more").hidden = true;
+    renderMarkers(order);
   }
 
   function renderList() {
-    const rows = visible();
-    $("count").textContent = rows.length === 1 ? "1 find" : `${rows.length.toLocaleString()} finds` +
-      (st.showgone ? "" : " (sold, off-market and ruled-out finds hidden)");
-    $("list").innerHTML = rows.slice(0, st.shown).map(rowHtml).join("") ||
-      `<li class="nocard">Nothing matches. Try clearing the search or picking “All counties”.</li>`;
+    if (st.tab === "start") { renderStart(); return; }
+    const rows = listRows();
+    order = rows;
+    const hidden = [];
+    if (!st.showgone && st.tab !== "mine") hidden.push("sold and ruled-out finds");
+    if (!st.showpassed && st.tab !== "mine") hidden.push("ones you passed on");
+    $("count").textContent = `${rows.length.toLocaleString()} ${rows.length === 1 ? "find" : "finds"}` + (hidden.length ? ` · hiding ${hidden.join(" and ")}` : "");
+    $("list").innerHTML = `<div class="rows">${rows.slice(0, st.shown).map(rowHtml).join("")}</div>` +
+      (rows.length ? "" : `<p class="none">${st.tab === "mine" ? "Nothing marked yet. Open a find and tap ★ Interested." : "Nothing matches. Try a smaller size, turn off the sewer button, or pick “All counties”."}</p>`);
     $("more").hidden = rows.length <= st.shown;
-    $("more").textContent = `Show more (${(rows.length - st.shown).toLocaleString()} left)`;
-    renderMarkers(rows);
+    $("more").textContent = `Show ${Math.min(PAGE, rows.length - st.shown)} more (${(rows.length - st.shown).toLocaleString()} left)`;
+    if (!st.mapOnly) renderMarkers(rows);
   }
+
+  function renderAll(fit) { renderTabs(); renderControls(); renderList(); if (fit) fitMap(); }
 
   function fmtDate(d) {
     if (!d) return "—";
     const [y, m, day] = d.split("-").map(Number);
     return new Date(y, m - 1, day || 1).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
   }
-
   function foundTxt(r) {
     if (r.bot === "rezone") {
       const [y, m] = r.found.split("-").map(Number);
-      return "in the " + new Date(y, m - 1, 1).toLocaleDateString("en-US", { month: "long", year: "numeric" }) + " meetings report";
+      return "In the " + new Date(y, m - 1, 1).toLocaleDateString("en-US", { month: "long", year: "numeric" }) + " meetings report";
     }
-    return "found " + fmtDate(r.found);
+    return "Found " + fmtDate(r.found);
   }
 
-  function renderAll(fit) { renderTabs(); renderList(); if (fit) fitMap(); }
-
-  // ---- map ------------------------------------------------------------------
-  let map, markerLayer, shapeLayer, sat, streets, onStreets = false, lastRows = [];
+  // ---- map --------------------------------------------------------------------
+  let map, markerLayer, shapeLayer, sat, streets, onStreets = false, lastRows = [], markerById = {};
+  const ESRI = "https://server.arcgisonline.com/ArcGIS/rest/services/";
   function initMap() {
-    map = L.map("map", { preferCanvas: true, zoomControl: true }).setView([33.95, -84.2], 9);
+    map = L.map("map", { preferCanvas: true }).setView([33.95, -84.2], 9);
     sat = L.layerGroup([
-      L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
-        { maxZoom: 19, attribution: "Imagery © Esri, Maxar, Earthstar Geographics" }),
-      L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Transportation/MapServer/tile/{z}/{y}/{x}",
-        { maxZoom: 19, opacity: 0.85 }),
+      L.tileLayer(ESRI + "World_Imagery/MapServer/tile/{z}/{y}/{x}", { maxZoom: 19, attribution: "Imagery © Esri, Maxar, Earthstar Geographics" }),
+      L.tileLayer(ESRI + "Reference/World_Transportation/MapServer/tile/{z}/{y}/{x}", { maxZoom: 19, opacity: 0.85 }),
     ]).addTo(map);
     streets = L.tileLayer("https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png",
       { maxZoom: 19, attribution: "© OpenStreetMap contributors © CARTO" });
     markerLayer = L.layerGroup().addTo(map);
     shapeLayer = L.layerGroup().addTo(map);
-    map.on("zoomend moveend", drawShapes);
+    map.on("zoomend moveend", () => { drawShapes(); if (st.mapOnly && st.tab !== "start") { st.shown = PAGE; renderTabs(); renderList(); } });
     $("basemap").onclick = () => {
       onStreets = !onStreets;
       if (onStreets) { map.removeLayer(sat); streets.addTo(map); } else { map.removeLayer(streets); sat.addTo(map); }
       $("basemap").textContent = onStreets ? "Satellite" : "Street map";
     };
-    $("legend").innerHTML = Object.entries(BOT).map(([k, b]) =>
-      `<span><i class="dot ${k}"></i>${esc(b.name)}</span>`).join("");
+    $("legend").innerHTML = Object.entries(BOT).map(([k, b]) => `<span><i class="dot ${k}"></i>${esc(b.name)}</span>`).join("");
   }
   function renderMarkers(rows) {
     lastRows = rows;
     markerLayer.clearLayers();
+    markerById = {};
     for (const r of rows) {
       if (r.lat == null || r.lon == null) continue;
       const m = L.circleMarker([r.lat, r.lon], {
         radius: r.related.length ? 9 : 7, color: "#fff", weight: r.related.length ? 3 : 2,
         fillColor: BOT[r.bot].color, fillOpacity: isGone(r) ? 0.5 : 0.95,
       });
-      m.bindPopup(() => `<div class="pop"><b>${esc(r.title)}</b>${esc(r.headline.join(" · "))}<br>` +
-        `<button type="button" data-open="${esc(r.id)}">Open</button></div>`);
+      m.bindTooltip(`<b>${esc(r.title)}</b><br>${esc(BOT[r.bot].one)} · ${esc(acres(r.acres))}`, { direction: "top" });
+      m.on("click", () => openDetail(r.id));
       markerLayer.addLayer(m);
+      markerById[r.id] = m;
     }
     drawShapes();
   }
@@ -201,47 +287,65 @@
     }
   }
   function fitMap() {
+    if (st.mapOnly) return;
     map.invalidateSize();
     const pts = lastRows.filter((r) => r.lat != null).map((r) => [r.lat, r.lon]);
     if (pts.length) map.fitBounds(pts, { padding: [30, 30], maxZoom: pts.length > 1 ? 13 : 15 });
   }
+  function highlight(id, on) {
+    const m = markerById[id];
+    if (!m) return;
+    const r = BYID[id];
+    m.setStyle(on ? { radius: 13, weight: 4, color: "#ffd84a" } : { radius: r.related.length ? 9 : 7, weight: r.related.length ? 3 : 2, color: "#fff" });
+    if (on) m.bringToFront();
+  }
 
-  // ---- detail ---------------------------------------------------------------
+  // ---- detail ----------------------------------------------------------------------
   let dmap = null, current = null;
   function openDetail(id, push) {
     const r = BYID[id];
     if (!r) return;
     current = id;
+    viewed[id] = 1; save("df_viewed", viewed);
     if (push !== false) setHash(id, true);
+    const i = order.findIndex((x) => x.id === id);
+    $("pos").textContent = i >= 0 ? `${i + 1} of ${order.length}` : "";
+    $("prev").disabled = !(i > 0);
+    $("next").disabled = !(i >= 0 && i < order.length - 1);
     const rel = r.related.map(([oid, why]) => {
       const o = BYID[oid];
-      return o ? `<li><button type="button" data-open="${esc(oid)}">${esc(BOT[o.bot].one)}: ${esc(o.title)}</button>
-        — ${esc(why)}</li>` : "";
+      return o ? `<li><button type="button" class="lnk" data-open="${esc(oid)}">${esc(BOT[o.bot].one)}: ${esc(o.title)}</button> — ${esc(plainWhy(why).toLowerCase())}</li>` : "";
     }).join("");
+    const mail = "mailto:" + WES + "?subject=" + encodeURIComponent("Deal Finder: " + r.title) +
+      "&body=" + encodeURIComponent(`${r.title} (${BOT[r.bot].one}, ${r.county})\n${linkFor(id)}\n\n`);
+    const allFacts = `<dl class="fields">${r.fields.map(([k, v]) => `<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join("")}</dl>`;
     $("dcontent").innerHTML = `
-      <div class="d-kind"><i class="dot ${r.bot}"></i>${esc(BOT[r.bot].one)} · ${esc(r.county)}${isNew(r) ? ' · <span class="tag new">NEW</span>' : ""}</div>
-      <h2>${esc(r.title)}</h2>
+      <div class="d-kind"><i class="dot ${r.bot}"></i>${esc(BOT[r.bot].one)} · ${esc(r.county)}${isNew(r) ? ' <span class="tag new">NEW</span>' : ""}</div>
+      <h2 id="dtitle">${esc(r.title)}</h2>
       <p class="d-sub">${esc(r.sub)}</p>
-      <p class="d-head">${r.headline.map((h) => `<span>${esc(h)}</span>`).join("")}</p>
-      <div class="d-status">${statusTag(r)} <span class="tag">${esc(foundTxt(r))}</span></div>
+      <p class="d-head">${facts(r)}</p>
+      <div class="d-tags">${badge(r)}${r.sewer_ok ? '<span class="tag sewer">Gravity sewer ≤200 ft</span>' : ""}<span class="tag">${esc(foundTxt(r))}</span></div>
+      <div class="actions">
+        <button type="button" class="act yes${marks[id] === "yes" ? " on" : ""}" data-mark="yes">★ Interested</button>
+        <button type="button" class="act no${marks[id] === "no" ? " on" : ""}" data-mark="no">Pass</button>
+        <a class="act mail" href="${esc(mail)}">✉ Email Wes about this</a>
+        ${r.links.map(([t, u]) => `<a class="act" href="${esc(u)}" target="_blank" rel="noopener noreferrer">${esc(t)} ↗</a>`).join("")}
+      </div>
       ${rel ? `<div class="related"><h4>Also found by another scout</h4><ul>${rel}</ul></div>` : ""}
-      ${r.lat != null ? '<div class="d-map" id="dmap"></div>' : '<p class="nocard">No map location — the county gave no address for this case.</p>'}
-      <dl class="fields">${r.fields.map(([k, v]) => `<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join("")}</dl>
-      ${r.links.length ? `<div class="links">${r.links.map(([t, u]) => `<a href="${esc(u)}" target="_blank" rel="noopener">${esc(t)} ↗</a>`).join("")}</div>` : ""}
-      ${r.card ? `<h4 class="card-h">The scout's own report card <small>(from ${esc(r.card_from)})</small></h4>
-        <iframe class="cardframe" id="cardframe" title="Report card"></iframe><p class="nocard" id="cardwait">Opening the report card…</p>`
-        : '<p class="nocard">This find never appeared on a report card with maps, so only the facts above are shown.</p>'}`;
+      ${r.card ? `<h3 class="sech">The scout's report card</h3>
+        <iframe class="cardframe" id="cardframe" title="Report card"></iframe><p class="none" id="cardwait">Opening the report card…</p>` : ""}
+      ${r.lat != null ? '<h3 class="sech">Where it is</h3><div class="d-map" id="dmap"></div>' : '<p class="none">No map location — the county gave no address for this case.</p>'}
+      ${r.card ? `<details class="more-facts"><summary>All the details</summary>${allFacts}</details>` : `<h3 class="sech">The details</h3>${allFacts}`}`;
     $("detail").hidden = false;
-    document.body.style.overflow = "hidden";
-    $("detail").querySelector(".detail-inner").scrollTop = 0;
+    document.body.classList.add("noscroll");
+    $("detailinner").scrollTop = 0;
     if (r.lat != null) {
       if (dmap) { dmap.remove(); dmap = null; }
-      dmap = L.map("dmap", { zoomControl: true, attributionControl: false }).setView([r.lat, r.lon], 15);
-      L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}", { maxZoom: 19 }).addTo(dmap);
-      L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Transportation/MapServer/tile/{z}/{y}/{x}", { maxZoom: 19, opacity: 0.85 }).addTo(dmap);
+      dmap = L.map("dmap", { attributionControl: false }).setView([r.lat, r.lon], 15);
+      L.tileLayer(ESRI + "World_Imagery/MapServer/tile/{z}/{y}/{x}", { maxZoom: 19 }).addTo(dmap);
+      L.tileLayer(ESRI + "Reference/World_Transportation/MapServer/tile/{z}/{y}/{x}", { maxZoom: 19, opacity: 0.85 }).addTo(dmap);
       if (r.rings) {
-        const poly = L.polygon(r.rings.map((ring) => ring.map(([x, y]) => [y, x])),
-          { color: "#ffd84a", weight: 3, fillOpacity: 0.08 }).addTo(dmap);
+        const poly = L.polygon(r.rings.map((ring) => ring.map(([x, y]) => [y, x])), { color: "#ffd84a", weight: 3, fillOpacity: 0.08 }).addTo(dmap);
         dmap.fitBounds(poly.getBounds(), { padding: [20, 20], maxZoom: 17 });
       } else {
         L.circleMarker([r.lat, r.lon], { radius: 9, color: "#fff", weight: 3, fillColor: BOT[r.bot].color, fillOpacity: 1 }).addTo(dmap);
@@ -250,53 +354,53 @@
     }
     const f = $("cardframe");
     if (f) {
-      const want = r.id;
+      const fit = () => { try { f.style.height = (f.contentDocument.documentElement.scrollHeight + 4) + "px"; } catch (e) { /* ignore */ } };
+      f.addEventListener("load", () => {
+        fit();
+        try { f.contentDocument.querySelectorAll("img").forEach((im) => im.addEventListener("load", fit)); } catch (e) { /* ignore */ }
+        setTimeout(fit, 800); setTimeout(fit, 2500);
+      });
       cardHtml(r.card).then((html) => {
-        if (current !== want) return;           // another find was opened meanwhile
+        if (current !== id) return;
         f.srcdoc = html;
         const w = $("cardwait"); if (w) w.remove();
       }).catch(() => { const w = $("cardwait"); if (w) w.textContent = "The report card could not be opened. Please reload the page."; });
-      const fit = () => { try { f.style.height = (f.contentDocument.documentElement.scrollHeight + 4) + "px"; } catch (e) { /* cross-origin */ } };
-      f.addEventListener("load", () => {
-        fit();
-        try { f.contentDocument.querySelectorAll("img").forEach((i) => i.addEventListener("load", fit)); } catch (e) { /* ignore */ }
-        setTimeout(fit, 800); setTimeout(fit, 2500);
-      });
     }
+  }
+  function step(d) {
+    const i = order.findIndex((x) => x.id === current);
+    const nx = order[i + d];
+    if (nx) { openDetail(nx.id, false); setHash(nx.id, false); }
   }
   function closeDetail(push) {
     $("detail").hidden = true;
-    document.body.style.overflow = "";
+    document.body.classList.remove("noscroll");
     if (dmap) { dmap.remove(); dmap = null; }
+    const was = current;
     current = null;
     if (push !== false && hashParams().get("f")) setHash(null, true);
+    renderTabs(); renderList();
+    const el = was && document.querySelector(`.row[data-id="${CSS.escape(was)}"]`);
+    if (el) { el.classList.add("active"); el.scrollIntoView({ block: "center" }); }
   }
   function fromHash() {
     const f = hashParams().get("f");
-    if (f) openDetail(f, false); else closeDetail(false);
+    if (f) openDetail(f, false); else if (!$("detail").hidden) closeDetail(false);
+  }
+  function setMark(id, v) {
+    if (marks[id] === v) delete marks[id]; else marks[id] = v;
+    save("df_marks", marks);
+    document.querySelectorAll(".act[data-mark]").forEach((b) => b.classList.toggle("on", marks[id] === b.dataset.mark));
+    if (v === "no" && marks[id] === "no") setTimeout(() => step(1), 250);   // passed: move on
   }
 
-  // ---- intro ----------------------------------------------------------------
-  function renderIntro() {
-    const c = DATA.counts, recs = DATA.records;
-    const newN = recs.filter(isNew).length;
-    const cur = recs.filter((r) => !isGone(r));
-    const months = [...new Set(recs.filter((r) => r.bot === "rezone").map((r) => r.found.slice(0, 7)))].sort();
-    $("intro").innerHTML = `
-      <p class="big">Everything the three scouts have found since they started:
-        <b>${c.rezone}</b> rezonings, <b>${c.listing}</b> properties listed for sale, and <b>${c.assemblage}</b> assemblage sites
-        — <b>${cur.length}</b> still live.</p>
-      <p><b>${DATA.links}</b> pieces of land turn up in more than one scout — see <i>In more than one</i>.
-        Tap any find for its full details and the scout's own report card.</p>
-      <p>${prevSeen ? (newN ? `<b>${newN}</b> new since your last visit (marked NEW).` : "Nothing new since your last visit.")
-        : "Next time you open this page, anything added since today will be marked NEW."}</p>`;
-    const overlapFinds = recs.filter((r) => r.related.length).length;
-    $("intro").querySelector("p:nth-child(2)").innerHTML = `<b>${DATA.links}</b> pieces of land show up in more than one scout
-      (${overlapFinds} finds, under <i>In more than one</i>). Tap any find for its full details and the scout's own report card.`;
-    $("updated").textContent = "Updated " + DATA.built;
+  // ---- header -------------------------------------------------------------------
+  function renderUpdated() {
+    const c = DATA.counts;
+    $("updated").innerHTML = `${c.rezone} rezonings · ${c.listing} for sale · ${c.assemblage} assemblages<br><span>Updated ${esc(fmtDate(DATA.built.slice(0, 10)))}</span>`;
   }
 
-  // ---- wiring ---------------------------------------------------------------
+  // ---- wiring ---------------------------------------------------------------------
   function wire() {
     $("tabs").addEventListener("click", (e) => {
       const t = e.target.closest(".tab"); if (!t) return;
@@ -306,32 +410,53 @@
     $("q").addEventListener("input", (e) => {
       clearTimeout(tq); tq = setTimeout(() => { st.q = e.target.value.trim(); st.shown = PAGE; renderAll(false); }, 150);
     });
+    $("sizechips").addEventListener("click", (e) => {
+      const b = e.target.closest("[data-size]"); if (!b) return;
+      st.minAcres = Number(b.dataset.size); st.shown = PAGE; renderAll(true);
+    });
+    $("sewerchip").addEventListener("click", () => { st.sewer = !st.sewer; st.shown = PAGE; renderAll(true); });
     $("county").addEventListener("change", (e) => { st.county = e.target.value; st.shown = PAGE; renderAll(true); });
     $("sort").addEventListener("change", (e) => { st.sort = e.target.value; renderList(); });
-    $("newonly").addEventListener("change", (e) => { st.newonly = e.target.checked; st.shown = PAGE; renderAll(true); });
+    $("mapfilter").addEventListener("change", (e) => { st.mapOnly = e.target.checked; st.shown = PAGE; renderAll(false); });
     $("showgone").addEventListener("change", (e) => { st.showgone = e.target.checked; st.shown = PAGE; renderAll(false); });
+    $("showpassed").addEventListener("change", (e) => { st.showpassed = e.target.checked; st.shown = PAGE; renderAll(false); });
     $("more").addEventListener("click", () => { st.shown += PAGE; renderList(); });
-    const openFrom = (e) => {
-      const b = e.target.closest("[data-open]"); if (b) { openDetail(b.dataset.open); return true; }
-      const row = e.target.closest(".row"); if (row) { openDetail(row.dataset.id); return true; }
-      return false;
-    };
-    $("list").addEventListener("click", openFrom);
-    $("list").addEventListener("keydown", (e) => { if (e.key === "Enter") openFrom(e); });
-    document.addEventListener("click", (e) => {
-      if (e.target.closest(".leaflet-popup") || e.target.closest(".related")) openFrom(e);
+    $("list").addEventListener("click", (e) => {
+      const go = e.target.closest("[data-go]");
+      if (go) {
+        Object.assign(st, { minAcres: 0, sewer: false, sort: "found", shown: PAGE }, JSON.parse(go.dataset.go));
+        $("sort").value = st.sort;
+        renderAll(true); window.scrollTo({ top: 0 }); return;
+      }
+      const row = e.target.closest(".row"); if (row) openDetail(row.dataset.id);
     });
+    $("list").addEventListener("mouseover", (e) => { const r = e.target.closest(".row"); if (r) highlight(r.dataset.id, true); });
+    $("list").addEventListener("mouseout", (e) => { const r = e.target.closest(".row"); if (r) highlight(r.dataset.id, false); });
+    $("dcontent").addEventListener("click", (e) => {
+      const m = e.target.closest("[data-mark]"); if (m) { setMark(current, m.dataset.mark); return; }
+      const o = e.target.closest("[data-open]"); if (o) openDetail(o.dataset.open);
+    });
+    $("prev").addEventListener("click", () => step(-1));
+    $("next").addEventListener("click", () => step(1));
     $("close").addEventListener("click", () => closeDetail());
     $("detail").addEventListener("click", (e) => { if (e.target === $("detail")) closeDetail(); });
-    document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !$("detail").hidden) closeDetail(); });
+    document.addEventListener("keydown", (e) => {
+      if ($("detail").hidden) return;
+      if (e.key === "Escape") closeDetail();
+      else if (e.key === "ArrowRight") step(1);
+      else if (e.key === "ArrowLeft") step(-1);
+    });
+    $("maptoggle").addEventListener("click", () => {
+      const on = document.body.classList.toggle("showmap");
+      $("maptoggle").textContent = on ? "Hide map" : "Show map";
+      if (on) setTimeout(() => { map.invalidateSize(); fitMap(); }, 50);
+    });
     window.addEventListener("popstate", fromHash);
+    window.addEventListener("hashchange", () => { if (!DATA && hashParams().get("k")) location.reload(); });
   }
 
-  // A full link pasted into a tab that opened without its key: start over.
-  window.addEventListener("hashchange", () => { if (!DATA && hashParams().get("k")) location.reload(); });
-
   async function start() {
-    const fail = (msg) => { $("intro").innerHTML = `<p class="big">${msg}</p>`; };
+    const fail = (msg) => { $("explain").innerHTML = `<b>${msg}</b>`; $("controls").hidden = true; };
     if (!KEY_TXT) { fail("This link is incomplete — please open the full link Wes sent you."); return; }
     try {
       CRYPTO_KEY = await crypto.subtle.importKey("raw", b64u(KEY_TXT), "AES-GCM", false, ["decrypt"]);
@@ -342,15 +467,17 @@
     }
     for (const r of DATA.records) {
       BYID[r.id] = r;
-      r._text = [r.title, r.sub, r.county, r.status, ...r.headline, ...r.fields.map((f) => f[1])].join(" ").toLowerCase();
+      r._text = [r.title, r.sub, r.county, r.badge, ...r.headline, ...r.fields.map((f) => f[1])].join(" ").toLowerCase();
     }
+    marks = load("df_marks") || {};
+    viewed = load("df_viewed") || {};
     const prev = load("df_seen_ids");
     prevSeen = Array.isArray(prev) ? new Set(prev) : null;
     const counties = [...new Set(DATA.records.map((r) => r.county))].sort();
     $("county").insertAdjacentHTML("beforeend", counties.map((c) => `<option>${esc(c)}</option>`).join(""));
     initMap();
     wire();
-    renderIntro();
+    renderUpdated();
     renderAll(true);
     fromHash();
     // Remember what this visit showed, so the next one can mark what is new.

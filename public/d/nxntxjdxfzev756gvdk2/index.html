@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
 <title>Deal Finder · Prime Interest</title>
 <link rel="icon" href="favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,45 +22,58 @@
   <p class="updated" id="updated"></p>
 </header>
 
-<section class="intro" id="intro"></section>
-
 <nav class="tabs" id="tabs" role="tablist"></nav>
+<p class="explain" id="explain"></p>
 
-<section class="controls">
-  <input id="q" type="search" placeholder="Search road, owner, case number, city…" autocomplete="off" aria-label="Search">
+<section class="controls" id="controls">
+  <input id="q" type="search" placeholder="Search a road, owner, city or case number" autocomplete="off" aria-label="Search">
+  <div class="chips" id="sizechips" role="group" aria-label="Size"></div>
+  <button type="button" class="chip" id="sewerchip" aria-pressed="false">Gravity sewer within 200 ft</button>
   <select id="county" aria-label="County"><option value="">All counties</option></select>
   <select id="sort" aria-label="Sort">
     <option value="found">Newest first</option>
     <option value="acres">Biggest first</option>
-    <option value="price">Cheapest per acre first</option>
+    <option value="homes">Most homes first</option>
+    <option value="price">Lowest price per acre first</option>
     <option value="county">By county</option>
   </select>
-  <label class="chk"><input type="checkbox" id="newonly"> New since last visit</label>
-  <label class="chk"><input type="checkbox" id="showgone"> Include sold / ruled out</label>
+  <label class="chk"><input type="checkbox" id="mapfilter"> Only what's on the map</label>
+  <label class="chk"><input type="checkbox" id="showgone"> Include sold and ruled out</label>
+  <label class="chk"><input type="checkbox" id="showpassed"> Include ones I passed on</label>
 </section>
 
-<main class="body">
-  <div class="mapwrap"><div id="map"></div>
+<button type="button" class="maptoggle" id="maptoggle">Show map</button>
+
+<main class="body" id="body">
+  <div class="mapwrap" id="mapwrap"><div id="map"></div>
     <div class="legend" id="legend"></div>
     <button class="basemap" id="basemap" type="button">Street map</button>
   </div>
   <div class="listwrap">
     <p class="count" id="count"></p>
-    <ol class="list" id="list"></ol>
+    <div id="list"></div>
     <button class="more" id="more" type="button" hidden>Show more</button>
   </div>
 </main>
 
-<aside class="detail" id="detail" hidden aria-modal="true" role="dialog">
-  <div class="detail-inner">
-    <button class="close" id="close" type="button">← Back to the list</button>
+<aside class="detail" id="detail" hidden aria-modal="true" role="dialog" aria-labelledby="dtitle">
+  <div class="detail-inner" id="detailinner">
+    <div class="dnav">
+      <button class="close" id="close" type="button">← Back</button>
+      <span class="pos" id="pos"></span>
+      <span class="dnav-btns">
+        <button type="button" class="navbtn" id="prev" aria-label="Previous find">‹ Previous</button>
+        <button type="button" class="navbtn" id="next" aria-label="Next find">Next ›</button>
+      </span>
+    </div>
     <div id="dcontent"></div>
   </div>
 </aside>
 
 <footer class="foot">
-  Built from Rezone Scout, Land Scout and Assemblage Scout. Each find shows the bot's own report card where one exists.
-  Private — please don't forward this link.
+  Built from Rezone Scout, Land Scout and Assemblage Scout, updated every afternoon.
+  Your Interested / Pass marks are kept on this device only.
+  Private page — please don't forward the link.
 </footer>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>

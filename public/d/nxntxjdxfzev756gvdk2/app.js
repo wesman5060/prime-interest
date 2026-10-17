@@ -18,7 +18,7 @@
     ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 
   let DATA, BYID = {}, prevSeen = null, marks = {}, viewed = {};
-  const st = { tab: "start", q: "", county: "", sort: "found", minAcres: 0, sewer: false,
+  const st = { tab: "start", q: "", sort: "found", open: new Set(), autoOpen: true, minAcres: 0, sewer: false,
     mapOnly: false, showgone: false, showpassed: false, shown: PAGE };
   let order = [];            // the list currently on screen, for Previous / Next
 
@@ -87,7 +87,6 @@
     const o = Object.assign({ gone: st.showgone, passed: st.showpassed }, opts || {});
     if (!o.gone && isGone(r)) return false;
     if (!o.passed && marks[r.id] === "no") return false;
-    if (st.county && r.county !== st.county) return false;
     if (st.minAcres && !(r.acres >= st.minAcres)) return false;
     if (st.sewer && !r.sewer_ok) return false;
     if (st.q) {
@@ -107,7 +106,6 @@
     acres: (a, b) => (b.acres || 0) - (a.acres || 0),
     homes: (a, b) => (b.homes || 0) - (a.homes || 0) || (b.acres || 0) - (a.acres || 0),
     price: (a, b) => (ppa(a) || Infinity) - (ppa(b) || Infinity),
-    county: (a, b) => a.county.localeCompare(b.county) || (b.acres || 0) - (a.acres || 0),
   };
   function listRows() {
     const opts = st.tab === "mine" ? { gone: true, passed: true } : {};
@@ -165,7 +163,7 @@
       (BOT[t] ? `<i class="dot ${t}"></i>` : "") + `${esc(label)}${c !== "" ? ` <span class="n">${c}</span>` : ""}</button>`).join("");
     const ex = {
       start: `A first look: the finds most worth your time, out of <b>${DATA.records.filter((r) => !isGone(r)).length}</b> live ones. Use the tabs above to go through everything.`,
-      all: "Every find from all three scouts. Use the size and sewer buttons to narrow it down.",
+      all: "Every find from all three scouts, grouped by county and then by town. Use the size and sewer buttons to narrow it down.",
       mine: "Finds you marked ★ Interested. Kept on this device.",
     }[st.tab] || esc(BOT[st.tab].explain);
     $("explain").innerHTML = ex;
@@ -186,6 +184,30 @@
     return cap(w);
   }
 
+  // ---- county -> town grouping ------------------------------------------------
+  function townKey(t) { return (/^Unincorporated/.test(t) ? "~" : "") + t; }   // unincorporated last
+  function groupRows(rows) {
+    const byC = new Map();
+    for (const r of rows) {
+      const c = r.county_group || r.county;
+      if (!byC.has(c)) byC.set(c, new Map());
+      const towns = byC.get(c);
+      const t = r.town || "Town not given";
+      if (!towns.has(t)) towns.set(t, []);
+      towns.get(t).push(r);
+    }
+    return [...byC.entries()].sort((a, b) => a[0].localeCompare(b[0])).map(([county, towns]) => ({
+      county,
+      towns: [...towns.entries()].sort((a, b) => townKey(a[0]).localeCompare(townKey(b[0]))).map(([town, rs]) => ({ town, rows: rs })),
+      n: [...towns.values()].reduce((x, rs) => x + rs.length, 0),
+    }));
+  }
+  function short(c) { return c.replace(/ County$/, ""); }
+  function fitTo(rows) {
+    const pts = rows.filter((r) => r.lat != null).map((r) => [r.lat, r.lon]);
+    if (pts.length && map) map.fitBounds(pts, { padding: [30, 30], maxZoom: pts.length > 1 ? 13 : 15 });
+  }
+
   function renderStart() {
     const secs = startSections();
     order = [];
@@ -194,8 +216,11 @@
       if (s.pairs) {
         body = s.pairs.map((p) => { order.push(p.a, p.b); return `<div class="pair"><p class="pairwhy">${esc(plainWhy(p.why))}</p>${rowHtml(p.a)}${rowHtml(p.b)}</div>`; }).join("");
       } else {
-        order.push(...s.rows);
-        body = s.rows.map(rowHtml).join("");
+        body = groupRows(s.rows).map((g) => {
+          const rs = g.towns.flatMap((t) => t.rows);
+          order.push(...rs);
+          return `<h4 class="minicounty">${esc(g.county)} <span>${g.n}</span></h4>` + rs.map(rowHtml).join("");
+        }).join("");
       }
       const more = s.go && s.more > s.rows.length
         ? `<button type="button" class="seeall" data-go='${esc(JSON.stringify(s.go))}'>See all ${s.more} →</button>` : "";
@@ -210,15 +235,36 @@
   function renderList() {
     if (st.tab === "start") { renderStart(); return; }
     const rows = listRows();
-    order = rows;
+    const groups = groupRows(rows);
+    order = groups.flatMap((g) => g.towns.flatMap((t) => t.rows));
+    if (st.autoOpen) {                       // small lists open fully; big ones start as a county index
+      st.open = new Set(rows.length <= 60 || groups.length === 1 ? groups.map((g) => g.county) : []);
+      st.autoOpen = false;
+    }
     const hidden = [];
     if (!st.showgone && st.tab !== "mine") hidden.push("sold and ruled-out finds");
     if (!st.showpassed && st.tab !== "mine") hidden.push("ones you passed on");
-    $("count").textContent = `${rows.length.toLocaleString()} ${rows.length === 1 ? "find" : "finds"}` + (hidden.length ? ` · hiding ${hidden.join(" and ")}` : "");
-    $("list").innerHTML = `<div class="rows">${rows.slice(0, st.shown).map(rowHtml).join("")}</div>` +
-      (rows.length ? "" : `<p class="none">${st.tab === "mine" ? "Nothing marked yet. Open a find and tap ★ Interested." : "Nothing matches. Try a smaller size, turn off the sewer button, or pick “All counties”."}</p>`);
-    $("more").hidden = rows.length <= st.shown;
-    $("more").textContent = `Show ${Math.min(PAGE, rows.length - st.shown)} more (${(rows.length - st.shown).toLocaleString()} left)`;
+    $("count").textContent = `${rows.length.toLocaleString()} ${rows.length === 1 ? "find" : "finds"} in ${groups.length} ${groups.length === 1 ? "county" : "counties"}` +
+      (hidden.length ? ` · hiding ${hidden.join(" and ")}` : "");
+    const jump = groups.length > 1 ? `<div class="jump"><span class="jl">Jump to a county:</span>${groups.map((g) =>
+      `<button type="button" class="chip" data-jump="${esc(g.county)}">${esc(short(g.county))} <span class="n">${g.n}</span></button>`).join("")}
+      <span class="oc"><button type="button" class="lnkbtn" data-all="open">Open all</button> · <button type="button" class="lnkbtn" data-all="close">Close all</button></span></div>` : "";
+    const body = groups.map((g) => {
+      const open = st.open.has(g.county);
+      const towns = g.towns.length;
+      return `<section class="cgroup${open ? " open" : ""}" data-county="${esc(g.county)}">
+        <button type="button" class="chead" data-toggle="${esc(g.county)}" aria-expanded="${open}">
+          <span class="cname">${esc(g.county)}</span>
+          <span class="ccount">${g.n} ${g.n === 1 ? "find" : "finds"} · ${towns} ${towns === 1 ? "town" : "towns"}</span>
+          <span class="chev" aria-hidden="true">${open ? "▾ Close" : "▸ Open"}</span>
+        </button>
+        ${open ? `<div class="cbody">${g.towns.map((t) => `<h3 class="town">${esc(t.town)} <span>${t.rows.length}</span></h3><div class="rows">${t.rows.map(rowHtml).join("")}</div>`).join("")}</div>`
+          : `<p class="ctowns">${g.towns.map((t) => `${esc(t.town)} (${t.rows.length})`).join(" · ")}</p>`}
+      </section>`;
+    }).join("");
+    $("list").innerHTML = jump + body +
+      (rows.length ? "" : `<p class="none">${st.tab === "mine" ? "Nothing marked yet. Open a find and tap ★ Interested." : "Nothing matches. Try a smaller size or turn off the sewer button."}</p>`);
+    $("more").hidden = true;
     if (!st.mapOnly) renderMarkers(rows);
   }
 
@@ -404,7 +450,7 @@
   function wire() {
     $("tabs").addEventListener("click", (e) => {
       const t = e.target.closest(".tab"); if (!t) return;
-      st.tab = t.dataset.tab; st.shown = PAGE; renderAll(true);
+      st.tab = t.dataset.tab; st.shown = PAGE; st.autoOpen = true; renderAll(true);
     });
     let tq;
     $("q").addEventListener("input", (e) => {
@@ -412,10 +458,9 @@
     });
     $("sizechips").addEventListener("click", (e) => {
       const b = e.target.closest("[data-size]"); if (!b) return;
-      st.minAcres = Number(b.dataset.size); st.shown = PAGE; renderAll(true);
+      st.minAcres = Number(b.dataset.size); st.shown = PAGE; st.autoOpen = true; renderAll(true);
     });
-    $("sewerchip").addEventListener("click", () => { st.sewer = !st.sewer; st.shown = PAGE; renderAll(true); });
-    $("county").addEventListener("change", (e) => { st.county = e.target.value; st.shown = PAGE; renderAll(true); });
+    $("sewerchip").addEventListener("click", () => { st.sewer = !st.sewer; st.shown = PAGE; st.autoOpen = true; renderAll(true); });
     $("sort").addEventListener("change", (e) => { st.sort = e.target.value; renderList(); });
     $("mapfilter").addEventListener("change", (e) => { st.mapOnly = e.target.checked; st.shown = PAGE; renderAll(false); });
     $("showgone").addEventListener("change", (e) => { st.showgone = e.target.checked; st.shown = PAGE; renderAll(false); });
@@ -424,9 +469,29 @@
     $("list").addEventListener("click", (e) => {
       const go = e.target.closest("[data-go]");
       if (go) {
-        Object.assign(st, { minAcres: 0, sewer: false, sort: "found", shown: PAGE }, JSON.parse(go.dataset.go));
+        Object.assign(st, { minAcres: 0, sewer: false, sort: "found", shown: PAGE, autoOpen: true }, JSON.parse(go.dataset.go));
         $("sort").value = st.sort;
         renderAll(true); window.scrollTo({ top: 0 }); return;
+      }
+      const tg = e.target.closest("[data-toggle]");
+      if (tg) {
+        const c = tg.dataset.toggle;
+        if (st.open.has(c)) st.open.delete(c); else { st.open.add(c); fitTo(order.filter((r) => (r.county_group || r.county) === c)); }
+        renderList(); return;
+      }
+      const j = e.target.closest("[data-jump]");
+      if (j) {
+        const c = j.dataset.jump;
+        st.open.add(c); renderList();
+        fitTo(order.filter((r) => (r.county_group || r.county) === c));
+        const el = document.querySelector(`.cgroup[data-county="${CSS.escape(c)}"]`);
+        if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+        return;
+      }
+      const all = e.target.closest("[data-all]");
+      if (all) {
+        st.open = new Set(all.dataset.all === "open" ? groupRows(listRows()).map((g) => g.county) : []);
+        renderList(); if (all.dataset.all === "close") fitMap(); return;
       }
       const row = e.target.closest(".row"); if (row) openDetail(row.dataset.id);
     });
@@ -467,14 +532,12 @@
     }
     for (const r of DATA.records) {
       BYID[r.id] = r;
-      r._text = [r.title, r.sub, r.county, r.badge, ...r.headline, ...r.fields.map((f) => f[1])].join(" ").toLowerCase();
+      r._text = [r.title, r.sub, r.county, r.county_group, r.town, r.badge, ...r.headline, ...r.fields.map((f) => f[1])].join(" ").toLowerCase();
     }
     marks = load("df_marks") || {};
     viewed = load("df_viewed") || {};
     const prev = load("df_seen_ids");
     prevSeen = Array.isArray(prev) ? new Set(prev) : null;
-    const counties = [...new Set(DATA.records.map((r) => r.county))].sort();
-    $("county").insertAdjacentHTML("beforeend", counties.map((c) => `<option>${esc(c)}</option>`).join(""));
     initMap();
     wire();
     renderUpdated();

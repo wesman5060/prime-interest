@@ -197,3 +197,23 @@ a { color: var(--rezone); }
   .top h1 { font-size: 23px; }
   .updated { text-align: left; }
 }
+
+
+/* county -> town grouping */
+.jump { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin: 0 0 14px; }
+.jump .jl { font-size: 14px; color: var(--muted); margin-right: 4px; }
+.jump .chip .n { color: var(--muted); }
+.jump .oc { font-size: 14px; color: var(--muted); margin-left: auto; }
+.lnkbtn { border: 0; background: none; padding: 2px 0; color: var(--rezone); font-weight: 600; cursor: pointer; font-size: 14px; }
+.cgroup { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; margin: 0 0 10px; overflow: hidden; }
+.chead { width: 100%; display: flex; align-items: baseline; flex-wrap: wrap; gap: 4px 12px; padding: 14px 16px; border: 0; background: none; cursor: pointer; text-align: left; }
+.chead:hover { background: #faf8f3; }
+.cname { font: 600 21px/1.2 "Playfair Display", Georgia, serif; }
+.ccount { color: var(--muted); font-size: 14.5px; }
+.chev { margin-left: auto; color: var(--rezone); font-size: 14px; font-weight: 600; }
+.ctowns { margin: -6px 16px 12px; color: var(--muted); font-size: 14px; }
+.cbody { padding: 0 12px 12px; background: var(--bg); border-top: 1px solid var(--line); }
+.town { font-size: 14px; letter-spacing: .06em; text-transform: uppercase; color: #6b5221; margin: 14px 4px 8px; }
+.town span, .minicounty span { color: var(--muted); font-weight: 400; letter-spacing: 0; }
+.minicounty { font-size: 13.5px; letter-spacing: .06em; text-transform: uppercase; color: #6b5221; margin: 12px 2px 6px; }
+.minicounty:first-child { margin-top: 0; }

@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Deal Finder · Prime Interest</title>
+<link rel="icon" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top">
+  <div class="brand">
+    <span class="mark">PRIME INTEREST</span>
+    <h1>Deal Finder</h1>
+  </div>
+  <p class="updated" id="updated"></p>
+</header>
+
+<section class="intro" id="intro"></section>
+
+<nav class="tabs" id="tabs" role="tablist"></nav>
+
+<section class="controls">
+  <input id="q" type="search" placeholder="Search road, owner, case number, city…" autocomplete="off" aria-label="Search">
+  <select id="county" aria-label="County"><option value="">All counties</option></select>
+  <select id="sort" aria-label="Sort">
+    <option value="found">Newest first</option>
+    <option value="acres">Biggest first</option>
+    <option value="price">Cheapest per acre first</option>
+    <option value="county">By county</option>
+  </select>
+  <label class="chk"><input type="checkbox" id="newonly"> New since last visit</label>
+  <label class="chk"><input type="checkbox" id="showgone"> Include sold / ruled out</label>
+</section>
+
+<main class="body">
+  <div class="mapwrap"><div id="map"></div>
+    <div class="legend" id="legend"></div>
+    <button class="basemap" id="basemap" type="button">Street map</button>
+  </div>
+  <div class="listwrap">
+    <p class="count" id="count"></p>
+    <ol class="list" id="list"></ol>
+    <button class="more" id="more" type="button" hidden>Show more</button>
+  </div>
+</main>
+
+<aside class="detail" id="detail" hidden aria-modal="true" role="dialog">
+  <div class="detail-inner">
+    <button class="close" id="close" type="button">← Back to the list</button>
+    <div id="dcontent"></div>
+  </div>
+</aside>
+
+<footer class="foot">
+  Built from Rezone Scout, Land Scout and Assemblage Scout. Each find shows the bot's own report card where one exists.
+  Private — please don't forward this link.
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

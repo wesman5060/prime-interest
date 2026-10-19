@@ -1,4 +1,4 @@
-/* Deal Finder — one page over everything the three scouts found. */
+/* Deal Finder — one page over everything the scouts found. */
 (function () {
   "use strict";
 
@@ -9,6 +9,8 @@
       explain: "Land listed for sale (mostly 10+ acres), each checked against county records for sewer, floodplain, zoning and the owner." },
     assemblage: { name: "Assemblages", one: "Assemblage", color: "#c26a12",
       explain: "Neighbouring lots that together clear 10 acres of good ground for townhomes or apartments — land nobody is selling as one piece." },
+    lots: { name: "Finished lots", one: "Finished lots", color: "#7b3fa8",
+      explain: "Subdivisions with streets in but few or no houses, and brand-new sites still in one piece — where the owner shows signs of wanting out. Each owner's court and county filings were read one at a time; none is held by a national builder. Numbered strongest first." },
   };
   const SIZES = [[0, "Any size"], [10, "10+ ac"], [25, "25+ ac"], [50, "50+ ac"], [100, "100+ ac"]];
   const PAGE = 50;
@@ -109,7 +111,9 @@
   };
   function listRows() {
     const opts = st.tab === "mine" ? { gone: true, passed: true } : {};
-    return DATA.records.filter((r) => inTab(r, st.tab) && passes(r, opts)).sort(SORTS[st.sort]);
+    const rows = DATA.records.filter((r) => inTab(r, st.tab) && passes(r, opts));
+    // the Finished lots shortlist reads best in its own order, strongest seller signals first
+    return st.tab === "lots" && st.sort === "found" ? rows.sort((a, b) => a.rank - b.rank) : rows.sort(SORTS[st.sort]);
   }
 
   // ---- "Start here": a short, explained first look ---------------------------
@@ -131,6 +135,8 @@
     const num = (r) => parseInt(r.badge.replace(/\D/g, "") || "99", 10);
     const picks = recs.filter((r) => r.bot === "assemblage" && (r.state === "pick" || r.state === "runner_up"))
       .sort((a, b) => (a.state === "pick" ? 0 : 1) - (b.state === "pick" ? 0 : 1) || num(a) - num(b));
+    const lots = recs.filter((r) => r.bot === "lots").sort((a, b) => a.rank - b.rank);
+    if (lots.length) sec.push({ title: "Finished lots shortlist", why: "Ready-to-build lots and new sites whose owners show signs of wanting out — liens, back taxes, lawsuits, a stalled project. Numbered strongest first.", rows: lots, keepOrder: true });
     if (picks.length) sec.push({ title: "Assemblage shortlist", why: "The ten best groups of lots across seven counties, each checked by eye and in the news, plus four runners-up.", rows: picks });
     const rez = recs.filter((r) => r.bot === "rezone" && r.badge_kind === "good" && live(r)).sort(SORTS.acres);
     if (rez.length) sec.push({ title: "Rezonings approved or recommended", why: "The county has said yes, or its staff or planning board recommended yes.", rows: rez.slice(0, 10), more: rez.length, go: { tab: "rezone", sort: "acres" } });
@@ -157,13 +163,13 @@
     const n = (t) => DATA.records.filter((r) => inTab(r, t) && passes(r, t === "mine" ? { gone: true, passed: true } : {})).length;
     const mine = Object.values(marks).filter((v) => v === "yes").length;
     const tabs = [["start", "Start here", ""], ["all", "Everything", n("all")], ["rezone", BOT.rezone.name, n("rezone")],
-      ["listing", BOT.listing.name, n("listing")], ["assemblage", BOT.assemblage.name, n("assemblage")], ["mine", "★ My picks", mine]];
+      ["listing", BOT.listing.name, n("listing")], ["assemblage", BOT.assemblage.name, n("assemblage")], ["lots", BOT.lots.name, n("lots")], ["mine", "★ My picks", mine]];
     $("tabs").innerHTML = tabs.map(([t, label, c]) =>
       `<button class="tab${t === "start" ? " start" : ""}" role="tab" data-tab="${t}" aria-selected="${st.tab === t}">` +
       (BOT[t] ? `<i class="dot ${t}"></i>` : "") + `${esc(label)}${c !== "" ? ` <span class="n">${c}</span>` : ""}</button>`).join("");
     const ex = {
       start: `A first look: the finds most worth your time, out of <b>${DATA.records.filter((r) => !isGone(r)).length}</b> live ones. Use the tabs above to go through everything.`,
-      all: "Every find from all three scouts, grouped by county and then by town. Use the size and sewer buttons to narrow it down.",
+      all: "Every find from all four scouts, grouped by county and then by town. Use the size and sewer buttons to narrow it down.",
       mine: "Finds you marked ★ Interested. Kept on this device.",
     }[st.tab] || esc(BOT[st.tab].explain);
     $("explain").innerHTML = ex;
@@ -216,7 +222,7 @@
       if (s.pairs) {
         body = s.pairs.map((p) => { order.push(p.a, p.b); return `<div class="pair"><p class="pairwhy">${esc(plainWhy(p.why))}</p>${rowHtml(p.a)}${rowHtml(p.b)}</div>`; }).join("");
       } else {
-        body = groupRows(s.rows).map((g) => {
+        body = s.keepOrder ? (order.push(...s.rows), s.rows.map(rowHtml).join("")) : groupRows(s.rows).map((g) => {
           const rs = g.towns.flatMap((t) => t.rows);
           order.push(...rs);
           return `<h4 class="minicounty">${esc(g.county)} <span>${g.n}</span></h4>` + rs.map(rowHtml).join("");
@@ -443,7 +449,7 @@
   // ---- header -------------------------------------------------------------------
   function renderUpdated() {
     const c = DATA.counts;
-    $("updated").innerHTML = `${c.rezone} rezonings · ${c.listing} for sale · ${c.assemblage} assemblages<br><span>Updated ${esc(fmtDate(DATA.built.slice(0, 10)))}</span>`;
+    $("updated").innerHTML = `${c.rezone} rezonings · ${c.listing} for sale · ${c.assemblage} assemblages` + (c.lots ? ` · ${c.lots} finished lots` : "") + `<br><span>Updated ${esc(fmtDate(DATA.built.slice(0, 10)))}</span>`;
   }
 
   // ---- wiring ---------------------------------------------------------------------

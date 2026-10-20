@@ -135,8 +135,10 @@
     const num = (r) => parseInt(r.badge.replace(/\D/g, "") || "99", 10);
     const picks = recs.filter((r) => r.bot === "assemblage" && (r.state === "pick" || r.state === "runner_up"))
       .sort((a, b) => (a.state === "pick" ? 0 : 1) - (b.state === "pick" ? 0 : 1) || num(a) - num(b));
-    const lots = recs.filter((r) => r.bot === "lots").sort((a, b) => a.rank - b.rank);
+    const lots = recs.filter((r) => r.bot === "lots" && r.rank < 100).sort((a, b) => a.rank - b.rank);
     if (lots.length) sec.push({ title: "Pre-built developments, no houses yet", why: "Roads in, lots graded, nothing built, still with the developer. Numbered by how likely the owner is to deal.", rows: lots, keepOrder: true });
+    const uw = recs.filter((r) => r.bot === "lots" && r.rank >= 100).sort((a, b) => a.rank - b.rank);
+    if (uw.length) sec.push({ title: "Site work under way, nothing built yet", why: "Grading, streets or sewer going in now and no building started: homes (H) first, then apartments and townhomes (A). The rest are on the Finished lots tab.", rows: uw.slice(0, 10), more: uw.length, keepOrder: true, go: { tab: "lots", sort: "found" } });
     if (picks.length) sec.push({ title: "Assemblage shortlist", why: "The ten best groups of lots across seven counties, each checked by eye and in the news, plus four runners-up.", rows: picks });
     const rez = recs.filter((r) => r.bot === "rezone" && r.badge_kind === "good" && live(r)).sort(SORTS.acres);
     if (rez.length) sec.push({ title: "Rezonings approved or recommended", why: "The county has said yes, or its staff or planning board recommended yes.", rows: rez.slice(0, 10), more: rez.length, go: { tab: "rezone", sort: "acres" } });

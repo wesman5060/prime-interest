@@ -9,7 +9,7 @@
       explain: "Land listed for sale (mostly 10+ acres), each checked against county records for sewer, floodplain, zoning and the owner." },
     assemblage: { name: "Assemblages", one: "Assemblage", color: "#c26a12",
       explain: "Neighbouring lots that together clear 10 acres of good ground for townhomes or apartments — land nobody is selling as one piece." },
-    lots: { name: "Finished lots", one: "Finished lots", color: "#7b3fa8",
+    lots: { name: "Pre-built developments", one: "Pre-built development", color: "#7b3fa8",
       explain: "Every development in these counties where the roads are built and the lots are graded but not one house has gone up, still held by the developer and not by a national builder. Each was checked on current aerial photos and in county, court and state records. Numbered by how likely the owner is to deal." },
   };
   const SIZES = [[0, "Any size"], [10, "10+ ac"], [25, "25+ ac"], [50, "50+ ac"], [100, "100+ ac"]];
@@ -138,7 +138,7 @@
     const lots = recs.filter((r) => r.bot === "lots" && r.rank < 100).sort((a, b) => a.rank - b.rank);
     if (lots.length) sec.push({ title: "Pre-built developments, no houses yet", why: "Roads in, lots graded, nothing built, still with the developer. Numbered by how likely the owner is to deal.", rows: lots, keepOrder: true });
     const uw = recs.filter((r) => r.bot === "lots" && r.rank >= 100).sort((a, b) => a.rank - b.rank);
-    if (uw.length) sec.push({ title: "Site work under way, nothing built yet", why: "Grading, streets or sewer going in now and no building started: homes (H) first, then apartments and townhomes (A). The rest are on the Finished lots tab.", rows: uw.slice(0, 10), more: uw.length, keepOrder: true, go: { tab: "lots", sort: "found" } });
+    if (uw.length) sec.push({ title: "Site work under way, nothing built yet", why: "Grading, streets or sewer going in now and no building started: homes (H) first, then apartments and townhomes (A). The rest are on the Pre-built developments tab.", rows: uw.slice(0, 10), more: uw.length, keepOrder: true, go: { tab: "lots", sort: "found" } });
     if (picks.length) sec.push({ title: "Assemblage shortlist", why: "The ten best groups of lots across seven counties, each checked by eye and in the news, plus four runners-up.", rows: picks });
     const rez = recs.filter((r) => r.bot === "rezone" && r.badge_kind === "good" && live(r)).sort(SORTS.acres);
     if (rez.length) sec.push({ title: "Rezonings approved or recommended", why: "The county has said yes, or its staff or planning board recommended yes.", rows: rez.slice(0, 10), more: rez.length, go: { tab: "rezone", sort: "acres" } });
@@ -451,7 +451,7 @@
   // ---- header -------------------------------------------------------------------
   function renderUpdated() {
     const c = DATA.counts;
-    $("updated").innerHTML = `${c.rezone} rezonings · ${c.listing} for sale · ${c.assemblage} assemblages` + (c.lots ? ` · ${c.lots} finished lots` : "") + `<br><span>Updated ${esc(fmtDate(DATA.built.slice(0, 10)))}</span>`;
+    $("updated").innerHTML = `${c.rezone} rezonings · ${c.listing} for sale · ${c.assemblage} assemblages` + (c.lots ? ` · ${c.lots} pre-built developments` : "") + `<br><span>Updated ${esc(fmtDate(DATA.built.slice(0, 10)))}</span>`;
   }
 
   // ---- wiring ---------------------------------------------------------------------

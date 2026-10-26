@@ -601,6 +601,18 @@
     marks = load("df_marks") || {};
     // Marty's marks follow him: what he marked on another computer arrives with
     // the day's data. A mark made here since then stays as he left it.
+    // Clicks made before marks were recorded (21-26 Oct) lived only in this
+    // browser: send each of them once, and keep them (queued marks are never
+    // dropped by the sync below).
+    if (WHO === "marty" && !load("df_marks_backfilled")) {
+      const box = load("df_outbox") || [];
+      for (const [id, m] of Object.entries(marks)) {
+        const r = BYID[id] || {};
+        box.push({ id, mark: m, title: r.title, bot: r.bot, county: r.county_group || r.county, who: WHO,
+          device: deviceId(), at: new Date().toISOString(), earlier: true });
+      }
+      save("df_outbox", box); save("df_marks_backfilled", 1);
+    }
     if (WHO === "marty" && DATA.marty_marks) {
       const since = load("df_marks_synced") || "";
       for (const [id, m] of Object.entries(DATA.marty_marks)) if (!(id in marks) || since < (DATA.marty_marks_at || "")) marks[id] = m;

@@ -221,3 +221,11 @@ a { color: var(--rezone); }
 .town span, .minicounty span { color: var(--muted); font-weight: 400; letter-spacing: 0; }
 .minicounty { font-size: 13.5px; letter-spacing: .06em; text-transform: uppercase; color: #6b5221; margin: 12px 2px 6px; }
 .minicounty:first-child { margin-top: 0; }
+
+/* feedback */
+.toast { position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%) translateY(20px); opacity: 0;
+  background: #16140f; color: #fff; padding: 12px 18px; border-radius: 10px; font-size: 15px; z-index: 3000;
+  box-shadow: 0 6px 24px rgba(0,0,0,.25); transition: opacity .2s, transform .2s; pointer-events: none; max-width: calc(100% - 32px); }
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+.tag.marty { background: #ffe58a; color: #5a4300; font-weight: 700; }
+.tag.marty-no { background: #e9e5dc; color: #5d5a52; font-weight: 600; }

@@ -60,7 +60,62 @@
     names.forEach((n, i) => { html = html.split('src="../../img/' + n + '"').join('src="' + urls[i] + '"'); });
     return html;
   }
-  function linkFor(id) { return location.origin + location.pathname + "#k=" + KEY_TXT + (id ? "&f=" + encodeURIComponent(id) : ""); }
+  const WHO = (hashParams().get("who") || "marty").toLowerCase();
+  function linkFor(id) { return location.origin + location.pathname + "#k=" + KEY_TXT + (WHO !== "marty" ? "&who=" + encodeURIComponent(WHO) : "") + (id ? "&f=" + encodeURIComponent(id) : ""); }
+
+  // ---- feedback: every Interested / Pass is recorded where Wes can see it ------------
+  // Written to the Prime Interest database (the contact-form table, tagged
+  // DEAL_FINDER_MARK); the public key can add a row but can never read one back.
+  // A click that cannot be sent waits in this browser and goes on the next visit.
+  function deviceId() {
+    let d = load("df_device");
+    if (!d) { d = Math.random().toString(36).slice(2, 10); save("df_device", d); }
+    return d;
+  }
+  async function sendMark(item) {
+    const fb = DATA && DATA.feedback;
+    if (!fb) return false;
+    try {
+      const res = await fetch(fb.url + "/rest/v1/pi_contact_submissions", {
+        method: "POST",
+        headers: { apikey: fb.key, Authorization: "Bearer " + fb.key, "Content-Type": "application/json", Prefer: "return=minimal" },
+        body: JSON.stringify({ name: "Deal Finder (" + item.who + ")", email: "deal-finder@primeinterestinc.com",
+          company: "DEAL_FINDER_MARK", heard_from: "deal-finder", message: JSON.stringify(item) }),
+      });
+      return res.ok;
+    } catch (e) { return false; }
+  }
+  async function flushOutbox() {
+    const box = load("df_outbox") || [];
+    const left = [];
+    for (const item of box) if (!(await sendMark(item))) left.push(item);
+    save("df_outbox", left);
+    return left.length === 0;
+  }
+  function recordMark(id, value) {
+    const r = BYID[id] || {};
+    const item = { id, mark: value || "clear", title: r.title, bot: r.bot, county: r.county_group || r.county,
+      who: WHO, device: deviceId(), at: new Date().toISOString() };
+    const box = load("df_outbox") || [];
+    box.push(item);
+    save("df_outbox", box);
+    flushOutbox().then((ok) => toast(ok
+      ? (value === "yes" ? "Saved — Wes will see you're interested." : value === "no" ? "Passed — saved." : "Mark removed.")
+      : "Saved on this computer — it will reach Wes as soon as you're back online."));
+  }
+  let toastTimer;
+  function toast(msg) {
+    let t = document.getElementById("toast");
+    if (!t) { t = document.createElement("div"); t.id = "toast"; t.className = "toast"; document.body.appendChild(t); }
+    t.textContent = msg; t.classList.add("show");
+    clearTimeout(toastTimer); toastTimer = setTimeout(() => t.classList.remove("show"), 3200);
+  }
+  function martyTag(r) {
+    // On anyone else's copy, show what Marty decided.
+    if (WHO === "marty" || !DATA.marty_marks) return "";
+    const m = DATA.marty_marks[r.id];
+    return m === "yes" ? '<span class="tag marty">Marty: ★ Interested</span>' : m === "no" ? '<span class="tag marty-no">Marty passed</span>' : "";
+  }
   function setHash(id, push) {
     history[push ? "pushState" : "replaceState"]({ id }, "", linkFor(id).slice(location.origin.length));
   }
@@ -151,7 +206,7 @@
   function rowHtml(r) {
     const also = [...new Set(r.related.map(([id]) => BYID[id] && BYID[id].bot))].filter(Boolean)
       .map((b) => `<span class="tag also">Also ${esc(BOT[b].one.toLowerCase())}</span>`).join("");
-    const mk = marks[r.id] === "yes" ? '<span class="tag yes">★ Interested</span>' : marks[r.id] === "no" ? '<span class="tag">Passed</span>' : "";
+    const mk = (marks[r.id] === "yes" ? '<span class="tag yes">★ Interested</span>' : marks[r.id] === "no" ? '<span class="tag">Passed</span>' : "") + martyTag(r);
     return `<button type="button" class="row ${r.bot}${isGone(r) ? " gone" : ""}${viewed[r.id] ? " seen" : ""}" data-id="${esc(r.id)}">
       <span class="kind">${esc(BOT[r.bot].one)}${viewed[r.id] ? ' <span class="seenmark">· viewed</span>' : ""}</span>
       <span class="title">${esc(r.title)}</span>
@@ -378,7 +433,7 @@
       <h2 id="dtitle">${esc(r.title)}</h2>
       <p class="d-sub">${esc(r.sub)}</p>
       <p class="d-head">${facts(r)}</p>
-      <div class="d-tags">${badge(r)}${r.sewer_ok ? '<span class="tag sewer">Gravity sewer ≤200 ft</span>' : ""}<span class="tag">${esc(foundTxt(r))}</span></div>
+      <div class="d-tags">${martyTag(r)}${badge(r)}${r.sewer_ok ? '<span class="tag sewer">Gravity sewer ≤200 ft</span>' : ""}<span class="tag">${esc(foundTxt(r))}</span></div>
       <div class="actions">
         <button type="button" class="act yes${marks[id] === "yes" ? " on" : ""}" data-mark="yes">★ Interested</button>
         <button type="button" class="act no${marks[id] === "no" ? " on" : ""}" data-mark="no">Pass</button>
@@ -444,6 +499,7 @@
   function setMark(id, v) {
     if (marks[id] === v) delete marks[id]; else marks[id] = v;
     save("df_marks", marks);
+    recordMark(id, marks[id] || null);
     document.querySelectorAll(".act[data-mark]").forEach((b) => b.classList.toggle("on", marks[id] === b.dataset.mark));
     if (v === "no" && marks[id] === "no") setTimeout(() => step(1), 250);   // passed: move on
   }
@@ -543,6 +599,15 @@
       r._text = [r.title, r.sub, r.county, r.county_group, r.town, r.badge, ...r.headline, ...r.fields.map((f) => f[1])].join(" ").toLowerCase();
     }
     marks = load("df_marks") || {};
+    // Marty's marks follow him: what he marked on another computer arrives with
+    // the day's data. A mark made here since then stays as he left it.
+    if (WHO === "marty" && DATA.marty_marks) {
+      const since = load("df_marks_synced") || "";
+      for (const [id, m] of Object.entries(DATA.marty_marks)) if (!(id in marks) || since < (DATA.marty_marks_at || "")) marks[id] = m;
+      for (const id of Object.keys(marks)) if (!(id in DATA.marty_marks) && since < (DATA.marty_marks_at || "") && !(load("df_outbox") || []).some((x) => x.id === id)) delete marks[id];
+      save("df_marks", marks); save("df_marks_synced", DATA.marty_marks_at || "");
+    }
+    flushOutbox();
     viewed = load("df_viewed") || {};
     const prev = load("df_seen_ids");
     prevSeen = Array.isArray(prev) ? new Set(prev) : null;

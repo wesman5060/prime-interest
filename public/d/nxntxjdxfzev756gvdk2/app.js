@@ -4,13 +4,13 @@
 
   const BOT = {
     rezone: { name: "Rezonings", one: "Rezoning", color: "#2f62c9",
-      explain: "Land a county has been asked to rezone toward housing — spotted at the hearing, usually before it is ever listed for sale. The counties' agendas and minutes are re-read every week for the vote; a denied or withdrawn case moves to No longer available." },
+      explain: "Land a county has been asked to rezone toward housing, 50 or more homes or units (or, where the case states no count, 12+ acres) — spotted at the hearing, usually before it is ever listed for sale. The counties' agendas and minutes are re-read every week for the vote; a denied or withdrawn case moves to No longer available." },
     listing: { name: "For sale", one: "For sale", color: "#1b8a5e",
-      explain: "Land listed for sale (mostly 10+ acres), each checked against county records for sewer, floodplain, zoning and the owner. New listings every two weeks; every listing's own page is re-checked every three days, and one that sells or goes under contract moves to No longer available." },
+      explain: "Land listed for sale, big enough for 50+ homes (12+ acres; 5+ in Fulton and Atlanta), each checked against county records for sewer, floodplain, zoning and the owner. New listings every two weeks; every listing's own page is re-checked every three days, and one that sells or goes under contract moves to No longer available." },
     assemblage: { name: "Assemblages", one: "Assemblage", color: "#c26a12",
       explain: "Neighbouring lots that together clear 10 acres of good ground for townhomes or apartments — land nobody is selling as one piece. Each county is re-run every month on its current tax roll, so new groups show up here as they appear." },
     lots: { name: "Pre-built developments", one: "Pre-built development", color: "#7b3fa8",
-      explain: "Every development in these counties where the roads are built and the lots are graded but not one house has gone up, still held by the developer and not by a national builder. Each was checked on current aerial photos and in county, court and state records. Numbered by how likely the owner is to deal. Every site's lots are re-checked on the county records each month; one that sells or starts building moves to No longer available." },
+      explain: "Every development of 50 or more lots or units in these counties where the roads are built and the lots are graded but not one house has gone up, still held by the developer and not by a national builder. Each was checked on current aerial photos and in county, court and state records. Numbered by how likely the owner is to deal. Every site's lots are re-checked on the county records each month; one that sells or starts building moves to No longer available." },
   };
   const SIZES = [[0, "Any size"], [10, "10+ ac"], [25, "25+ ac"], [50, "50+ ac"], [100, "100+ ac"]];
   const PAGE = 50;

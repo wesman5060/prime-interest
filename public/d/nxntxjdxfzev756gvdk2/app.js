@@ -4,13 +4,13 @@
 
   const BOT = {
     rezone: { name: "Rezonings", one: "Rezoning", color: "#2f62c9",
-      explain: "Land a county has been asked to rezone toward housing — spotted at the hearing, usually before it is ever listed for sale." },
+      explain: "Land a county has been asked to rezone toward housing — spotted at the hearing, usually before it is ever listed for sale. The counties' agendas and minutes are re-read every week for the vote; a denied or withdrawn case moves to No longer available." },
     listing: { name: "For sale", one: "For sale", color: "#1b8a5e",
-      explain: "Land listed for sale (mostly 10+ acres), each checked against county records for sewer, floodplain, zoning and the owner." },
+      explain: "Land listed for sale (mostly 10+ acres), each checked against county records for sewer, floodplain, zoning and the owner. New listings every two weeks; every listing's own page is re-checked every three days, and one that sells or goes under contract moves to No longer available." },
     assemblage: { name: "Assemblages", one: "Assemblage", color: "#c26a12",
-      explain: "Neighbouring lots that together clear 10 acres of good ground for townhomes or apartments — land nobody is selling as one piece." },
+      explain: "Neighbouring lots that together clear 10 acres of good ground for townhomes or apartments — land nobody is selling as one piece. Each county is re-run every month on its current tax roll, so new groups show up here as they appear." },
     lots: { name: "Pre-built developments", one: "Pre-built development", color: "#7b3fa8",
-      explain: "Every development in these counties where the roads are built and the lots are graded but not one house has gone up, still held by the developer and not by a national builder. Each was checked on current aerial photos and in county, court and state records. Numbered by how likely the owner is to deal." },
+      explain: "Every development in these counties where the roads are built and the lots are graded but not one house has gone up, still held by the developer and not by a national builder. Each was checked on current aerial photos and in county, court and state records. Numbered by how likely the owner is to deal. Every site's lots are re-checked on the county records each month; one that sells or starts building moves to No longer available." },
   };
   const SIZES = [[0, "Any size"], [10, "10+ ac"], [25, "25+ ac"], [50, "50+ ac"], [100, "100+ ac"]];
   const PAGE = 50;
@@ -136,8 +136,12 @@
 
   // ---- what a find is ---------------------------------------------------------
   function isGone(r) {
-    return (r.bot === "listing" && r.state !== "current") || (r.bot === "assemblage" && r.state === "ruled_out");
+    return (r.bot === "listing" && r.state !== "current") || (r.bot === "assemblage" && r.state === "ruled_out") || r.state === "closed";
   }
+  // Sold, under contract, off the market, taken down, denied, withdrawn, or dropped by its scout:
+  // the "No longer available" tab (Wes, 2026-10-27: things need to update and stay relevant).
+  function isClosed(r) { return r.state === "closed" || (r.bot === "listing" && r.state === "gone"); }
+  function closedOn(r) { return r.closed_on || r.last_seen || r.found || ""; }
   function isNew(r) { return prevSeen ? !prevSeen.has(r.id) : false; }
   function ppa(r) { return r.ppa || (r.price && r.acres ? r.price / r.acres : null); }
   function money(v) { return v == null ? "" : "$" + Math.round(v).toLocaleString(); }
@@ -170,6 +174,7 @@
   function inTab(r, tab) {
     if (tab === "all") return true;
     if (tab === "mine") return marks[r.id] === "yes";
+    if (tab === "closed") return isClosed(r);
     return r.bot === tab;
   }
   const SORTS = {
@@ -179,8 +184,9 @@
     price: (a, b) => (ppa(a) || Infinity) - (ppa(b) || Infinity),
   };
   function listRows() {
-    const opts = st.tab === "mine" ? { gone: true, passed: true } : {};
+    const opts = st.tab === "mine" ? { gone: true, passed: true } : st.tab === "closed" ? { gone: true } : {};
     const rows = DATA.records.filter((r) => inTab(r, st.tab) && passes(r, opts));
+    if (st.tab === "closed") return rows.sort((a, b) => closedOn(b).localeCompare(closedOn(a)));
     // the Finished lots shortlist reads best in its own order, strongest seller signals first
     return st.tab === "lots" && st.sort === "found" ? rows.sort((a, b) => a.rank - b.rank) : rows.sort(SORTS[st.sort]);
   }
@@ -204,9 +210,9 @@
     const num = (r) => parseInt(r.badge.replace(/\D/g, "") || "99", 10);
     const picks = recs.filter((r) => r.bot === "assemblage" && (r.state === "pick" || r.state === "runner_up"))
       .sort((a, b) => (a.state === "pick" ? 0 : 1) - (b.state === "pick" ? 0 : 1) || num(a) - num(b));
-    const lots = recs.filter((r) => r.bot === "lots" && r.rank < 100).sort((a, b) => a.rank - b.rank);
+    const lots = recs.filter((r) => r.bot === "lots" && r.rank < 100 && !isGone(r)).sort((a, b) => a.rank - b.rank);
     if (lots.length) sec.push({ title: "Pre-built developments, no houses yet", why: "Roads in, lots graded, nothing built, still with the developer. Numbered by how likely the owner is to deal.", rows: lots, keepOrder: true });
-    const uw = recs.filter((r) => r.bot === "lots" && r.rank >= 100).sort((a, b) => a.rank - b.rank);
+    const uw = recs.filter((r) => r.bot === "lots" && r.rank >= 100 && !isGone(r)).sort((a, b) => a.rank - b.rank);
     if (uw.length) sec.push({ title: "Site work under way, nothing built yet", why: "Grading, streets or sewer going in now and no building started: homes first, then apartments and townhomes. The rest are on the Pre-built developments tab.", rows: uw.slice(0, 10), more: uw.length, keepOrder: true, go: { tab: "lots", sort: "found" } });
     if (picks.length) {
       const np = picks.filter((r) => r.state === "pick").length, nr = picks.length - np;
@@ -218,6 +224,9 @@
     if (rez.length) sec.push({ title: "Rezonings approved or recommended", why: "The county has said yes, or its staff or planning board recommended yes.", rows: rez.slice(0, 10), more: rez.length, go: { tab: "rezone", sort: "acres" } });
     const big = recs.filter((r) => r.bot === "listing" && r.state === "current" && r.sewer_ok && r.acres >= 25 && live(r)).sort(SORTS.acres);
     if (big.length) sec.push({ title: "For sale: 25+ acres with gravity sewer within 200 ft", why: "Big enough for a real project, with sewer measured at or near the land.", rows: big.slice(0, 10), more: big.length, go: { tab: "listing", minAcres: 25, sewer: true, sort: "acres" } });
+    const cutoff = new Date(Date.now() - 30 * 864e5).toISOString().slice(0, 10);
+    const closed = recs.filter((r) => isClosed(r) && closedOn(r) >= cutoff).sort((x, y) => closedOn(y).localeCompare(closedOn(x)));
+    if (closed.length) sec.push({ title: "Gone in the last 30 days", why: "Sold, under contract, off the market, or a rezoning denied or withdrawn. Everything that closed is on the No longer available tab.", rows: closed.slice(0, 8), more: closed.length, keepOrder: true, go: { tab: "closed" } });
     return sec;
   }
 
@@ -236,17 +245,18 @@
   }
 
   function renderTabs() {
-    const n = (t) => DATA.records.filter((r) => inTab(r, t) && passes(r, t === "mine" ? { gone: true, passed: true } : {})).length;
+    const n = (t) => DATA.records.filter((r) => inTab(r, t) && passes(r, t === "mine" ? { gone: true, passed: true } : t === "closed" ? { gone: true } : {})).length;
     const mine = Object.values(marks).filter((v) => v === "yes").length;
     const tabs = [["start", "Start here", ""], ["all", "Everything", n("all")], ["rezone", BOT.rezone.name, n("rezone")],
-      ["listing", BOT.listing.name, n("listing")], ["assemblage", BOT.assemblage.name, n("assemblage")], ["lots", BOT.lots.name, n("lots")], ["mine", "★ My picks", mine]];
+      ["listing", BOT.listing.name, n("listing")], ["assemblage", BOT.assemblage.name, n("assemblage")], ["lots", BOT.lots.name, n("lots")], ["mine", "★ My picks", mine], ["closed", "No longer available", n("closed")]];
     $("tabs").innerHTML = tabs.map(([t, label, c]) =>
       `<button class="tab${t === "start" ? " start" : ""}" role="tab" data-tab="${t}" aria-selected="${st.tab === t}">` +
       (BOT[t] ? `<i class="dot ${t}"></i>` : "") + `${esc(label)}${c !== "" ? ` <span class="n">${c}</span>` : ""}</button>`).join("");
     const ex = {
       start: `A first look: the finds most worth your time, out of <b>${DATA.records.filter((r) => !isGone(r)).length}</b> live ones. Use the tabs above to go through everything.`,
       all: "Every find from all four scouts, grouped by county and then by town. Use the size and sewer buttons to narrow it down.",
-      mine: "Finds you marked ★ Interested. Kept on this device.",
+      mine: "Finds you marked ★ Interested.",
+      closed: "Land that was on this page and is not available any more: sold, under contract, taken off the market, a rezoning denied or withdrawn, or a development that started building. Each one says what happened and when.",
     }[st.tab] || esc(BOT[st.tab].explain);
     $("explain").innerHTML = ex;
     $("controls").hidden = st.tab === "start";
@@ -324,7 +334,7 @@
       st.autoOpen = false;
     }
     const hidden = [];
-    if (!st.showgone && st.tab !== "mine") hidden.push("sold and ruled-out finds");
+    if (!st.showgone && st.tab !== "mine" && st.tab !== "closed") hidden.push("sold and ruled-out finds");
     if (!st.showpassed && st.tab !== "mine") hidden.push("ones you passed on");
     $("count").textContent = `${rows.length.toLocaleString()} ${rows.length === 1 ? "find" : "finds"} in ${groups.length} ${groups.length === 1 ? "county" : "counties"}` +
       (hidden.length ? ` · hiding ${hidden.join(" and ")}` : "");

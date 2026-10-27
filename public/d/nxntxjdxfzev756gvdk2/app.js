@@ -103,6 +103,20 @@
       ? (value === "yes" ? "Saved — Wes will see you're interested." : value === "no" ? "Passed — saved." : "Mark removed.")
       : "Saved on this computer — it will reach Wes as soon as you're back online."));
   }
+  // "Email Wes about this": typed on the page and sent the same way as a mark
+  // (a mailto link does nothing on a computer whose email is a website, like Marty's).
+  function sendMessage(id) {
+    const text = $("msgtext").value.trim();
+    if (!text) { toast("Type your message first, then click Send."); $("msgtext").focus(); return; }
+    const r = BYID[id] || {};
+    const box = load("df_outbox") || [];
+    box.push({ type: "message", id, text, title: r.title, bot: r.bot, county: r.county_group || r.county,
+      who: WHO, device: deviceId(), at: new Date().toISOString() });
+    save("df_outbox", box);
+    $("msgtext").value = ""; $("msgbox").hidden = true;
+    flushOutbox().then((ok) => toast(ok ? "Sent — Wes will get your message by email."
+      : "Saved on this computer — it will reach Wes as soon as you're back online."));
+  }
   let toastTimer;
   function toast(msg) {
     let t = document.getElementById("toast");
@@ -425,8 +439,6 @@
       const o = BYID[oid];
       return o ? `<li><button type="button" class="lnk" data-open="${esc(oid)}">${esc(BOT[o.bot].one)}: ${esc(o.title)}</button> — ${esc(plainWhy(why).toLowerCase())}</li>` : "";
     }).join("");
-    const mail = "mailto:" + WES + "?subject=" + encodeURIComponent("Deal Finder: " + r.title) +
-      "&body=" + encodeURIComponent(`${r.title} (${BOT[r.bot].one}, ${r.county})\n${linkFor(id)}\n\n`);
     const allFacts = `<dl class="fields">${r.fields.map(([k, v]) => `<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join("")}</dl>`;
     $("dcontent").innerHTML = `
       <div class="d-kind"><i class="dot ${r.bot}"></i>${esc(BOT[r.bot].one)} · ${esc(r.county)}${isNew(r) ? ' <span class="tag new">NEW</span>' : ""}</div>
@@ -437,8 +449,15 @@
       <div class="actions">
         <button type="button" class="act yes${marks[id] === "yes" ? " on" : ""}" data-mark="yes">★ Interested</button>
         <button type="button" class="act no${marks[id] === "no" ? " on" : ""}" data-mark="no">Pass</button>
-        <a class="act mail" href="${esc(mail)}">✉ Email Wes about this</a>
+        <button type="button" class="act mail" data-write>✉ Email Wes about this</button>
         ${r.links.map(([t, u]) => `<a class="act" href="${esc(u)}" target="_blank" rel="noopener noreferrer">${esc(t)} ↗</a>`).join("")}
+      </div>
+      <div class="msgbox" id="msgbox" hidden>
+        <label for="msgtext">Your message to Wes about <b>${esc(r.title)}</b></label>
+        <textarea id="msgtext" rows="4" placeholder="Type your message here, then click Send."></textarea>
+        <div class="msgbtns"><button type="button" class="act yes" data-send>Send to Wes</button>
+          <button type="button" class="act" data-cancel>Cancel</button></div>
+        <p class="msgnote">It goes straight to Wes's email with a link to this property. Wes replies to your email.</p>
       </div>
       ${rel ? `<div class="related"><h4>Also found by another scout</h4><ul>${rel}</ul></div>` : ""}
       ${r.card ? `<h3 class="sech">The scout's report card</h3>
@@ -563,6 +582,9 @@
     $("list").addEventListener("mouseout", (e) => { const r = e.target.closest(".row"); if (r) highlight(r.dataset.id, false); });
     $("dcontent").addEventListener("click", (e) => {
       const m = e.target.closest("[data-mark]"); if (m) { setMark(current, m.dataset.mark); return; }
+      if (e.target.closest("[data-write]")) { $("msgbox").hidden = false; $("msgtext").focus(); $("msgbox").scrollIntoView({ block: "nearest" }); return; }
+      if (e.target.closest("[data-cancel]")) { $("msgbox").hidden = true; return; }
+      if (e.target.closest("[data-send]")) { sendMessage(current); return; }
       const o = e.target.closest("[data-open]"); if (o) openDetail(o.dataset.open);
     });
     $("prev").addEventListener("click", () => step(-1));
@@ -571,6 +593,7 @@
     $("detail").addEventListener("click", (e) => { if (e.target === $("detail")) closeDetail(); });
     document.addEventListener("keydown", (e) => {
       if ($("detail").hidden) return;
+      if (e.target.closest && e.target.closest("textarea, input")) return;   // typing a message: arrows move the cursor, not the page
       if (e.key === "Escape") closeDetail();
       else if (e.key === "ArrowRight") step(1);
       else if (e.key === "ArrowLeft") step(-1);

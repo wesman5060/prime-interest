@@ -162,6 +162,13 @@ a { color: var(--rezone); }
 .act.yes.on { background: #ffe58a; border-color: #e3c34e; }
 .act.no.on { background: #e9e5dc; border-color: #c9c2b2; }
 .act.mail { background: #000; color: #fff; border-color: #000; }
+.msgbox { border: 2px solid #000; border-radius: 10px; padding: 12px 14px; margin: -4px 0 16px; background: var(--surface); }
+.msgbox label { display: block; font-size: 16px; margin-bottom: 8px; }
+.msgbox textarea { width: 100%; box-sizing: border-box; font: inherit; font-size: 17px; padding: 10px;
+  border: 1px solid var(--line); border-radius: 8px; resize: vertical; }
+.msgbtns { display: flex; gap: 8px; margin-top: 10px; }
+.msgbtns .act.yes { background: #000; color: #fff; border-color: #000; }
+.msgnote { color: var(--muted); font-size: 14px; margin: 8px 0 0; }
 .related { background: var(--gold-soft); border: 1px solid #e4d3ad; border-radius: 10px; padding: 12px 14px; margin: 0 0 16px; }
 .related h4 { margin: 0 0 6px; font-size: 15px; }
 .related ul { margin: 0; padding-left: 18px; }

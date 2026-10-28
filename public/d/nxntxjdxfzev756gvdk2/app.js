@@ -85,6 +85,27 @@
       return res.ok;
     } catch (e) { return false; }
   }
+  // Visits: one row when the page opens and one per property opened (once per page
+  // load), tagged DEAL_FINDER_VISIT so they never mix with marks. Wes asked to know
+  // whether Marty opens the page at all (2026-10-28). Nothing is queued if it fails.
+  const VIEWS_SENT = new Set();
+  function sendVisit(item) {
+    const fb = DATA && DATA.feedback;
+    if (!fb) return;
+    Object.assign(item, { who: WHO, device: deviceId(), at: new Date().toISOString() });
+    fetch(fb.url + "/rest/v1/pi_contact_submissions", {
+      method: "POST", keepalive: true,
+      headers: { apikey: fb.key, Authorization: "Bearer " + fb.key, "Content-Type": "application/json", Prefer: "return=minimal" },
+      body: JSON.stringify({ name: "Deal Finder (" + WHO + ")", email: "deal-finder@primeinterestinc.com",
+        company: "DEAL_FINDER_VISIT", heard_from: "deal-finder", message: JSON.stringify(item) }),
+    }).catch(() => {});
+  }
+  function recordView(id) {
+    if (VIEWS_SENT.has(id)) return;
+    VIEWS_SENT.add(id);
+    const r = BYID[id] || {};
+    sendVisit({ type: "view", id, title: r.title, bot: r.bot, county: r.county_group || r.county });
+  }
   async function flushOutbox() {
     const box = load("df_outbox") || [];
     const left = [];
@@ -445,6 +466,7 @@
     if (!r) return;
     current = id;
     viewed[id] = 1; save("df_viewed", viewed);
+    recordView(id);
     if (push !== false) setHash(id, true);
     const i = order.findIndex((x) => x.id === id);
     $("pos").textContent = i >= 0 ? `${i + 1} of ${order.length}` : "";
@@ -661,6 +683,7 @@
       save("df_marks", marks); save("df_marks_synced", DATA.marty_marks_at || "");
     }
     flushOutbox();
+    sendVisit({ type: "visit" });
     viewed = load("df_viewed") || {};
     const prev = load("df_seen_ids");
     prevSeen = Array.isArray(prev) ? new Set(prev) : null;

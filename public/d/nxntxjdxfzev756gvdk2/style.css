@@ -154,6 +154,8 @@ a { color: var(--rezone); }
 .detail h2 { font: 600 28px/1.2 "Playfair Display", Georgia, serif; margin: 4px 0 2px; overflow-wrap: anywhere; }
 .d-sub { color: var(--muted); margin: 0 0 8px; }
 .d-head { font-size: 18px; margin: 0 0 4px; }
+.d-fifty { margin: 6px 0 8px; padding: 8px 10px; background: #eef6ea; border-left: 4px solid #3f8a3a; border-radius: 4px; font-size: 15px; }
+.d-fifty .flag { color: #a33; }
 .actions { display: flex; gap: 8px; flex-wrap: wrap; margin: 14px 0 16px; }
 .act {
   border: 1px solid var(--line); background: var(--surface); border-radius: 8px; padding: 9px 14px;

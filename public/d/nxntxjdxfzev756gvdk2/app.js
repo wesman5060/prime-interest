@@ -4,11 +4,11 @@
 
   const BOT = {
     rezone: { name: "Rezonings", one: "Rezoning", color: "#2f62c9",
-      explain: "Land a county has been asked to rezone toward housing, 50 or more homes or units (or, where the case states no count, 12+ acres) — spotted at the hearing, usually before it is ever listed for sale. The counties' agendas and minutes are re-read every week for the vote; a denied or withdrawn case moves to No longer available." },
+      explain: "Land a county has been asked to rezone toward housing, with room for 50 or more homes or units (the count the case states, or the zoning it asks for times its acres; each card says which) — spotted at the hearing, usually before it is ever listed for sale. The counties' agendas and minutes are re-read every week for the vote; a denied or withdrawn case moves to No longer available." },
     listing: { name: "For sale", one: "For sale", color: "#1b8a5e",
-      explain: "Land listed for sale, big enough for 50+ homes (12+ acres; 5+ in Fulton and Atlanta), each checked against county records for sewer, floodplain, zoning and the owner. New listings every two weeks; every listing's own page is re-checked every three days, and one that sells or goes under contract moves to No longer available." },
+      explain: "Land listed for sale with room for 50+ homes or units — by its zoning, a denser neighbor's zoning or the county's own plan, times its acres (each card says which) — each checked against county records for sewer, floodplain, zoning and the owner. New listings every two weeks; every listing's own page is re-checked every three days, and one that sells or goes under contract moves to No longer available." },
     assemblage: { name: "Assemblages", one: "Assemblage", color: "#c26a12",
-      explain: "Neighbouring lots that together clear 10 acres of good ground for townhomes or apartments — land nobody is selling as one piece. Each county is re-run every month on its current tax roll, so new groups show up here as they appear." },
+      explain: "Neighbouring lots that together hold 50+ homes or units by the zoning on or beside them (each card says how) — land nobody is selling as one piece. Each county is re-run every month on its current tax roll, so new groups show up here as they appear." },
     lots: { name: "Pre-built developments", one: "Pre-built development", color: "#7b3fa8",
       explain: "Every development of 50 or more lots or units in these counties where the roads are built and the lots are graded but not one house has gone up, still held by the developer and not by a national builder. Each was checked on current aerial photos and in county, court and state records. Numbered by how likely the owner is to deal. Every site's lots are re-checked on the county records each month; one that sells or starts building moves to No longer available." },
   };
@@ -460,6 +460,7 @@
       <h2 id="dtitle">${esc(r.title)}</h2>
       <p class="d-sub">${esc(r.sub)}</p>
       <p class="d-head">${facts(r)}</p>
+      ${r.fifty && r.fifty.how ? `<p class="d-fifty"><b>50+ lots:</b> ${esc(r.fifty.how)}${r.fifty.flags && r.fifty.flags.length ? `<br><b class="flag">Red flag:</b> ${esc(r.fifty.flags.join("; "))}` : ""}</p>` : ""}
       <div class="d-tags">${martyTag(r)}${badge(r)}${r.sewer_ok ? '<span class="tag sewer">Gravity sewer ≤200 ft</span>' : ""}<span class="tag">${esc(foundTxt(r))}</span></div>
       <div class="actions">
         <button type="button" class="act yes${marks[id] === "yes" ? " on" : ""}" data-mark="yes">★ Interested</button>
